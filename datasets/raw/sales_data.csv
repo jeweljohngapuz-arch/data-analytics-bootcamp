@@ -1,0 +1,13 @@
+date,customer,product,category,units,price,region
+2026-01-02,Alice,Laptop,Electronics,1,1200,West
+2026-01-03,Bob,Mouse,Electronics,2,25,West
+2026-01-03,Charlie,Desk,Furniture,1,300,East
+2026-01-04,Alice,Keyboard,Electronics,1,80,West
+2026-01-05,David,Chair,Furniture,2,150,North
+2026-01-06,Eva,Monitor,Electronics,1,400,East
+2026-01-07,Frank,Laptop,Electronics,1,1200,South
+2026-01-07,Bob,Mouse,Electronics,1,25,West
+2026-01-08,Grace,Desk,Furniture,1,300,East
+2026-01-09,Helen,Chair,Furniture,1,150,North
+2026-01-10,Ian,Monitor,Electronics,2,400,South
+2026-01-10,Alice,Mouse,Electronics,1,25,West
