@@ -52,9 +52,9 @@ item1_price = 50
 item1_revenue = item1_unit * item1_price
 
 if item1_revenue > 500:
-    print(f"item 1 is high value sale base on revenue")
+    print(f"item 1 is high value sale based on revenue")
 else:
-    print(f"item 1 is normal sale base on revenue")
+    print(f"item 1 is normal sale based on revenue")
 
 # #2
 item2_unit = 1
@@ -63,9 +63,9 @@ item2_price = 1000
 item2_revenue = item2_unit * item2_price
 
 if item2_revenue > 500:
-    print(f"item 2 is high value sale base on revenue")
+    print(f"item 2 is high value sale based on revenue")
 else:
-    print(f"item 2 is normal sale base on revenue")
+    print(f"item 2 is normal sale based on revenue")
 
 # #3
 item3_unit = 5
@@ -74,9 +74,9 @@ item3_price = 20
 item3_revenue = item3_unit * item3_price
 
 if item3_revenue > 500:
-    print(f"item 3 is high value sale base on revenue")
+    print(f"item 3 is high value sale based on revenue")
 else:
-    print(f"item 3 is normal sale base on revenue")
+    print(f"item 3 is normal sale based on revenue")
 
 # #4
 item4_unit = 2
@@ -85,6 +85,6 @@ item4_price = 300
 item4_revenue = item4_unit * item4_price
 
 if item4_revenue > 500:
-    print(f"item 4 is high value sale base on revenue")
+    print(f"item 4 is high value sale based on revenue")
 else:
-    print(f"item 4 is normal sale base on revenue")
+    print(f"item 4 is normal sale based on revenue")
