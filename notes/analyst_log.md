@@ -29,6 +29,20 @@ Insight: Is a decision. what a manager can do with it
         (example: Because these products generate higher revenue per sale, they should receive more sales focus or promotion.)
 
 Keep it short.
+--------------------------------------
+# day03
+Question:
+How much revenue do all sales generate combined?
+
+Answer:
+The combined revenue sales generated a total of 8670 from 6 sales.
+*correction:
+The six sales generated a total revenue of 8670.
+
+Insight:
+the data suggest that, the store's current sale strategy is performing well compared to previous month.
+*correction:
+The data suggests that the six transactions generated 8670 in total revenue, indicating that a few large sales significantly contribute to overall store revenue.
 
 --------------------------------------
 
@@ -42,5 +56,4 @@ mini pc and monitor generated revenue are above 500 high-value threshold.
 Insight:
 These products contribute the most revenue per transaction and should be prioritized in sales focus or promotion.
 
-# day03
 

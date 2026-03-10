@@ -26,6 +26,7 @@ print(f"the average sale: {average:.2f}")
 # result for [50, 1200, 300, 150, 400] is 420.00
 
 print()
+
 # SPEED ROUND
 
 #1
@@ -46,4 +47,16 @@ print(sum(earnings))
 
 #5
 sales_revenues = [5000, 200, 300, 200, 100]
-print(max(sales_revenues))
+print(f"max: the highest value is {max(sales_revenues)}")
+print(f"average: {sum(sales_revenues) / len(sales_revenues)}")
+print(f"min: {min(sales_revenues)}")
+
+print()
+
+# MISSION — DAILY SALES SUMMARY 
+revenues = [6540, 50, 1200, 300, 150, 400]
+
+print(f"Revenue List: {revenues}")
+print(f"Total Revenue: {sum(revenues)}")
+print(f"Average Sale: {sum(revenues) / len(revenues):.2f}")
+print(f"Highest Sale: {max(revenues)}")
