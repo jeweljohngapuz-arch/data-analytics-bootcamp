@@ -30,6 +30,17 @@ Insight: Is a decision. what a manager can do with it
 
 Keep it short.
 --------------------------------------
+# day06
+Question:
+How do we calculate revenue for many transactions automatically?
+
+Answer:
+We calculate revenue for large transaction using loop.
+
+Insight:
+The data suggest the sales generated a total revenue of $181,150 and average sale of $3,630.
+
+--------------------------------------
 # day03
 Question:
 How much revenue do all sales generate combined?
