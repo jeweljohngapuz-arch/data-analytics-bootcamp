@@ -19,4 +19,4 @@ for sale in revenues:
 
 # output
 print(f"Total revenue: {total}")
-print(sale)
+

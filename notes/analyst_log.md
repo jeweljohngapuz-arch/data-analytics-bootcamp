@@ -39,6 +39,8 @@ We calculate revenue for large transaction using loop.
 
 Insight:
 The data suggest the sales generated a total revenue of $181,150 and average sale of $3,630.
+*correction:
+The dataset generated $181,150 in total revenue with an average sale of $3,630.
 
 --------------------------------------
 # day03

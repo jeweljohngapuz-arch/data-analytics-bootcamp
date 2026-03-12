@@ -1,13 +1,13 @@
 # speed round
 
 #1 print numbers
-lists = [10, 20, 30]
+numbers = [10, 20, 30]
 
-total_list = 0
+total_numbers = 0
 print(f"printed numbers:")
-for list in lists:
-    total_list += list
-    print(total_list)
+for number in numbers:
+    total_numbers += number
+    print(total_numbers)
 
 print()
 

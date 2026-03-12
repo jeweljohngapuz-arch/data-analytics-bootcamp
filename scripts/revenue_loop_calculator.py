@@ -15,3 +15,6 @@ average_sale = revenue_total / len(revenues)
 
 print(f"Total Revenue: ${revenue_total}")
 print(f"Average Sale: ${average_sale:.0f}")
+
+# Insight:
+# The dataset generated $181,150 total revenue with an average sale of $3,630.
