@@ -6,21 +6,24 @@
 
 import csv
 
-# read the dataset
+# load and read the dataset
 with open("datasets/raw/sales_Data.csv") as file:
     reader = csv.DictReader(file)
 
     print("Transaction Analysis")
     print("--------------------")
 
-    # calculate revenue per transaction
+    # Loop through each transaction
     for row in reader:
         # print(row)
 
         product = row["product"]
         units = int(row["units"])
         price = int(row["price"])
+
+        # Calculate metrics
         revenue = units * price
 
-        print(f"{product} > Revenue: ${revenue}")
+        # Display results
+        print(f"{product} | Revenue: ${revenue}")
 
