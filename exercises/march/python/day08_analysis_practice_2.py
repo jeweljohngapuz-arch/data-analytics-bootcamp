@@ -36,15 +36,15 @@ print(f"Highest Value: ${highest_transaction}")
 #4
 def calculate_sum(transactions):
 
-    sum = 0
+    total = 0
 
     for transaction in transactions:
-        sum += transaction
+        total += transaction
 
-    return sum
+    return total
 
-sum = calculate_sum(transactions)
-print (f"Sum Total: ${sum}")
+total = calculate_sum(transactions)
+print (f"Sum Total: ${total}")
 
 #5
 def calculate_highest_value(transactions):

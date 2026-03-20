@@ -4,7 +4,7 @@
 # Description:
 # Generates basic sales analysis report
 
-print(f"Daily Sales report")
+print("Daily Sales report")
 print("-------------------")
 
 revenues = [503, 120, 3200, 150, 4500]
