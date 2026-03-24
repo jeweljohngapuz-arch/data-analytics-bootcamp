@@ -30,6 +30,17 @@ Insight: Is a decision. what a manager can do with it
 
 Keep it short.
 --------------------------------------
+# day11
+Question:
+Which region generates the most revenue?
+
+Answer:
+The west region generated the most revenue total of $1600.
+
+Insight:
+The data suggest that the west region generated the highest revenue a total of $1600. The north region has the lowest total revenue of $600.
+
+--------------------------------------
 # day06
 Question:
 How do we calculate revenue for many transactions automatically?
