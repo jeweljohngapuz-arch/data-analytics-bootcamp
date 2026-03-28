@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>Jewel's Analytics Training Suite</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+:root{--bg:#f5f5f2;--surface:#fff;--surface2:#f0f0ec;--border:#e2e2dc;--text:#1a1a18;--muted:#888880;--green:#1a9e5c;--green-bg:#edfaf3;--green-b:#a3dfc0;--blue:#2563eb;--blue-bg:#eff4ff;--blue-b:#b0c8f5;--yellow:#c97a00;--yellow-bg:#fef8ec;--yellow-b:#f0d080;--purple:#7c3aed;--purple-bg:#f5f3ff;--purple-b:#c4b5fd;--red:#d93f3f;--r:12px;--rs:8px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;font-size:15px;line-height:1.5;min-height:100vh}
+
+.page{max-width:560px;margin:0 auto;padding:32px 18px 60px}
+
+/* HERO */
+.hero{text-align:center;margin-bottom:36px}
+.hero-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--muted);text-transform:uppercase;margin-bottom:10px}
+.hero-title{font-size:32px;font-weight:800;letter-spacing:-0.5px;line-height:1.15;margin-bottom:10px}
+.hero-title span{color:var(--green)}
+.hero-sub{font-size:14px;color:var(--muted);line-height:1.6;max-width:380px;margin:0 auto 18px}
+.deadline-pill{display:inline-flex;align-items:center;gap:6px;background:var(--yellow-bg);border:1px solid var(--yellow-b);border-radius:99px;padding:6px 14px;font-family:'DM Mono',monospace;font-size:11px;color:var(--yellow);letter-spacing:1px}
+
+/* PROGRESS BAR */
+.progress-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:28px}
+.progress-label{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.progress-label-text{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted)}
+.progress-label-val{font-weight:700;font-size:13px;color:var(--green)}
+.progress-track{height:8px;background:var(--surface2);border-radius:4px;overflow:hidden;margin-bottom:14px}
+.progress-fill{height:100%;background:var(--green);border-radius:4px;width:34%}
+.progress-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.p-step{text-align:center;padding:10px 6px;background:var(--surface2);border-radius:var(--rs)}
+.p-step-num{font-size:18px;font-weight:800;display:block}
+.p-step-num.done{color:var(--green)}
+.p-step-num.active{color:var(--blue)}
+.p-step-num.todo{color:var(--muted)}
+.p-step-label{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;letter-spacing:1px;display:block;margin-top:2px}
+
+/* SECTION HEADER */
+.section-hdr{margin-bottom:14px}
+.section-tag{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:4px}
+.section-title{font-size:18px;font-weight:800}
+
+/* APP CARDS */
+.app-list{display:flex;flex-direction:column;gap:14px;margin-bottom:36px}
+
+.app-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden;transition:border-color 0.15s}
+.app-card:hover{border-color:var(--text)}
+
+.app-card-top{padding:18px 18px 14px;display:flex;gap:14px;align-items:flex-start}
+.app-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.app-info{flex:1;min-width:0}
+.app-name{font-size:17px;font-weight:800;margin-bottom:2px}
+.app-tagline{font-size:12px;color:var(--muted);margin-bottom:10px}
+.app-tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:'DM Mono',monospace;font-size:10px;padding:2px 8px;border-radius:99px;letter-spacing:0.5px}
+.tag.offline{background:var(--green-bg);color:var(--green);border:1px solid var(--green-b)}
+.tag.internet{background:var(--yellow-bg);color:var(--yellow);border:1px solid var(--yellow-b)}
+.tag.mobile{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-b)}
+.tag.github{background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-b)}
+
+.app-card-mid{padding:0 18px 14px}
+.app-desc{font-size:13px;color:var(--text);line-height:1.65;margin-bottom:12px}
+.feature-list{display:flex;flex-direction:column;gap:5px}
+.feature-row{display:flex;align-items:flex-start;gap:8px;font-size:12px;color:var(--muted);line-height:1.4}
+.feature-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;margin-top:5px}
+
+.app-card-bottom{border-top:1px solid var(--border);padding:12px 18px;display:flex;align-items:center;justify-content:space-between}
+.app-use-when{font-size:12px;color:var(--muted)}
+.app-use-when strong{color:var(--text);font-weight:600}
+.app-link{display:inline-flex;align-items:center;gap:5px;font-family:'DM Mono',monospace;font-size:11px;font-weight:700;color:var(--text);text-decoration:none;background:var(--surface2);border:1px solid var(--border);border-radius:var(--rs);padding:6px 12px;transition:all 0.15s;cursor:pointer;letter-spacing:0.5px}
+.app-link:hover{background:var(--text);color:#fff}
+.app-link:active{opacity:0.8}
+
+/* HOW TO DEPLOY */
+.deploy-card{background:var(--blue-bg);border:1px solid var(--blue-b);border-radius:var(--r);padding:16px 18px;margin-bottom:28px}
+.deploy-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--blue);margin-bottom:12px;text-transform:uppercase}
+.deploy-steps{display:flex;flex-direction:column;gap:8px}
+.deploy-step{display:flex;gap:10px;align-items:flex-start}
+.deploy-num{width:22px;height:22px;border-radius:50%;background:var(--blue);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;font-family:'DM Mono',monospace}
+.deploy-text{font-size:13px;color:var(--blue);line-height:1.5}
+.deploy-text code{background:#fff;border:1px solid var(--blue-b);border-radius:4px;padding:1px 6px;font-family:'DM Mono',monospace;font-size:12px}
+
+/* SYSTEM MAP */
+.system-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:28px}
+.system-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--muted);margin-bottom:14px;text-transform:uppercase}
+.system-row{display:flex;align-items:center;gap:8px;margin-bottom:10px;font-size:13px}
+.system-row:last-child{margin-bottom:0}
+.system-icon{font-size:18px;flex-shrink:0;width:28px;text-align:center}
+.system-label{font-weight:700;flex:1}
+.system-when{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace}
+.system-arrow{font-size:18px;color:var(--muted);text-align:center;padding:2px 0}
+
+/* FOOTER */
+.footer{text-align:center;padding-top:24px;border-top:1px solid var(--border)}
+.footer-text{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);line-height:1.7}
+.footer-text strong{color:var(--text)}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-eyebrow">Jewel John Gapuz · Saskatoon</div>
+    <div class="hero-title">Analytics Training <span>Suite</span></div>
+    <div class="hero-sub">3 tools. Built to get hired as a data analyst by June 2026. Each targets a different gap in the hiring process.</div>
+    <div class="deadline-pill">⏱ Target: Portfolio live late April · Applications May</div>
+  </div>
+
+  <!-- PROGRESS -->
+  <div class="progress-card">
+    <div class="progress-label">
+      <span class="progress-label-text">BOOTCAMP PROGRESS</span>
+      <span class="progress-label-val">Day 12 of 35</span>
+    </div>
+    <div class="progress-track"><div class="progress-fill"></div></div>
+    <div class="progress-steps">
+      <div class="p-step">
+        <span class="p-step-num done">✓ 11</span>
+        <span class="p-step-label">Days Done</span>
+      </div>
+      <div class="p-step">
+        <span class="p-step-num active">3</span>
+        <span class="p-step-label">Projects Left</span>
+      </div>
+      <div class="p-step">
+        <span class="p-step-num todo">Jun</span>
+        <span class="p-step-label">Job-Ready</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPS -->
+  <div class="section-hdr">
+    <div class="section-tag">Your Training Tools</div>
+    <div class="section-title">3 Apps · 3 Gaps Solved</div>
+  </div>
+
+  <div class="app-list">
+
+    <!-- APP 1: VOCAB -->
+    <div class="app-card">
+      <div class="app-card-top">
+        <div class="app-icon" style="background:#edfaf3">🗣️</div>
+        <div class="app-info">
+          <div class="app-name">Language Lab</div>
+          <div class="app-tagline">Analyst Vocabulary Trainer</div>
+          <div class="app-tags">
+            <span class="tag offline">⚡ Offline</span>
+            <span class="tag mobile">📱 Mobile-first</span>
+            <span class="tag github">GitHub Pages</span>
+          </div>
+        </div>
+      </div>
+      <div class="app-card-mid">
+        <div class="app-desc">Drills analyst vocabulary across 5 stages that mirror the real analyst workflow — from inspecting data to communicating findings. Flashcards, multiple choice, translate-to-analyst exercises.</div>
+        <div class="feature-list">
+          <div class="feature-row"><div class="feature-dot" style="background:var(--green)"></div>5 stages: Inspect → Analyse → Pattern → Insight → Communicate</div>
+          <div class="feature-row"><div class="feature-dot" style="background:var(--green)"></div>Wrong answers re-queue until mastered. Hearts system.</div>
+          <div class="feature-row"><div class="feature-dot" style="background:var(--green)"></div>Weak word drill mode — targets exactly what you miss</div>
+          <div class="feature-row"><div class="feature-dot" style="background:var(--green)"></div>Progress saved in browser, works on iPhone</div>
+        </div>
+      </div>
+      <div class="app-card-bottom">
+        <div class="app-use-when"><strong>Use when:</strong> commute, dead time, bus</div>
+        <a class="app-link" onclick="alert('Upload analyst_vocab_final.html to GitHub Pages and paste your URL here.')">Open App ↗</a>
+      </div>
+    </div>
+
+    <!-- APP 2: SIMULATOR -->
+    <div class="app-card">
+      <div class="app-card-top">
+        <div class="app-icon" style="background:#eff4ff">🧪</div>
+        <div class="app-info">
+          <div class="app-name">Analyst Simulator</div>
+          <div class="app-tagline">Technical Interview Practice</div>
+          <div class="app-tags">
+            <span class="tag offline">⚡ Offline</span>
+            <span class="tag mobile">📱 Mobile-first</span>
+            <span class="tag github">GitHub Pages</span>
+          </div>
+        </div>
+      </div>
+      <div class="app-card-mid">
+        <div class="app-desc">5 technical labs covering every tool in the analyst stack. Scenario-based: write the query, spot the bug, fill the blank, explain the output. Final Round mixes all labs — no labels — replicates interview conditions.</div>
+        <div class="feature-list">
+          <div class="feature-row"><div class="feature-dot" style="background:var(--blue)"></div>Lab 1: Python — GROUP BY, aggregation, csv.DictReader</div>
+          <div class="feature-row"><div class="feature-dot" style="background:var(--blue)"></div>Lab 2: Excel — pivot tables, VLOOKUP, formatting</div>
+          <div class="feature-row"><div class="feature-dot" style="background:var(--blue)"></div>Lab 3: Git/GitHub — commit, push, README workflow</div>
+          <div class="feature-row"><div class="feature-dot" style="background:var(--blue)"></div>Lab 4: SQL — SELECT, GROUP BY, WHERE, subqueries</div>
+          <div class="feature-row"><div class="feature-dot" style="background:var(--blue)"></div>Lab 5: Power BI + DAX — KPIs, measures, slicers</div>
+          <div class="feature-row"><div class="feature-dot" style="background:var(--blue)"></div>Final Round: all labs mixed, no hints — full interview simulation</div>
+        </div>
+      </div>
+      <div class="app-card-bottom">
+        <div class="app-use-when"><strong>Use when:</strong> 30 min sessions, home or commute</div>
+        <a class="app-link" onclick="alert('Upload analyst_simulator.html to GitHub Pages and paste your URL here.')">Open App ↗</a>
+      </div>
+    </div>
+
+    <!-- APP 3: PRACTICE LAB -->
+    <div class="app-card">
+      <div class="app-card-top">
+        <div class="app-icon" style="background:#fef8ec">✍️</div>
+        <div class="app-info">
+          <div class="app-name">Practice Lab</div>
+          <div class="app-tagline">Insight Writing · STAR Builder · Spiels</div>
+          <div class="app-tags">
+            <span class="tag offline">⚡ Offline</span>
+            <span class="tag mobile">📱 Mobile-first</span>
+            <span class="tag github">GitHub Pages</span>
+          </div>
+        </div>
+      </div>
+      <div class="app-card-mid">
+        <div class="app-desc">Targets the two skills that cost junior analysts job offers: writing data-backed insights and telling STAR stories in analyst language. Plus a full interview spiel bank so you execute, not think.</div>
+        <div class="feature-list">
+          <div class="feature-row"><div class="feature-dot" style="background:var(--yellow)"></div>Insight Writing: 4 data scenarios · instant offline critique · scores 0–100</div>
+          <div class="feature-row"><div class="feature-dot" style="background:var(--yellow)"></div>STAR Builder: S·T·A·R slots · analyst language checks · verbal reminders</div>
+          <div class="feature-row"><div class="feature-dot" style="background:var(--yellow)"></div>Interview Spiels: 5 stages · 12 scenarios · ✅/🚫/⚡ decision system</div>
+          <div class="feature-row"><div class="feature-dot" style="background:var(--yellow)"></div>History tab: all submissions with scores, export as .txt</div>
+          <div class="feature-row"><div class="feature-dot" style="background:var(--yellow)"></div>No internet needed — critique engine is fully baked in</div>
+        </div>
+      </div>
+      <div class="app-card-bottom">
+        <div class="app-use-when"><strong>Use when:</strong> commute, anytime with or without internet</div>
+        <a class="app-link" onclick="alert('Upload insight_star_lab.html to GitHub Pages and paste your URL here.')">Open App ↗</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SYSTEM MAP -->
+  <div class="section-hdr">
+    <div class="section-tag">How They Work Together</div>
+    <div class="section-title">Your Full Practice System</div>
+  </div>
+  <div class="system-card" style="margin-bottom:28px">
+    <div class="system-title">DAILY WORKFLOW</div>
+    <div class="system-row"><div class="system-icon">🗣️</div><div class="system-label">Language Lab</div><div class="system-when">5–10 min · vocab drills</div></div>
+    <div class="system-arrow">↓</div>
+    <div class="system-row"><div class="system-icon">🧪</div><div class="system-label">Simulator</div><div class="system-when">20–30 min · technical questions</div></div>
+    <div class="system-arrow">↓</div>
+    <div class="system-row"><div class="system-icon">✍️</div><div class="system-label">Practice Lab</div><div class="system-when">10–15 min · insight + STAR</div></div>
+    <div class="system-arrow">↓</div>
+    <div class="system-row"><div class="system-icon">🎙️</div><div class="system-label">Spiels (in Practice Lab)</div><div class="system-when">Read 1 stage out loud · verbal muscle memory</div></div>
+    <div class="system-arrow">↓</div>
+    <div class="system-row"><div class="system-icon">💻</div><div class="system-label">VS Code + Claude</div><div class="system-when">Main session · build, code, commit</div></div>
+  </div>
+
+  <!-- DEPLOY -->
+  <div class="section-hdr">
+    <div class="section-tag">Setup</div>
+    <div class="section-title">Deploy to GitHub Pages</div>
+  </div>
+  <div class="deploy-card">
+    <div class="deploy-title">HOW TO HOST ALL 3 APPS FOR FREE</div>
+    <div class="deploy-steps">
+      <div class="deploy-step"><div class="deploy-num">1</div><div class="deploy-text">Create a GitHub repo named <code>analytics-tools</code> (or any name)</div></div>
+      <div class="deploy-step"><div class="deploy-num">2</div><div class="deploy-text">Upload all 3 HTML files: <code>analyst_vocab_final.html</code>, <code>analyst_simulator.html</code>, <code>insight_star_lab.html</code></div></div>
+      <div class="deploy-step"><div class="deploy-num">3</div><div class="deploy-text">Upload this file as <code>index.html</code> — it becomes your landing page</div></div>
+      <div class="deploy-step"><div class="deploy-num">4</div><div class="deploy-text">Go to Settings → Pages → Source: Deploy from branch → main → / (root)</div></div>
+      <div class="deploy-step"><div class="deploy-num">5</div><div class="deploy-text">Your URL: <code>yourusername.github.io/analytics-tools</code> — works on any browser, any device, forever free</div></div>
+      <div class="deploy-step"><div class="deploy-num">6</div><div class="deploy-text">Update the "Open App ↗" links on this page to point to each HTML file URL</div></div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="footer-text">
+      <strong>Jewel's Analytics Training Suite</strong><br>
+      Built March 2026 · Saskatoon, Canada<br>
+      Target role: Data Analyst / AI Business Analyst · June 2026
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
