@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>BI Analyst Suite</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f7f6f1;--surface:#fff;--surface2:#f0efe9;--border:#e2e0d8;--text:#1c1b18;--muted:#888070;--muted2:#c8c4b8;--green:#0f9e5e;--green-bg:#edfaf3;--green-b:#9edfc0;--red:#d63f3f;--red-bg:#fff0f0;--red-b:#f5b8b8;--yellow:#b87800;--yellow-bg:#fff8e6;--yellow-b:#f0d080;--blue:#2460d8;--blue-bg:#eef3ff;--blue-b:#b0c8f8;--purple:#6d3ac7;--purple-bg:#f3eeff;--purple-b:#c8aaf8;--orange:#c85a00;--orange-bg:#fff4ee;--orange-b:#f8c8a0;--teal:#0a8c80;--teal-bg:#edfaf8;--teal-b:#90d8d0;--ink:#1c1b18;--r:14px;--rs:8px}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Inter',sans-serif;font-size:15px;line-height:1.5}
+.screen{display:none;min-height:100vh;flex-direction:column}
+.screen.active{display:flex}
+/* LANDING */
+#landing{align-items:center;justify-content:center;padding:40px 24px;text-align:center}
+.land-eyebrow{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--green);margin-bottom:16px;display:block}
+.land-title{font-family:'Syne',sans-serif;font-size:36px;font-weight:800;line-height:1.1;margin-bottom:14px;letter-spacing:-1px}
+.land-title span{color:var(--green)}
+.land-body{font-size:14px;color:var(--muted);line-height:1.75;max-width:320px;margin:0 auto 28px}
+.land-stack{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-bottom:32px}
+.land-tag{font-family:'DM Mono',monospace;font-size:11px;padding:5px 12px;border:1.5px solid var(--border);border-radius:99px;color:var(--muted);background:var(--surface)}
+.land-cta{display:block;width:100%;max-width:300px;margin:0 auto 10px;padding:16px;background:var(--green);color:#fff;border:none;border-radius:var(--r);font-family:'Syne',sans-serif;font-size:16px;font-weight:700;cursor:pointer}
+.land-note{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted2)}
+/* HOME */
+.logo{font-family:'Syne',sans-serif;font-size:22px;font-weight:800;letter-spacing:-0.5px}
+.logo span{color:var(--green)}
+.logo-sub{font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:20px;margin-top:2px}
+.streak-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:14px 16px;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.weak-card{background:var(--red-bg);border:1.5px solid var(--red-b);border-radius:var(--rs);padding:12px 14px;margin-bottom:14px}
+.weak-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--red);margin-bottom:6px}
+.weak-item{font-size:12px;color:var(--text);padding:4px 0;border-bottom:1px solid var(--red-b)}
+.weak-item:last-child{border:none}
+.section-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);margin-bottom:10px;margin-top:22px}
+.stage-card{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:15px 16px;cursor:pointer;display:flex;align-items:center;gap:13px;margin-bottom:9px;transition:border-color .15s,box-shadow .15s}
+.stage-card:hover{border-color:var(--green);box-shadow:0 2px 12px rgba(15,158,94,.08)}
+.stage-card:active{transform:scale(.99)}
+.stage-icon{width:46px;height:46px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0}
+.stage-info{flex:1;min-width:0}
+.stage-name{font-family:'Syne',sans-serif;font-weight:700;font-size:14px}
+.stage-desc{font-size:11px;color:var(--muted);margin-top:1px}
+.stage-subs{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.sub-pill{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:99px;border:1px solid var(--border);color:var(--muted);background:var(--surface2)}
+.stage-right{text-align:right;flex-shrink:0}
+.stage-pct{font-family:'DM Mono',monospace;font-weight:700;font-size:13px}
+.mini-bar{height:3px;background:var(--border);border-radius:2px;margin-top:5px;width:52px;overflow:hidden}
+.mini-fill{height:100%;border-radius:2px;transition:width .4s}
+.readiness-box{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:16px 18px;display:flex;align-items:center;gap:16px;margin-top:18px}
+.readiness-num{font-family:'Syne',sans-serif;font-size:44px;font-weight:800;color:var(--green);line-height:1}
+/* GAME */
+.g-header{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--surface);border-bottom:1.5px solid var(--border);position:sticky;top:0;z-index:10}
+.btn-back{background:none;border:none;font-size:20px;cursor:pointer;color:var(--ink);padding:4px}
+.g-stage-name{font-family:'DM Mono',monospace;font-size:12px;flex:1;color:var(--muted)}
+.heart{font-size:16px;transition:all .2s}
+.heart.lost{opacity:.18;filter:grayscale(1)}
+.combo-pill{font-family:'DM Mono',monospace;font-size:11px;color:var(--yellow);background:var(--yellow-bg);border:1px solid var(--yellow-b);border-radius:99px;padding:3px 9px;display:none}
+.g-prog{padding:8px 16px 0;background:var(--surface);border-bottom:1.5px solid var(--border)}
+.g-sub-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);margin-bottom:4px}
+.g-track{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.g-fill{height:100%;background:var(--green);border-radius:3px;transition:width .4s}
+.g-count{font-size:10px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:4px;text-align:right;padding-bottom:8px}
+.g-body{padding:18px 16px 130px;flex:1}
+/* Q COMPONENTS */
+.ctx-block{background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--rs);padding:11px 14px;margin-bottom:14px}
+.ctx-where{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--green);margin-bottom:4px}
+.ctx-text{font-size:12px;color:var(--muted);line-height:1.65}
+.tag-row{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap;align-items:center}
+.int-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--purple);background:var(--purple-bg);border:1px solid var(--purple-b);border-radius:99px;padding:3px 9px}
+.job-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--teal);background:var(--teal-bg);border:1px solid var(--teal-b);border-radius:99px;padding:3px 9px}
+.tool-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);background:var(--blue-bg);border:1px solid var(--blue-b);border-radius:99px;padding:3px 9px}
+.cat-tag{font-family:'DM Mono',monospace;font-size:10px;color:var(--orange);background:var(--orange-bg);border:1px solid var(--orange-b);border-radius:99px;padding:3px 9px}
+.q-text{font-family:'Syne',sans-serif;font-size:17px;font-weight:700;line-height:1.45;color:var(--ink);margin-bottom:16px}
+.opts{display:flex;flex-direction:column;gap:8px}
+.opt{padding:13px 14px;border-radius:var(--rs);border:1.5px solid var(--border);background:var(--surface);color:var(--text);font-family:'Inter',sans-serif;font-size:14px;font-weight:500;cursor:pointer;text-align:left;transition:all .12s;display:flex;align-items:flex-start;gap:10px;width:100%}
+.opt-key{width:26px;height:26px;border-radius:6px;background:var(--surface2);display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);flex-shrink:0;margin-top:1px}
+.opt:active:not(:disabled){transform:scale(.98)}
+.opt.correct{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.opt.correct .opt-key{background:var(--green);color:#fff}
+.opt.wrong{border-color:var(--red);background:var(--red-bg);color:var(--red)}
+.opt.wrong .opt-key{background:var(--red);color:#fff}
+.opt:disabled{cursor:default}
+.fill-input{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:var(--rs);background:var(--surface);font-family:'DM Mono',monospace;font-size:14px;color:var(--ink);outline:none;transition:border-color .15s;margin-bottom:8px}
+.fill-input:focus{border-color:var(--blue)}
+.fill-input.correct{border-color:var(--green);background:var(--green-bg);color:var(--green)}
+.fill-input.wrong{border-color:var(--red);background:var(--red-bg)}
+textarea{width:100%;background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rs);color:var(--ink);font-family:'DM Mono',monospace;font-size:13px;padding:12px 14px;resize:none;min-height:80px;outline:none;line-height:1.65;-webkit-appearance:none}
+textarea:focus{border-color:var(--blue)}
+.feedback{margin-top:12px;padding:12px 14px;border-radius:var(--rs);font-size:13px;line-height:1.65;display:none}
+.feedback.show{display:block}
+.fb-ok{background:var(--green-bg);border:1.5px solid var(--green-b);color:var(--green)}
+.fb-no{background:var(--red-bg);border:1.5px solid var(--red-b);color:var(--red)}
+.fb-warn{background:var(--yellow-bg);border:1.5px solid var(--yellow-b);color:var(--yellow)}
+.analyst-card{margin-top:12px;border-radius:var(--rs);overflow:hidden;display:none;border:1.5px solid var(--border)}
+.analyst-card.show{display:block}
+.ac-header{background:var(--ink);color:#fff;padding:9px 14px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px}
+.ac-body{background:var(--surface);padding:13px 14px;font-size:13px;line-height:1.75}
+.ac-row{margin-bottom:8px}
+.ac-row:last-child{margin-bottom:0}
+.ac-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);display:block;margin-bottom:2px}
+.ac-code{background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:12px;color:var(--ink);margin-top:4px;overflow-x:auto;white-space:pre;line-height:1.7}
+.verbal-box{margin-top:10px;padding:11px 14px;background:var(--purple-bg);border:1.5px solid var(--purple-b);border-radius:var(--rs);font-size:13px;color:var(--purple);display:none}
+.verbal-box.show{display:block}
+.verbal-box strong{display:block;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;margin-bottom:4px}
+.action-bar{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1.5px solid var(--border);padding:10px 16px;padding-bottom:calc(10px + env(safe-area-inset-bottom));display:flex;gap:8px;max-width:580px;margin:0 auto}
+.btn-primary{flex:1;padding:14px;background:var(--ink);color:#fff;border:none;border-radius:var(--rs);font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;transition:opacity .12s}
+.btn-primary:active{opacity:.8}
+.btn-hint{padding:14px 16px;background:var(--surface2);color:var(--muted);border:1.5px solid var(--border);border-radius:var(--rs);font-family:'Inter',sans-serif;font-size:13px;cursor:pointer}
+#toast{position:fixed;top:68px;left:50%;transform:translateX(-50%) translateY(-8px);background:var(--ink);color:#fff;padding:8px 18px;border-radius:99px;font-size:13px;font-weight:700;opacity:0;transition:all .25s;z-index:999;white-space:nowrap;pointer-events:none}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.sum-btn{width:100%;padding:14px;border-radius:var(--rs);font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;border:none;margin-bottom:8px}
+.sum-btn.primary{background:var(--green);color:#fff}
+.sum-btn.secondary{background:var(--surface);border:1.5px solid var(--border);color:var(--ink)}
+.missed-item{padding:11px 13px;background:var(--red-bg);border:1px solid var(--red-b);border-radius:var(--rs);margin-bottom:7px}
+.review-item{background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rs);padding:14px;margin-bottom:10px}
+.review-cols{display:flex;gap:8px;margin-top:6px}
+.review-col{flex:1;padding:9px 10px;border-radius:var(--rs)}
+.review-col-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;margin-bottom:3px}
+.review-ans{font-size:12px;font-family:'DM Mono',monospace;line-height:1.6}
+.bottom-nav{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-top:1.5px solid var(--border);display:flex;max-width:580px;margin:0 auto;padding-bottom:env(safe-area-inset-bottom)}
+.nav-btn{flex:1;padding:12px 4px 10px;background:none;border:none;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px;color:var(--muted);font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px}
+.nav-btn.active{color:var(--green)}
+.nav-icon{font-size:18px}
+@keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.g-body>*{animation:slideUp .18s ease forwards}
+</style>
+</head>
+<body>
+
+<!-- LANDING -->
+<div class="screen active" id="landing">
+  <div style="max-width:380px;margin:0 auto;width:100%;padding:40px 24px;text-align:center">
+    <span class="land-eyebrow">BI ANALYST READINESS SUITE</span>
+    <h1 class="land-title">Learn the job.<br><span>Not just the terms.</span></h1>
+    <p class="land-body">Every question shows where it's used, why it matters, and what a real BI Analyst does with it.</p>
+    <div class="land-stack">
+      <span class="land-tag">Python</span><span class="land-tag">SQL</span><span class="land-tag">Power BI</span>
+      <span class="land-tag">Excel</span><span class="land-tag">Git</span><span class="land-tag">DAX</span>
+    </div>
+    <button class="land-cta" onclick="enterApp()">Start Training →</button>
+    <div class="land-note">Progress saved on this device</div>
+  </div>
+</div>
+
+<!-- HOME -->
+<div class="screen" id="home">
+  <div style="padding:24px 18px 150px;max-width:580px;margin:0 auto;width:100%">
+    <div class="logo">BI Analyst <span>Suite</span></div>
+    <div class="logo-sub">READINESS TRAINER · JEWEL JOHN GAPUZ</div>
+    <div class="streak-card">
+      <div style="font-size:28px">🔥</div>
+      <div style="flex:1">
+        <div style="font-family:'Syne',sans-serif;font-size:28px;font-weight:800;color:var(--yellow);line-height:1" id="h-streak">0</div>
+        <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px">DAY STREAK</div>
+        <div style="font-size:12px;color:var(--muted);margin-top:2px" id="streak-sub">Practice today to start your streak</div>
+      </div>
+    </div>
+    <div id="weak-card" class="weak-card" style="display:none">
+      <div class="weak-lbl">⚠ WEAK SPOTS — DRILL THESE FIRST</div>
+      <div id="weak-list"></div>
+    </div>
+    <div class="section-label">STAGES</div>
+    <div class="stage-card" onclick="startStage('vocab')">
+      <div class="stage-icon" style="background:#fff8e6">📚</div>
+      <div class="stage-info">
+        <div class="stage-name">Language Lab</div>
+        <div class="stage-desc">Terms, tools, file habits, BI concepts</div>
+        <div class="stage-subs"><span class="sub-pill">Core Terms</span><span class="sub-pill">BI-Specific</span><span class="sub-pill">Tool Stack</span><span class="sub-pill">File Naming</span><span class="sub-pill">Insight Writing</span></div>
+      </div>
+      <div class="stage-right">
+        <div class="stage-pct" id="pct-vocab" style="color:var(--yellow)">0%</div>
+        <div class="mini-bar"><div class="mini-fill" id="bar-vocab" style="width:0%;background:var(--yellow)"></div></div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-top:4px" id="cnt-vocab">30q</div>
+      </div>
+    </div>
+    <div class="stage-card" onclick="startStage('tech')">
+      <div class="stage-icon" style="background:var(--blue-bg)">⚙️</div>
+      <div class="stage-info">
+        <div class="stage-name">Technical Labs</div>
+        <div class="stage-desc">Python · SQL · Excel · Power BI + DAX</div>
+        <div class="stage-subs"><span class="sub-pill">Python</span><span class="sub-pill">SQL</span><span class="sub-pill">Excel</span><span class="sub-pill">Power BI</span><span class="sub-pill">DAX</span></div>
+      </div>
+      <div class="stage-right">
+        <div class="stage-pct" id="pct-tech" style="color:var(--blue)">0%</div>
+        <div class="mini-bar"><div class="mini-fill" id="bar-tech" style="width:0%;background:var(--blue)"></div></div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-top:4px" id="cnt-tech">30q</div>
+      </div>
+    </div>
+    <div class="stage-card" onclick="startStage('sim')">
+      <div class="stage-icon" style="background:var(--orange-bg)">🎯</div>
+      <div class="stage-info">
+        <div class="stage-name">Stakeholder Simulator</div>
+        <div class="stage-desc">Real BI scenarios — what would you do?</div>
+        <div class="stage-subs"><span class="sub-pill">Data Issues</span><span class="sub-pill">Requests</span><span class="sub-pill">Communication</span><span class="sub-pill">Prioritisation</span></div>
+      </div>
+      <div class="stage-right">
+        <div class="stage-pct" id="pct-sim" style="color:var(--orange)">0%</div>
+        <div class="mini-bar"><div class="mini-fill" id="bar-sim" style="width:0%;background:var(--orange)"></div></div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-top:4px" id="cnt-sim">30q</div>
+      </div>
+    </div>
+    <div class="stage-card" onclick="startStage('interview')">
+      <div class="stage-icon" style="background:var(--purple-bg)">🎤</div>
+      <div class="stage-info">
+        <div class="stage-name">Interview Prep</div>
+        <div class="stage-desc">Insights · STAR · Spiels · Tough Questions</div>
+        <div class="stage-subs"><span class="sub-pill">Insight Writing</span><span class="sub-pill">STAR Builder</span><span class="sub-pill">Spiels</span><span class="sub-pill">Hard Questions</span></div>
+      </div>
+      <div class="stage-right">
+        <div class="stage-pct" id="pct-interview" style="color:var(--purple)">0%</div>
+        <div class="mini-bar"><div class="mini-fill" id="bar-interview" style="width:0%;background:var(--purple)"></div></div>
+        <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--muted);margin-top:4px" id="cnt-interview">30q</div>
+      </div>
+    </div>
+    <div class="readiness-box">
+      <div class="readiness-num" id="overall-pct">0%</div>
+      <div>
+        <div style="font-size:13px;font-weight:600">BI Analyst Readiness</div>
+        <div style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-top:3px" id="overall-sub">Complete all 4 stages</div>
+      </div>
+    </div>
+    <button onclick="resetAll()" style="width:100%;margin-top:10px;padding:12px;background:none;border:1.5px solid var(--border);border-radius:var(--rs);color:var(--muted);font-family:'Inter',sans-serif;font-size:12px;cursor:pointer">↺ Reset all progress</button>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-btn active" onclick="showTab('home')"><span class="nav-icon">🏠</span>HOME</button>
+    <button class="nav-btn" onclick="showTab('study')"><span class="nav-icon">📖</span>STUDY</button>
+  </div>
+</div>
+
+<!-- GAME -->
+<div class="screen" id="game">
+  <div class="g-header">
+    <button class="btn-back" onclick="backToHome()">←</button>
+    <div class="g-stage-name" id="g-title">Stage</div>
+    <div id="hearts-row" style="display:flex;gap:3px"></div>
+    <div class="combo-pill" id="combo-pill">🔥 <span id="combo-num">0</span></div>
+  </div>
+  <div class="g-prog">
+    <div class="g-sub-label" id="g-sub-label">SECTION</div>
+    <div class="g-track"><div class="g-fill" id="g-fill" style="width:0%"></div></div>
+    <div class="g-count" id="g-count">1 / 0</div>
+  </div>
+  <div class="g-body" id="g-body"></div>
+  <div class="action-bar">
+    <button class="btn-hint" onclick="useHint()">💡 Hint</button>
+    <button class="btn-primary" id="btn-main" onclick="handleMain()">Check</button>
+  </div>
+</div>
+
+<!-- SUMMARY -->
+<div class="screen" id="summary">
+  <div style="padding:32px 18px 60px;max-width:580px;margin:0 auto;width:100%">
+    <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:2px;margin-bottom:6px" id="sum-eyebrow">STAGE COMPLETE</div>
+    <div style="font-family:'Syne',sans-serif;font-size:56px;font-weight:800;line-height:1"><span id="sum-num">0</span><span style="font-size:24px;color:var(--muted);font-family:'Inter',sans-serif;font-weight:400"> / <span id="sum-total">0</span></span></div>
+    <div style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;margin-bottom:18px;margin-top:2px" id="sum-pct">0% accuracy</div>
+    <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;margin-bottom:20px" id="sum-verdict">Keep going.</div>
+    <div id="missed-section" style="display:none">
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);margin-bottom:8px">ADDED TO WEAK SPOTS</div>
+      <div id="missed-list"></div>
+    </div>
+    <button class="sum-btn primary" onclick="startStage(currentStage)">Practice Again</button>
+    <button class="sum-btn secondary" onclick="backToHome()">← Back to Home</button>
+  </div>
+</div>
+
+<!-- NO HEARTS -->
+<div class="screen" id="no-hearts">
+  <div style="text-align:center;padding:48px 24px;max-width:580px;margin:0 auto;width:100%">
+    <div style="font-size:52px;margin-bottom:14px">💔</div>
+    <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;margin-bottom:6px">Out of lives</div>
+    <div style="color:var(--muted);font-size:13px;line-height:1.7;margin-bottom:28px">This is how it sticks. Review weak spots, then try again.</div>
+    <button onclick="startStage(currentStage)" style="width:100%;padding:14px;border-radius:var(--rs);font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;border:none;background:var(--ink);color:#fff;margin-bottom:8px">Try Again</button>
+    <button onclick="backToHome()" style="width:100%;padding:14px;border-radius:var(--rs);font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer;background:var(--surface);border:1.5px solid var(--border)">← Back</button>
+  </div>
+</div>
+
+<!-- STUDY SCREEN -->
+<div class="screen" id="study-screen">
+  <div style="padding:0 0 80px;max-width:580px;margin:0 auto;width:100%">
+    <div style="padding:16px 18px 0">
+      <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:2px">Study Mode</div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);letter-spacing:1px;margin-bottom:14px">BROWSE · ACTIVE RECALL · LOG</div>
+      <div style="display:flex;gap:6px;margin-bottom:14px">
+        <button onclick="setStudyMode('browse')" id="mode-btn-browse" style="flex:1;padding:10px 6px;border-radius:var(--rs);border:1.5px solid var(--green);background:var(--green);color:#fff;font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;font-weight:700">Browse</button>
+        <button onclick="setStudyMode('recall')" id="mode-btn-recall" style="flex:1;padding:10px 6px;border-radius:var(--rs);border:1.5px solid var(--border);background:var(--surface2);color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer">Active Recall</button>
+        <button onclick="setStudyMode('log')" id="mode-btn-log" style="flex:1;padding:10px 6px;border-radius:var(--rs);border:1.5px solid var(--border);background:var(--surface2);color:var(--muted);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer">Log</button>
+      </div>
+      <div style="display:flex;gap:5px;flex-wrap:wrap;margin-bottom:16px">
+        <button onclick="setStudyStage('all')" id="sf-all" style="font-family:'DM Mono',monospace;font-size:10px;padding:5px 10px;border-radius:99px;border:1.5px solid var(--green);background:var(--green);color:#fff;cursor:pointer">All</button>
+        <button onclick="setStudyStage('vocab')" id="sf-vocab" style="font-family:'DM Mono',monospace;font-size:10px;padding:5px 10px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer">Language</button>
+        <button onclick="setStudyStage('tech')" id="sf-tech" style="font-family:'DM Mono',monospace;font-size:10px;padding:5px 10px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer">Technical</button>
+        <button onclick="setStudyStage('sim')" id="sf-sim" style="font-family:'DM Mono',monospace;font-size:10px;padding:5px 10px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer">Sim</button>
+        <button onclick="setStudyStage('interview')" id="sf-interview" style="font-family:'DM Mono',monospace;font-size:10px;padding:5px 10px;border-radius:99px;border:1.5px solid var(--border);background:var(--surface2);color:var(--muted);cursor:pointer">Interview</button>
+      </div>
+    </div>
+    <div id="study-browse-panel" style="padding:0 18px"></div>
+    <div id="study-recall-panel" style="padding:0 18px;display:none"></div>
+    <div id="study-log-panel" style="padding:0 18px;display:none">
+      <div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+        <button onclick="exportReview()" style="padding:8px 14px;background:var(--surface2);border:1.5px solid var(--border);border-radius:var(--rs);font-size:12px;cursor:pointer">Export .txt</button>
+      </div>
+      <div id="review-list"><div style="color:var(--muted);font-size:13px;text-align:center;margin-top:48px">No entries yet.</div></div>
+    </div>
+  </div>
+  <div class="bottom-nav">
+    <button class="nav-btn" onclick="showTab('home')"><span class="nav-icon">🏠</span>HOME</button>
+    <button class="nav-btn active" onclick="showTab('study')"><span class="nav-icon">📖</span>STUDY</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+// ════════════════════════════════════════════════
+// DATA — 30+ QUESTIONS PER STAGE
+// ════════════════════════════════════════════════
+
+const VOCAB_Q = [
+  // ── Core BI Terms (8) ──
+  {sub:"Core BI Terms",q:"KPI stands for:",type:"mc",opts:["Key Performance Indicator","Key Process Index","Known Priority Input","Key Pipeline Item"],ans:0,tag:"INTERVIEW",tool:"All tools",ctx:"Every stakeholder meeting starts with KPIs. A VP asking 'how are we doing?' wants KPI numbers. Every number card on a Power BI dashboard is a KPI.",hint:"Focus on 'Key' — not every metric qualifies. What word describes a measurable value that shows how well the business achieves a goal?",card:{what:"A KPI is a measurable value showing how well the business achieves its objectives.",use:"Power BI KPI cards, weekly reports, board decks",example:"Revenue $87K | Order Count 412 | Avg Order Value $211",how:"Power BI: drag a measure to a Card or KPI visual. SQL: SELECT SUM(revenue) as total_revenue FROM sales."}},
+  {sub:"Core BI Terms",q:"ETL stands for Extract, _____, Load.",type:"fill",ans:"Transform",accept:["transform"],tag:"INTERVIEW",tool:"Python · Power Query",ctx:"ETL is the backbone of every BI pipeline. Extract from source, Transform (clean/reshape/aggregate), Load into a reporting tool. You've already done ETL in Python.",hint:"The middle step is what you do to raw messy data before it's useful — remove nulls, fix names, group by region. One word.",card:{what:"Three-step data pipeline: get the data, fix the data, put it somewhere useful.",use:"Python scripts, Power Query, SQL stored procedures — every data project",example:"Extract: csv.DictReader reads CSV\nTransform: .strip(), GROUP BY dict\nLoad: write to output file or PostgreSQL",how:"Python: DictReader (E) → loop and clean (T) → write output (L). Power Query: Connect → Transform → Load to table."}},
+  {sub:"Core BI Terms",q:"A data discrepancy between two reports means your FIRST action is to:",type:"mc",opts:["Send the higher number — probably right","Re-run both tools and trace why they differ before communicating anything","Assume SQL is always correct","Update the dashboard silently"],ans:1,tag:"ON THE JOB",tool:"All tools",ctx:"Excel shows $2,900. SQL shows $2,300. Do NOT guess which is right. This is a real BI interview scenario — they want to see your diagnostic thinking.",hint:"You don't know which number is correct yet. Would you replace one unverified number with another? What do you need first?",card:{what:"When two systems show different numbers — almost always a data quality issue, not a tool bug.",use:"Cross-tool validation — mandatory before any stakeholder delivery",example:"Step 1: re-run both\nStep 2: check row counts\nStep 3: identify which rows differ\nStep 4: find root cause\nStep 5: fix at source",how:"Python: print(len(rows)) to count. SQL: SELECT COUNT(*), SUM(revenue) to compare — if counts differ, one tool sees extra rows."}},
+  {sub:"Core BI Terms",q:"In a star schema, the FACT table contains:",type:"mc",opts:["Customer names and product descriptions","Measurable events — sales transactions, order records, revenue figures","Date descriptions like month and quarter","Regional manager information"],ans:1,tag:"INTERVIEW",tool:"Power BI · SQL",ctx:"Star schema is the standard BI data model. Interviewers ask this. Drawing it on a whiteboard in an interview makes you look senior.",hint:"'Fact' = something that happened. Think about what a receipt records — not who the customer IS, but what they BOUGHT and how much they PAID.",card:{what:"Fact table: records of events (sales, orders, clicks) with measurable values (revenue, quantity) and foreign keys linking to dimensions.",use:"Power BI data model, SQL database design, every BI reporting project",example:"Fact: Sales(order_id, revenue, product_id, date_id, region_id)\nDims: Product, Date, Region — describe the who/what/when/where",how:"Power BI Model view: connect Sales[product_id] → Product[product_id]. This makes Product slicers automatically filter Sales data."}},
+  {sub:"Core BI Terms",q:"Self-service BI means stakeholders can explore data and answer questions WITHOUT waiting for:",type:"fill",ans:"the data team",accept:["the data team","it","a data analyst","an analyst","the bi team"],tag:"INTERVIEW",tool:"Power BI",ctx:"This is why Power BI exists. Instead of emailing the BI team every time they have a question, stakeholders use a published dashboard and filter it themselves.",hint:"Think about who they're currently waiting on — who do they email when they want a new report? Self-service removes that dependency.",card:{what:"Self-service BI empowers non-technical users to explore data using pre-built dashboards with slicers and filters — no coding or analyst required.",use:"Published Power BI dashboards on Power BI Service",example:"Sales manager filters the dashboard by their region and month without emailing the BI team for a custom report",how:"You build the model + visuals. Stakeholders interact via slicers. Your job: make it so they can self-serve without coming back to you."}},
+  {sub:"Core BI Terms",q:"The 'grain' of a dataset means the level of detail each row represents. A sales dataset with grain = 'one row per order' should NOT have:",type:"mc",opts:["An order_id column","Multiple rows for the same order_id","A revenue column","A region column"],ans:1,tag:"INTERVIEW",tool:"SQL · Power BI",ctx:"Understanding grain prevents double-counting errors — a very common BI mistake that produces inflated revenue totals that confuse stakeholders.",hint:"If grain = one row per order, what would it mean if the same order_id appeared on 3 rows?",card:{what:"Grain = what each row represents. Mismatched grain = duplicate data = inflated aggregates. Always verify grain before building any dashboard.",use:"Data model design, SQL joins, Power BI relationship setup",example:"Grain: one row per order\nProblem: JOIN to a table with multiple rows per order → each order row gets multiplied\nResult: revenue totals 3x too high",how:"Check grain: SELECT order_id, COUNT(*) FROM sales GROUP BY order_id HAVING COUNT(*) > 1 → any result = duplicate rows to investigate."}},
+  {sub:"Core BI Terms",q:"A calculated field in Excel or Power BI that divides revenue by order count is called a:",type:"mc",opts:["KPI","Derived metric","Dimension","Fact"],ans:1,tag:"INTERVIEW",tool:"Excel · Power BI",ctx:"Derived metrics are extremely common in BI work. Average Order Value (AOV), Revenue per User, Margin % — all derived. You'll create them constantly.",hint:"This metric doesn't exist directly in the source data — it's calculated FROM two existing fields. What do we call a metric that's derived from other fields?",card:{what:"A derived metric is calculated from other fields — not stored directly in the source data. Usually a ratio, rate, or percentage.",use:"DAX measures in Power BI, calculated columns, Excel formulas",example:"Avg Order Value = Revenue / Order Count\nMargin % = (Revenue - Cost) / Revenue * 100\nRevenue per Region = Total Revenue / Count of Regions",how:"DAX: Avg Order Value = DIVIDE(SUM(Sales[Revenue]), COUNT(Sales[OrderID])) — use DIVIDE() not '/' to avoid division-by-zero errors."}},
+  {sub:"Core BI Terms",q:"Which best describes the role of a BI Analyst on a typical workday?",type:"mc",opts:["Writing complex machine learning models","Connecting data sources, cleaning data, building dashboards, and communicating insights to stakeholders","Managing the company's database servers","Designing the company website"],ans:1,tag:"INTERVIEW",tool:"All tools",ctx:"This is 'tell me about yourself' territory. Knowing your own role clearly is the baseline for any interview. This IS your day-to-day.",hint:"Think about the tools you're learning: Python (process), SQL (query), Power BI (visualise), Excel (analyse). What connects all of them in a day's work?",card:{what:"BI Analyst day: pull data → clean it → aggregate it → build a visual → write the insight → present to stakeholders. Repeat.",use:"Every day — this is the job description",example:"9am: pull this week's sales CSV\n10am: clean and aggregate in Python/SQL\n11am: update Power BI dashboard\n2pm: present findings to Sales Manager",how:"Your portfolio projects ARE your workday in miniature. Each project = one BI Analyst task cycle."}},
+
+  // ── Tool Stack (6) ──
+  {sub:"Tool Stack & Workflow",q:"You receive a 50,000-row CSV every Monday and need to group revenue by region and rank them. The right tool is:",type:"mc",opts:["Excel (manual pivot)","Python (csv.DictReader + dict accumulator)","Power BI","SQL"],ans:1,tag:"ON THE JOB",tool:"Python",ctx:"Python automates this so Monday mornings take 2 seconds instead of 20 minutes. Automation = the primary BI value of Python.",hint:"The keyword is 'every Monday' — this is a recurring task. Which tool turns a 20-minute manual task into a one-second script you run once and never touch again?",card:{what:"Python is your automation tool for recurring data processing tasks on files — especially large CSVs.",use:"Weekly report automation, large file processing, combining multiple CSVs",example:"Script runs: reads CSV → groups by region → ranks → outputs summary\nRuns in <1 second\nSame script works on any new Monday CSV",how:"Your Day 11 pattern: csv.DictReader + dict accumulator + sorted(). Deploy once, run forever."}},
+  {sub:"Tool Stack & Workflow",q:"A company stores 5 years of transaction data in PostgreSQL. To get regional revenue totals you use:",type:"mc",opts:["Excel — download the whole database first","Python — read the database as a CSV","SQL — query the database directly","Power BI — connect and let it figure it out"],ans:2,tag:"INTERVIEW",tool:"SQL · PostgreSQL",ctx:"SQL is the right tool for structured data in databases — especially at scale. Downloading 5 years of data into Excel would crash Excel.",hint:"The data is in a database, not a file. Which tool is specifically designed to query data from databases without downloading everything first?",card:{what:"SQL queries databases directly — you don't download the data first, you run a query and get back only what you need.",use:"Any company database — PostgreSQL, MySQL, Snowflake, BigQuery",example:"SELECT region, SUM(revenue)\nFROM sales\nWHERE year = 2025\nGROUP BY region\nORDER BY SUM(revenue) DESC",how:"Tools: pgAdmin or VS Code PostgreSQL extension to write and run queries. PostgreSQL is named in Canadian BI job postings."}},
+  {sub:"Tool Stack & Workflow",q:"Power BI is the WRONG tool for:",type:"mc",opts:["Building an interactive sales dashboard","Publishing a report for stakeholders to filter","Automating weekly CSV processing with a script","Visualising trends over time"],ans:2,tag:"INTERVIEW",tool:"Python",ctx:"Knowing when NOT to use a tool is as important as knowing when to use it. Power BI is for visualization and delivery — not for scripted automation.",hint:"Three of these are what Power BI is designed for. One requires writing code that runs on a schedule. Which one doesn't fit Power BI's purpose?",card:{what:"Power BI = visualisation and delivery. Python = automation and processing. Excel = analysis and exploration. SQL = querying databases.",use:"Tool selection judgment is an interview signal — shows you understand the full stack",example:"✅ Power BI: dashboard, slicer, published report\n✅ Python: scheduled CSV processing, GROUP BY automation\n✅ SQL: querying 5-year transaction database\n❌ Power BI for scripted file processing",how:"Rule: if it involves a file running on a schedule with code → Python. If it involves stakeholders clicking slicers → Power BI."}},
+  {sub:"Tool Stack & Workflow",q:"In the BI pipeline, what happens BETWEEN Python processing and Power BI visualisation?",type:"mc",opts:["Nothing — Python outputs go directly to Power BI","SQL querying of a database","Excel pivot tables","Git commit"],ans:1,tag:"INTERVIEW",tool:"SQL · PostgreSQL",ctx:"Python cleans and processes raw files. SQL queries the structured database. Power BI visualises the query results. This is the full BI pipeline you're building.",hint:"Python outputs clean data to a file or database. Power BI connects to a database or file. What's the layer in between that extracts exactly what Power BI needs?",card:{what:"Full BI pipeline: CSV → Python (clean) → PostgreSQL (store) → SQL (query) → Power BI (visualise) → Service (publish) → Stakeholders.",use:"Your full curriculum: Days 9–11 (Python), 16–18 (SQL), 20–21 (Power BI). Each stage builds on the last.",example:"Python processes 50k rows → loads clean table to PostgreSQL → SQL query aggregates by region → Power BI connects and visualises → published to Service",how:"In Power BI: Get Data → PostgreSQL → write your SELECT query → Load → build visuals on top of the result."}},
+  {sub:"Tool Stack & Workflow",q:"Excel Power Query is used at which step of the ETL pipeline?",type:"mc",opts:["Extract only","Transform only","Both Extract and Transform","Load only"],ans:2,tag:"ON THE JOB",tool:"Excel",ctx:"Power Query both connects to data sources (Extract) and transforms them (remove blanks, rename columns, change data types) before loading to the worksheet.",hint:"Power Query has a 'Get Data' step AND a transformation editor. Which ETL steps do those two phases correspond to?",card:{what:"Power Query = the E and T of ETL inside Excel. It connects (Extract) and transforms (Transform) before loading to a worksheet or pivot.",use:"Excel-based BI workflows, data cleaning before pivoting, combining multiple sheets",example:"Get Data from CSV (Extract) → Remove Blank Rows, Trim Whitespace, Rename Columns (Transform) → Close & Load to Table (Load)",how:"Excel: Data tab → Get Data → From File → From CSV → Power Query Editor opens → apply transforms → Close & Load."}},
+  {sub:"Tool Stack & Workflow",q:"Git is used in BI work primarily for:",type:"mc",opts:["Running SQL queries","Version control — tracking changes to scripts, queries, and dashboard files over time","Building dashboards","Cleaning data"],ans:1,tag:"ON THE JOB",tool:"Git",ctx:"Git is your professional paper trail. Recruiters look at your GitHub commit history. Good commits show you work like a professional analyst, not just someone who knows tools.",hint:"Think about what problem Git solves — what happens to your work if you accidentally overwrite a file? What does version control protect you from?",card:{what:"Git tracks changes to your files over time — every commit is a saved state you can return to. GitHub hosts your portfolio publicly.",use:"Every BI project: version your Python scripts, SQL queries, README files",example:"git add revenue_by_region.py\ngit commit -m 'Add GROUP BY dict accumulator — Day 11'\ngit push origin main",how:"Workflow: edit file → git add → git commit -m 'descriptive message' → git push. Repeat every lesson."}},
+
+  // ── File Naming & Structure (5) ──
+  {sub:"File Naming & Structure",q:"Which file name is correct BI Analyst practice?",type:"mc",opts:["Revenue_FINAL_v3_USE THIS ONE.xlsx","sales_analysis_west_2026_03.xlsx","my analysis.xlsx","REPORT final.xlsx"],ans:1,tag:"ON THE JOB",tool:"Git",ctx:"Recruiters look at your GitHub. Files named 'FINAL_v3' signal no version control habits. Clean naming is a professional signal before a single line of code is read.",hint:"Eliminate: files with spaces (breaks command line), vague labels ('final'), no date. Which file tells you exactly what it contains 6 months from now?",card:{what:"Best practice: lowercase, underscores not spaces, descriptive, dated. Never 'FINAL', 'v2', or spaces. Git handles versions.",use:"Every file you commit to GitHub or deliver to a stakeholder",example:"✅ sales_analysis_west_2026_03.xlsx\n✅ revenue_by_region_2026_03.py\n❌ Revenue FINAL v3 USE THIS.xlsx\n❌ my analysis.xlsx",how:"Convention: [topic]_[detail]_[YYYY_MM].extension — always underscores, always date, never 'final'."}},
+  {sub:"File Naming & Structure",q:"A BI project folder should have separate subfolders for raw data, scripts, and:",type:"fill",ans:"output",accept:["output","outputs","output files","deliverables"],tag:"ON THE JOB",tool:"Git",ctx:"A recruiter who clones your GitHub sees the folder structure before any code. Clean separation signals professional habits instantly.",hint:"Three things live in a project: the original source data (never modify), the code that processes it, and the result you deliver. What's the third folder?",card:{what:"Standard structure: data/raw/ (untouched source), scripts/ (Python, SQL), output/ (Excel, charts, reports), README.md.",use:"Every portfolio project on GitHub",example:"project_01/\n├── data/raw/sales_data.csv  ← never modified\n├── scripts/revenue_by_region.py\n├── sql/sales_analysis.sql\n├── output/sales_summary.xlsx\n└── README.md",how:"Rule: scripts read from data/raw/, write to output/. Never commit changes to raw data files."}},
+  {sub:"File Naming & Structure",q:"A README.md answers: what question did you ask, what did you find, and:",type:"fill",ans:"what do you recommend",accept:["what do you recommend","what you recommend","recommendation","what action","what to do"],tag:"INTERVIEW",tool:"Git",ctx:"Interviewers read READMEs. 'This is a Python project' tells them nothing. A README that answers a business question is a portfolio differentiator.",hint:"You've answered the question asked and the finding. What's the thing a business actually acts on — the reason the finding matters?",card:{what:"README = your project's cover letter. Business question → finding → recommendation. This is the Mae Test: if Mae can read it and understand the story, it passes.",use:"Every GitHub project — read before code",example:"Question: Which region drives the most revenue?\nFinding: West leads with $2,530 — 52% of total.\nRecommendation: Prioritise West in Q3 budget planning.",how:"Three paragraphs max: Background (data + question) → Findings (insight with numbers) → Recommendation (action)."}},
+  {sub:"File Naming & Structure",q:"Which git commit message is most professional?",type:"mc",opts:["'update'","'Day11 done'","'Add revenue_by_region.py — GROUP BY dict accumulator, Day 11'","'fixed stuff'"],ans:2,tag:"ON THE JOB",tool:"Git",ctx:"Recruiters read git histories. 'update' tells them nothing. Descriptive commits are visible proof of analytical thinking before your code is even opened.",hint:"Imagine reading your git history 6 months from now. Which message tells you exactly what changed and why — without opening any file?",card:{what:"A commit message describes WHAT was added and WHY — specific enough to understand without reading the diff.",use:"Every GitHub commit on portfolio projects",example:"✅ 'Add revenue_by_region.py — GROUP BY dict accumulator'\n✅ 'Fix data discrepancy: trim trailing space in region field'\n❌ 'update' | ❌ 'Day11' | ❌ 'fix'",how:"Format: [verb] [what] — [context]. Verbs: Add, Fix, Update, Refactor. Max 72 chars."}},
+  {sub:"File Naming & Structure",q:"Why should raw data files NEVER be modified in a BI project?",type:"mc",opts:["They take up too much disk space","They are the original source of truth — if modified, you can never verify your results against the original","Excel can't open modified CSV files","SQL doesn't accept modified files"],ans:1,tag:"ON THE JOB",tool:"All tools",ctx:"If a stakeholder ever questions your numbers, you trace back to raw data. If raw data was modified, you've broken your audit trail. This is a data governance principle.",hint:"Think about what 'source of truth' means. If you change the source, what do you compare your processed results to? What do you lose?",card:{what:"Raw data = untouched original. All transformations happen in scripts. This preserves the audit trail — you can always verify results against the original.",use:"Every BI project — data governance standard",example:"Wrong: open sales.csv in Excel, delete some rows, save ✗\nRight: Python reads sales.csv → processes → writes to output/summary.csv ✓",how:"Git: never add raw data changes to a commit. If data is updated, treat the new file as a new version: sales_data_2026_04.csv."}},
+
+  // ── BI-Specific Terms (6) ──
+  {sub:"BI-Specific Terms",q:"A DAX measure recalculates automatically based on what _____ are currently active on the canvas.",type:"fill",ans:"filters",accept:["filters","filter context","slicers","slicers and filters"],tag:"INTERVIEW",tool:"Power BI · DAX",ctx:"Filter context is the most important Power BI concept. Measures respond to slicers. This is what makes dashboards interactive — and what interviewers test.",hint:"When a user clicks a slicer on a Power BI page, what changes? The measure formula is the same — but what it calculates against changes. What controls that?",card:{what:"Filter context = which rows are currently visible. A measure recalculates against only those rows when slicers or filters are applied.",use:"Every KPI in Power BI — Total Revenue, Order Count, Avg Order Value",example:"Total Revenue = SUM(Sales[Revenue])\n→ West slicer active: calculates West rows only\n→ No slicer: calculates all rows\n→ Same measure, different filter context",how:"Create: right-click table → New Measure → DAX formula → Enter. Drag to canvas as Card or chart value."}},
+  {sub:"BI-Specific Terms",q:"CALCULATE() in DAX is used to override the _____ of a measure.",type:"fill",ans:"filter context",accept:["filter context","filter","filters"],tag:"INTERVIEW",tool:"Power BI · DAX",ctx:"CALCULATE is the most powerful DAX function. Interviewers ask about it to test filter context understanding. 'Show total company revenue even when North slicer is active' = CALCULATE.",hint:"Think about the problem: a user clicks 'North' but you want the card to always show the company total. What do you need to change about how the measure evaluates?",card:{what:"CALCULATE wraps a measure and lets you add, remove, or override the filter context — forcing a specific calculation regardless of user selections.",use:"Fixed benchmarks, YTD calculations, comparing segment vs total",example:"West Revenue = CALCULATE(SUM(Sales[Revenue]), Region[Region]=\"West\")\n→ Always returns West revenue\n→ Even if user has 'North' slicer active",how:"Syntax: CALCULATE([measure], filter1, filter2...). Filters inside override the visual's automatic context."}},
+  {sub:"BI-Specific Terms",q:"Row-level security in Power BI restricts which _____ each user sees when they open a report.",type:"fill",ans:"rows of data",accept:["rows of data","rows","data","records"],tag:"ON THE JOB",tool:"Power BI",ctx:"Four regional managers, one dashboard, each seeing only their region — that's RLS. You define the rule once. Power BI enforces it per login automatically.",hint:"The name 'row-level security' tells you exactly what it controls. What is the smallest unit of data in a database table?",card:{what:"RLS restricts data access per user login — same dashboard, automatically filtered to what each user is allowed to see.",use:"Regional dashboards, HR data (managers see their own team only), financial reports",example:"West Manager role: Region[Region]=\"West\"\n→ West manager sees only West rows\n→ Same dashboard, different data per user",how:"Desktop: Modeling tab → Manage Roles → define DAX filter → Publish → Service → Security → assign users to roles."}},
+  {sub:"BI-Specific Terms",q:"Drill-through in Power BI lets users click a data point and navigate to a detail page filtered to:",type:"mc",opts:["A different dashboard entirely","The detailed rows behind that specific data point","A pop-up showing chart options","The data source connection settings"],ans:1,tag:"ON THE JOB",tool:"Power BI",ctx:"Drill-through avoids building 20 separate reports. One summary dashboard, click through to detail when needed. This is a stakeholder favourite feature.",hint:"The summary bar chart shows West total. The manager clicks it and wants to see all individual West orders. What does drill-through show them?",card:{what:"Drill-through navigates from a summary visual to a detail page — automatically filtered to the clicked data point.",use:"Executive dashboards where leaders want to dig into specific regions, reps, or products",example:"Click 'West' bar → drill-through page shows all West orders, rep breakdown, product mix\nRight-click → Drill through → [detail page name]",how:"Create a detail page → add drill-through field (e.g. Region) → summary page: right-click any bar → Drill through → detail page name."}},
+  {sub:"BI-Specific Terms",q:"In Power BI, a relationship between two tables is created by connecting their shared _____ column.",type:"fill",ans:"key",accept:["key","key column","primary key","foreign key","id"],tag:"ON THE JOB",tool:"Power BI",ctx:"Without relationships, a Product slicer won't filter your Sales data. Relationships are what connect dimensions to facts in your star schema inside Power BI.",hint:"In a star schema, what column appears in BOTH the fact table and the dimension table to link them together? What do we call that kind of column?",card:{what:"A table relationship in Power BI links two tables via a shared key column — like product_id in both Sales and Product tables.",use:"Any multi-table data model — required for cross-table filtering",example:"Sales[product_id] → Product[product_id]\nSales[date_id] → Date[date_id]\nNow a Product slicer automatically filters Sales data",how:"Model view: drag [product_id] from Sales onto [product_id] in Product. Arrow appears = relationship active. Check direction (usually one-to-many)."}},
+  {sub:"BI-Specific Terms",q:"The Mae Test means: if _____ can understand a README or dashboard, it passes.",type:"fill",ans:"Mae",accept:["mae","your partner","a non-technical person","a non-technical reader","someone non-technical"],tag:"ON THE JOB",tool:"All tools",ctx:"Your partner Mae is your non-technical reader proxy. If someone with no data background can read your README and understand the business story — it's ready for stakeholders.",hint:"This is your personal quality standard from your bootcamp. Who is the named non-technical person your README must be readable by?",card:{what:"The Mae Test: before delivering any README or dashboard to a stakeholder, have a non-technical person read it. If they're confused, it needs more plain-English explanation.",use:"Every GitHub project README, every Power BI dashboard description",example:"Too technical: 'Used GROUP BY dict accumulator pattern with sorted() descending'\nMae-ready: 'Grouped all sales by region and ranked from highest to lowest revenue'",how:"Write the business story first. Tool names and code patterns go in technical notes sections — not in the main README summary."}},
+
+  // ── Insight Writing (5) ──
+  {sub:"Insight Writing",q:"A data-backed insight has three parts: metric, business meaning, and:",type:"fill",ans:"recommendation",accept:["recommendation","recommended action","action","a recommendation"],tag:"INTERVIEW",tool:"All tools",ctx:"This is your known challenge. Stopping at the metric is an observation. The recommendation is what separates a BI Analyst's output from a spreadsheet.",hint:"You have the number. You've explained what it means. What's the third part that answers 'so what should the business DO about it'?",card:{what:"Insight = [metric] + [business meaning / so what] + [recommendation / action]. All three required.",use:"Every dashboard annotation, slide, report summary, verbal briefing",example:"❌ 'West revenue is $2,530.'\n❌ 'West is the top region.'\n✅ 'West leads with $2,530 (52% of total), indicating strong demand — recommend prioritising West in Q3 budget.'",how:"Template: [Category] is [rank] with [metric] ([% of total]), indicating [business meaning] — recommend [action]."}},
+  {sub:"Insight Writing",q:"You see a revenue spike in week 3. Before telling a stakeholder 'the campaign worked', you should verify:",type:"mc",opts:["Nothing — a spike is clearly good","Whether week 3 historically spikes regardless of campaign activity","If the spike looks visually impressive enough","Whether stakeholders are already celebrating"],ans:1,tag:"ON THE JOB",tool:"All tools",ctx:"Over-interpretation is a real BI Analyst error. Claiming causation without checking historical baseline is a trust-damaging mistake.",hint:"To claim 'the campaign caused this spike', what data would you need that you don't have yet?",card:{what:"Correlation is not causation. A spike can have multiple explanations — always check the historical baseline before attributing it to one cause.",use:"Any time you see a trend, spike, or anomaly in time-series data",example:"Week 3 spike → pull 6 months of history → does week 3 always spike? If yes → seasonal pattern, not campaign",how:"Pull 3–6 months of historical data. Plot week-by-week. If the pattern predates the campaign, you cannot attribute the spike to it."}},
+  {sub:"Insight Writing",q:"The phrase 'the data suggests' is better than 'the data proves' because:",type:"mc",opts:["It's shorter","It accurately reflects that data indicates patterns but rarely proves causation","It sounds more academic","It's easier to say"],ans:1,tag:"INTERVIEW",tool:"All tools",ctx:"This is language precision — a quality signal in interviews. BI Analysts say 'indicates', 'suggests', 'shows evidence of' — not 'proves' unless you have experimental data.",hint:"Think about what a dataset can actually tell you. Can one company's sales data prove a global market trend? What's the honest word for what data does?",card:{what:"Data shows patterns and correlations — it rarely proves causation. Precise language builds credibility and protects you from overstating findings.",use:"Every written and verbal insight you deliver",example:"✅ 'West revenue declined 42% — this suggests a West-specific issue rather than a market-wide trend.'\n❌ 'West revenue declined 42%, which proves the new manager failed.'",how:"Safe language: 'indicates', 'suggests', 'shows evidence of', 'is consistent with'. Avoid: 'proves', 'definitely', 'always', 'never'."}},
+  {sub:"Insight Writing",q:"When you can only see a revenue drop but NOT the cause, the correct response to a stakeholder is:",type:"mc",opts:["Guess the most likely cause and state it confidently","State what the data shows, what it doesn't show, and offer to investigate further","Say nothing until you know the full story","Blame the previous analyst"],ans:1,tag:"ON THE JOB",tool:"All tools",ctx:"Data boundary awareness is a senior BI Analyst skill. Stating what your dataset CAN'T tell you is as important as stating what it can.",hint:"You have the revenue numbers but not the pipeline data or rep activity. What can you honestly say — and what can you honestly offer?",card:{what:"Insight boundary: report what your data shows. Clearly state what additional data is needed for follow-up questions. Offer to pull it.",use:"Every stakeholder conversation after presenting a finding",example:"'I can see West is down 42%. The cause isn't in this dataset — I'd need rep activity or pipeline data to identify the driver. Want me to pull that?'",how:"Template: 'I can confirm [X]. To understand [why], I'd need [additional data]. Want me to investigate?'"}},
+  {sub:"Insight Writing",q:"An insight that says 'West is the worst region' is weaker than one that says:",type:"mc",opts:["'West is bad'","'West is the lowest-performing region at $230, representing 14% of total revenue — indicating possible under-resourcing'","'The West region has issues'","'Someone should look at West'"],ans:1,tag:"INTERVIEW",tool:"All tools",ctx:"Specificity = credibility. Vague insights are what junior analysts produce. Precise, numbered insights with business context are what BI Analysts are hired for.",hint:"What does the better insight have that 'West is the worst' doesn't? Think: numbers, context, business meaning.",card:{what:"A strong insight is specific (has a number), contextualised (% of total, vs what), and implies a business meaning or action.",use:"Every dashboard annotation, every verbal briefing, every slide",example:"❌ 'West is bad'\n✅ 'West leads at $230, 14% of total revenue — the largest gap from the second-lowest (East at $620) — investigate before Q3 planning'",how:"Formula: [Region] at $[amount] ([% of total]), [vs comparison], indicating [implication]."}},
+];
+
+const TECH_Q = [
+  // ── Python (8) ──
+  {sub:"Python",q:"What does revenue.get('West', 0) return if 'West' is not yet in the dict?",type:"mc",opts:["A KeyError","None","0","An empty string"],ans:2,tag:"ON THE JOB",tool:"Python",ctx:"The GROUP BY accumulator pattern you built in Day 11 depends on this. Without .get(), the script crashes on the first row of every new region.",hint:"Think about the very first time a region appears in your CSV. That key doesn't exist in the dict yet. What does .get() give you as a safety fallback?",card:{what:"dict.get(key, default) returns the default value when the key doesn't exist — preventing a KeyError crash.",use:"Dict accumulator GROUP BY pattern — grouping any metric by any category",example:"revenue.get('West', 0) → 0 (first West row)\nrevenue['West'] → KeyError (crashes)\nrevenue.get('West', 0) + 150 → 150 (safe accumulation)",how:"Always use in your accumulator:\nrevenue[region] = revenue.get(region, 0) + float(row['revenue'])"}},
+  {sub:"Python",q:"Complete the GROUP BY line:\nrevenue[region] = revenue._____(region, 0) + float(row['revenue'])",type:"fill",ans:"get",accept:["get",".get"],tag:"ON THE JOB",tool:"Python",ctx:"This single line IS the GROUP BY pattern. Read it: take existing total for this region (or 0 if new), add this row's revenue, store back.",hint:"You need a dict method that safely retrieves a value with a fallback when the key is missing. Three letters.",card:{what:"The dict accumulator: get current total (or 0) + add current value = running total per group. Python's GROUP BY + SUM().",use:"Any time you need to group and sum data from a CSV",example:"revenue['West'] = revenue.get('West', 0) + 150\n# First West row: 0 + 150 = 150\n# Second West row: 150 + 200 = 350\n# SQL equiv: SUM(revenue) GROUP BY region",how:"Same logic as SQL GROUP BY + SUM(), Excel Pivot Table by region. Three tools, one pattern."}},
+  {sub:"Python",q:"sorted(revenue.items(), key=lambda x: x[1], reverse=True) — x[1] refers to:",type:"mc",opts:["The region name","The revenue value","The sort index","The row number"],ans:1,tag:"ON THE JOB",tool:"Python",ctx:"revenue.items() returns (region, revenue) pairs. x is one pair. x[0] = region name (key), x[1] = revenue (value). Sorting by value = ranking by revenue.",hint:"items() gives you (key, value) tuples. If x is ('West', 2530), what is x[1]?",card:{what:"items() returns (key, value) pairs. Sorting by x[1] sorts by the value. reverse=True = descending = highest first.",use:"Ranking any grouped output — regions, products, reps",example:"{'West':2530,'North':1200,'East':800}\n→ sorted by x[1] desc\n→ [('West',2530),('North',1200),('East',800)]",how:"x[0] = key (region), x[1] = value (revenue). This is your Day 13 sorted() pattern."}},
+  {sub:"Python",q:"csv.DictReader gives you access to each row value by:",type:"mc",opts:["Row number","Column index position (e.g. row[3])","Column name (e.g. row['revenue'])","Alphabetical order"],ans:2,tag:"ON THE JOB",tool:"Python",ctx:"row['revenue'] is readable. row[3] means you have to count columns to know what you're accessing. DictReader makes code readable and maintainable.",hint:"The 'Dict' in DictReader tells you the data structure it returns. What does a dict give you that a list doesn't?",card:{what:"csv.DictReader reads each row as a dict with column headers as keys — access values by name, not position.",use:"All CSV analysis in Python — standard practice",example:"for row in csv.DictReader(f):\n    region = row['region']   # clear\n    revenue = row['revenue'] # clear\n    # NOT row[0], row[3] — confusing",how:"First CSV row becomes the keys automatically. If your CSV has a header row, DictReader handles it — no need to skip row 0 manually."}},
+  {sub:"Python",q:"float(row['revenue']) is needed because csv.DictReader reads all values as:",type:"fill",ans:"strings",accept:["strings","string","str","text"],tag:"ON THE JOB",tool:"Python",ctx:"This is a very common Python bug. DictReader reads everything as text. '150.00' + '200.00' = '150.00200.00' (string concatenation) NOT $350. You must convert to float first.",hint:"csv.DictReader makes everything a text value. What data type does Python use for decimal numbers that you can do math with?",card:{what:"csv.DictReader returns every value as a string (text). Mathematical operations require float() or int() conversion.",use:"Every time you do arithmetic on CSV data in Python",example:"❌ '150.00' + '200.00' = '150.00200.00'  (string concat)\n✅ float('150.00') + float('200.00') = 350.0",how:"Always convert: float(row['revenue']), int(row['quantity']). Add try/except if data might have blanks:\ntry: float(row['revenue'])\nexcept: continue  # skip bad rows"}},
+  {sub:"Python",q:"To open a CSV file safely in Python so it closes automatically, you use:",type:"fill",ans:"with open",accept:["with open","with open(","with"],tag:"ON THE JOB",tool:"Python",ctx:"'with open()' is the professional pattern. It automatically closes the file when done — no resource leaks, no forgotten file handles.",hint:"Python has a two-word syntax for opening resources (files, connections) that automatically cleans up when the block exits. What is it?",card:{what:"The 'with' statement is a context manager — it automatically handles setup and teardown (opening and closing the file).",use:"Every file operation in Python",example:"with open('sales.csv', newline='', encoding='utf-8') as f:\n    reader = csv.DictReader(f)\n    for row in reader:\n        ...",how:"Parameters: mode 'r' = read (default), newline='' prevents double newlines on Windows, encoding='utf-8' handles special characters."}},
+  {sub:"Python",q:"print(f'West: ${total:.2f}') — what does :.2f do?",type:"mc",opts:["Multiplies by 2","Formats the number to 2 decimal places","Rounds to the nearest dollar","Adds a dollar sign"],ans:1,tag:"ON THE JOB",tool:"Python",ctx:"Formatted output is a professionalism signal. '2530.0' looks like code output. '$2,530.00' looks like a BI Analyst's output.",hint:"The 'f' in .2f stands for 'float'. The .2 controls how many decimal places appear. What formatting operation does this perform?",card:{what:"f-string format spec: .2f = format as float with exactly 2 decimal places.",use:"Any output that will be seen by a stakeholder or included in a report",example:"total = 2530.5\nprint(f'Revenue: ${total:.2f}')  → 'Revenue: $2530.50'\nprint(f'Revenue: ${total:.0f}')  → 'Revenue: $2531'",how:"Common format specs:\n:.2f = 2 decimal places\n:,  = add thousand separator\n:.0f = no decimal places\n:.1% = as percentage with 1 decimal"}},
+  {sub:"Python",q:"In a Python dict accumulator, the typical structure is: read row → get region → _____ → store back.",type:"fill",ans:"add revenue",accept:["add revenue","accumulate","add to existing","sum revenue"],tag:"ON THE JOB",tool:"Python",ctx:"This is the core of the GROUP BY pattern — understanding what's happening inside the loop step by step.",hint:"You have the existing total for this region (or 0). You have the current row's revenue. What do you do with them?",card:{what:"The accumulator loop: read row → identify the grouping key → add this row's value to the running total → store the updated total.",use:"Grouping and summing any metric by any category from a CSV",example:"for row in reader:\n    region = row['region'].strip()\n    rev = float(row['revenue'])\n    revenue[region] = revenue.get(region, 0) + rev",how:"Three lines does the work: identify key, get value, accumulate. That's the entire GROUP BY + SUM() pattern."}},
+
+  // ── SQL (9) ──
+  {sub:"SQL",q:"SELECT region, SUM(revenue) FROM sales GROUP BY region — returns:",type:"mc",opts:["Every individual row","One row per region with total revenue","Only the region column","An error"],ans:1,tag:"INTERVIEW",tool:"SQL · PostgreSQL",ctx:"SQL GROUP BY is the database equivalent of your Python dict accumulator. One line replaces your entire Python script. This is the most common SQL pattern in BI work.",hint:"Your Python dict accumulator produced one total per region. What does GROUP BY + SUM() produce?",card:{what:"GROUP BY collapses all rows with the same region into one output row. SUM() adds all revenue values for each group.",use:"Revenue by region, orders by product — any aggregation query",example:"Input: West|150, West|200, North|300\nGROUP BY result:\n  West | 350\n  North | 300",how:"Rule: any column in SELECT that isn't inside an aggregate (SUM, COUNT, AVG) MUST be in GROUP BY. PostgreSQL enforces this strictly."}},
+  {sub:"SQL",q:"WHERE filters rows BEFORE grouping. HAVING filters groups AFTER:",type:"fill",ans:"aggregation",accept:["aggregation","aggregating","grouping","the group by"],tag:"INTERVIEW",tool:"SQL · PostgreSQL",ctx:"WHERE vs HAVING is the most common SQL interview question for BI roles. Master this and you immediately distinguish yourself from candidates who know only basic SELECT.",hint:"SQL execution order: filter rows (WHERE) → group (GROUP BY) → aggregate (SUM) → filter groups (?). What step comes right before that last filter?",card:{what:"WHERE filters rows before grouping runs. HAVING filters completed groups after aggregation — it can see SUM(), COUNT(), AVG() values.",use:"Finding regions above a revenue threshold, high-value customers, products with enough volume",example:"❌ WHERE SUM(revenue) > 1000  -- error\n✅ GROUP BY region\n   HAVING SUM(revenue) > 1000",how:"Rule: aggregate function in your filter → HAVING. Individual row condition → WHERE."}},
+  {sub:"SQL",q:"To get the TOP 3 regions by revenue, which clause limits your results?",type:"fill",ans:"LIMIT 3",accept:["limit 3","LIMIT 3","limit"],tag:"INTERVIEW",tool:"SQL · PostgreSQL",ctx:"Top-N queries are in almost every BI interview. 'What are our best-performing regions?' GROUP BY + ORDER BY DESC + LIMIT = your answer.",hint:"You've grouped and ranked (ORDER BY DESC). How do you cut the results to show only the top 3?",card:{what:"Top-N pattern: GROUP BY to aggregate → ORDER BY DESC to rank → LIMIT N to keep only top results.",use:"'Top 5 customers', 'Top 3 regions', 'Worst 10 products'",example:"SELECT region, SUM(revenue) as total\nFROM sales\nGROUP BY region\nORDER BY total DESC\nLIMIT 3",how:"Always alias your aggregate (as total) so ORDER BY can reference it cleanly. LIMIT N = keep N rows. No LIMIT = all rows."}},
+  {sub:"SQL",q:"A LEFT JOIN keeps all rows from the left table even when there is NO match in the right table. Non-matching right columns appear as:",type:"fill",ans:"NULL",accept:["null","NULL","null values","nulls"],tag:"INTERVIEW",tool:"SQL · PostgreSQL",ctx:"LEFT JOIN is the safest default join for BI work — it never silently drops rows from your main table. INNER JOIN would silently lose rows with no dimension match.",hint:"When there's no matching row on the right side, those right-table columns have no value. What does SQL use to represent a missing value?",card:{what:"LEFT JOIN: all left rows appear. Right rows join when matched. No match → right columns are NULL (not dropped).",use:"Joining fact table to dimension — some fact rows may not have a matching dimension yet",example:"Sales LEFT JOIN Region ON sales.region_id = region.id\n→ Sale with no region match still appears (NULL for region columns)\n→ INNER JOIN would silently drop it",how:"Use LEFT JOIN as your default for BI queries — safer than INNER JOIN. NULL values show you what's missing."}},
+  {sub:"SQL",q:"A subquery lets you use the result of one query as a _____ in another query.",type:"fill",ans:"filter value",accept:["filter value","filter","value","condition","input"],tag:"INTERVIEW",tool:"SQL · PostgreSQL",ctx:"Subqueries answer 'show me rows where revenue is above average' — where the average itself comes from the same table. This is a sign of advanced SQL thinking.",hint:"The filter condition needs a value that doesn't exist until you run a calculation. What do you call that inner calculation?",card:{what:"A subquery is a complete SELECT nested inside another query — the inner result becomes a value used in the outer WHERE or FROM clause.",use:"Above-average rows, dynamic thresholds, filtering by a calculated value",example:"SELECT * FROM sales\nWHERE revenue > (SELECT AVG(revenue) FROM sales)\n→ Inner query returns average first\n→ Outer query filters by that value",how:"Inner query runs first, returns a value. Outer query uses it. Think of it as a variable that holds a calculated result."}},
+  {sub:"SQL",q:"SELECT DISTINCT is used to return only _____ values in a column.",type:"fill",ans:"unique",accept:["unique","distinct","unique values","non-duplicate"],tag:"ON THE JOB",tool:"SQL · PostgreSQL",ctx:"SELECT DISTINCT is your first diagnostic tool. 'How many unique regions are there?' 'Are region names consistent?' Run DISTINCT and look at the results.",hint:"If a column has 'West', 'West', 'North', 'West ', what would DISTINCT return? What word describes values with no repetitions?",card:{what:"DISTINCT removes duplicate values — returns each unique value once regardless of how many times it appears.",use:"Data discovery, quality checks, checking for inconsistent values",example:"SELECT DISTINCT region FROM sales ORDER BY region\n→ Shows all unique region values\n→ Spot 'West ' (trailing space) vs 'West' immediately",how:"Use early in every project: SELECT DISTINCT [column] FROM [table] ORDER BY 1 — look for inconsistencies, unexpected values, blank rows."}},
+  {sub:"SQL",q:"TRIM(region) in SQL removes _____ from a text value.",type:"fill",ans:"leading and trailing spaces",accept:["leading and trailing spaces","spaces","whitespace","trailing spaces"],tag:"ON THE JOB",tool:"SQL · PostgreSQL",ctx:"Trailing spaces cause silent discrepancies. 'West' ≠ 'West '. TRIM() is the SQL fix for what .strip() does in Python.",hint:"Think about where extra spaces hide in messy data — not in the middle of a word, but at the _____ or _____.",card:{what:"TRIM() removes spaces from the start (leading) and end (trailing) of a text value — fixing the most common cause of grouping discrepancies.",use:"Any WHERE clause filtering on text columns, GROUP BY on name fields",example:"'West ' TRIM → 'West'\n'  North  ' TRIM → 'North'\n\nSQL: WHERE TRIM(region) = 'West'\nPython equivalent: row['region'].strip()",how:"Use in WHERE: WHERE TRIM(region) = 'West'\nOr in SELECT: SELECT TRIM(region) as region_clean\nBest: fix in source data so all tools see clean values."}},
+  {sub:"SQL",q:"COUNT(*) counts all rows. COUNT(revenue) counts rows where revenue is:",type:"mc",opts:["Greater than zero","Not NULL — NULL values are excluded","Positive","Less than $1,000"],ans:1,tag:"INTERVIEW",tool:"SQL · PostgreSQL",ctx:"This is a subtle but important difference. COUNT(*) = total rows. COUNT(column) = rows where that column is not null. They can give different results on the same table.",hint:"Think about what COUNT(column) skips. It's counting values — what kind of value is 'no value'?",card:{what:"COUNT(*) = all rows. COUNT(column) = rows where column is NOT NULL. This matters when a column has missing values.",use:"Any aggregation query where nulls are possible — always check both",example:"Table: 5 rows, 2 have NULL revenue\nCOUNT(*) → 5\nCOUNT(revenue) → 3\nSUM(revenue) → ignores NULLs automatically",how:"Diagnostic: if COUNT(*) ≠ COUNT(your_column), you have NULL values in that column. Investigate before building on top of it."}},
+  {sub:"SQL",q:"To see both the region total AND the grand total in one query, you can use GROUP BY with:",type:"mc",opts:["HAVING","ROLLUP","DISTINCT","LIMIT"],ans:1,tag:"INTERVIEW",tool:"SQL · PostgreSQL",ctx:"ROLLUP is a Power User SQL feature — it adds subtotals and grand totals automatically. Knowing it in an interview shows depth beyond basic SELECT.",hint:"You want GROUP BY region results AND a grand total row at the bottom. Which SQL extension adds summary rows automatically?",card:{what:"GROUP BY ROLLUP adds subtotal and grand total rows automatically — no UNION needed.",use:"Regional summary reports that need a grand total row, executive summaries",example:"SELECT region, SUM(revenue)\nFROM sales\nGROUP BY ROLLUP(region)\n→ North | 1200\n→ West  | 2530\n→ NULL  | 3730  ← grand total row",how:"The NULL region row = the grand total. Filter it with WHERE region IS NOT NULL to get only region rows without the total."}},
+
+  // ── Excel (5) ──
+  {sub:"Excel",q:"Your regional pivot shows $2,900. Your product pivot on the same data shows $3,300. Most likely cause:",type:"mc",opts:["Excel formula error","Rows with blank region — excluded from region pivot but included in product pivot","Power BI interference","Excel auto-recalculated wrong"],ans:1,tag:"ON THE JOB",tool:"Excel",ctx:"This is the Day 14 discrepancy puzzle. Blank values in a grouping field are silently excluded from that pivot — but still exist in the data.",hint:"A row with a blank region — where does it appear in the region pivot? In the 'blank' group or nowhere? What happens to its revenue?",card:{what:"Blank/null values in a GROUP BY column are excluded from that group's totals — the row's value is lost from that pivot but present in others.",use:"Cross-pivot validation — always verify grand totals match",example:"Row: region='', product='Widget', revenue=$400\n→ Region pivot: missing ($2,900)\n→ Product pivot: included ($3,300)\n→ Gap = $400 = rows with blank region",how:"Filter source data: click region column → filter → select blanks. Sum those rows. That's your gap amount."}},
+  {sub:"Excel",q:"Power Query is Excel's way of handling which ETL step(s)?",type:"mc",opts:["Load only","Extract only","Extract and Transform","Transform and Load"],ans:2,tag:"ON THE JOB",tool:"Excel",ctx:"Power Query both connects to sources (Extract) and applies transformations (Transform) before loading to Excel. It's Excel's built-in ETL layer.",hint:"Power Query has a 'Get Data' step and a 'Transform' editor. Two out of three ETL steps happen inside Power Query.",card:{what:"Power Query = Extract + Transform inside Excel. It connects to data and applies transformations before loading to the worksheet.",use:"Excel-based BI workflows, cleaning data before pivoting, combining multiple data files",example:"Get Data from CSV (E) → Remove Blank Rows, Trim Whitespace, Rename (T) → Close & Load to Table (L)",how:"Data tab → Get Data → From File → CSV → Power Query Editor → transforms → Close & Load."}},
+  {sub:"Excel",q:"To group revenue by region in Excel without writing any formulas, you use a:",type:"fill",ans:"pivot table",accept:["pivot table","pivot","pivottable"],tag:"ON THE JOB",tool:"Excel",ctx:"Pivot tables are Excel's GROUP BY. Drag region to Rows, revenue to Values — you get the same output as your Python dict accumulator or SQL GROUP BY.",hint:"This Excel feature lets you drag fields to group data and aggregate values without writing a single formula. What is it called?",card:{what:"A Pivot Table groups and aggregates data interactively — drag fields to rows, values, filters to rearrange the view instantly.",use:"Quick aggregations, exploratory analysis, verifying SQL results",example:"Drag 'region' to Rows → 'revenue' to Values (Sum) → instant GROUP BY result\nAdd 'month' to Columns → instant cross-tab",how:"Select data → Insert → PivotTable → drag Region to Rows → Revenue to Values → change to Sum."}},
+  {sub:"Excel",q:"VLOOKUP(lookup_value, table_array, col_index, FALSE) — the FALSE at the end means:",type:"mc",opts:["Return false if not found","Exact match — only return a value if the lookup value matches exactly","Approximate match","Case-sensitive search"],ans:1,tag:"ON THE JOB",tool:"Excel",ctx:"The FALSE/TRUE argument in VLOOKUP is the most misunderstood part. FALSE = exact match. TRUE = approximate match. For BI lookups, you almost always want FALSE (exact match).",hint:"You're looking up a specific order ID or region name. Would you want an approximate match (might give you a nearby wrong value) or an exact match?",card:{what:"VLOOKUP's 4th argument: FALSE = exact match (standard for BI lookups). TRUE = approximate match (used for range lookups like tax brackets).",use:"Looking up region managers, product categories, customer names from a reference table",example:"=VLOOKUP(A2, $D:$F, 2, FALSE)\n→ Finds exact match of A2 in column D\n→ Returns value from column 2 of the table",how:"Modern alternative: use XLOOKUP (no col_index counting, cleaner syntax):\n=XLOOKUP(A2, $D:$D, $E:$E)"}},
+  {sub:"Excel",q:"What does #REF! error in Excel mean?",type:"mc",opts:["Division by zero","A formula references a cell or range that no longer exists","Wrong data type","Circular reference"],ans:1,tag:"ON THE JOB",tool:"Excel",ctx:"#REF! appears when you delete a row or column that a formula references. In BI work this happens when source data is restructured. Knowing error codes looks professional.",hint:"The exclamation mark suggests something is broken. 'REF' is short for 'reference'. What would break a cell reference?",card:{what:"#REF! = invalid cell reference. The cell or range the formula pointed to was deleted, moved, or the formula was copied to a location that makes the reference invalid.",use:"Debugging Excel errors in received files, explaining errors to stakeholders",example:"=SUM(A1:A10) → delete row 3 → =SUM(A1:#REF!)\nFix: re-select the correct range or use Table references that adjust automatically",how:"Other key errors:\n#DIV/0! = dividing by zero (use IFERROR)\n#VALUE! = wrong data type\n#N/A = VLOOKUP found no match"}},
+
+  // ── Power BI (8) ──
+  {sub:"Power BI",q:"DAX measure vs calculated column: which one recalculates when a user clicks a slicer?",type:"mc",opts:["Calculated column","Measure","Both","Neither"],ans:1,tag:"INTERVIEW",tool:"Power BI · DAX",ctx:"#1 Power BI interview question. Measures are dynamic (respond to slicers). Calculated columns are static (computed once at model load). Get this solid.",hint:"When a user clicks a slicer, what changes? The measure formula is the same — but what it calculates against changes. Which type of calculation responds to that?",card:{what:"Measure: recalculates dynamically based on filter context. Calculated column: computed once per row at model load, fixed forever.",use:"Measures: KPIs, totals, ratios. Columns: row-level categories, labels.",example:"Measure: Total Revenue = SUM(Sales[Revenue])\n→ Changes when slicer is clicked\n\nCalc column: Category = IF(Revenue>500,'High','Low')\n→ Fixed per row regardless of slicer",how:"Rule: calculation depends on user filter → measure. Row property that doesn't change → calculated column."}},
+  {sub:"Power BI",q:"Write the DAX measure for Total Revenue:",type:"fill",ans:"Total Revenue = SUM(Sales[Revenue])",accept:["total revenue = sum(sales[revenue])","sum(sales[revenue])","= sum(sales[revenue])"],tag:"INTERVIEW",tool:"Power BI · DAX",ctx:"First measure every BI Analyst writes. Table name then column in square brackets. Measure name before equals sign.",hint:"DAX syntax: Measure Name = FUNCTION(TableName[ColumnName]). Which function sums all values in a column?",card:{what:"DAX SUM: always TableName[ColumnName] in square brackets. Measure name is what appears in the Fields pane.",use:"Any aggregated KPI — the most common DAX pattern",example:"Total Revenue = SUM(Sales[Revenue])\nTotal Orders = COUNT(Sales[OrderID])\nAvg Order Value = DIVIDE(SUM(Sales[Revenue]),COUNT(Sales[OrderID]))",how:"Right-click table → New Measure → type formula → Enter. Drag to canvas as Card visual."}},
+  {sub:"Power BI",q:"DIVIDE(numerator, denominator) in DAX is safer than using '/' because:",type:"mc",opts:["It's faster","It returns 0 (or blank) instead of an error when dividing by zero","It automatically rounds","It works with text values"],ans:1,tag:"ON THE JOB",tool:"Power BI · DAX",ctx:"Division by zero is a common DAX error. DIVIDE() handles it gracefully — your dashboard doesn't break when a denominator becomes 0.",hint:"What happens with regular division when the denominator is zero? What does a BI dashboard do when it hits an error?",card:{what:"DIVIDE() handles division-by-zero gracefully — returns blank (or a custom value) instead of an error that breaks your visual.",use:"Any ratio measure: Avg Order Value, Margin %, Conversion Rate",example:"✅ Avg Order Value = DIVIDE(SUM(Sales[Revenue]), COUNT(Sales[OrderID]))\n❌ Avg Order Value = SUM(Sales[Revenue]) / COUNT(Sales[OrderID])  -- errors when 0 orders",how:"Third argument is optional custom return value:\nDIVIDE(Revenue, Orders, 0)  -- returns 0 when orders=0\nDIVIDE(Revenue, Orders)     -- returns BLANK when orders=0"}},
+  {sub:"Power BI",q:"To share a Power BI report so stakeholders view it in a browser, you:",type:"mc",opts:["Email the .pbix file","Print to PDF and email","Publish to Power BI Service and share the link","Screenshot each page"],ans:2,tag:"INTERVIEW",tool:"Power BI",ctx:"Sharing .pbix requires Power BI Desktop to open. Publishing to Service = live, interactive dashboard in any browser. This is the professional standard.",hint:"Stakeholders should click a link and see the dashboard in Chrome — no install needed. What Power BI feature puts the report online?",card:{what:"Power BI Service (app.powerbi.com) hosts published reports online — stakeholders view via browser, no software install needed.",use:"All stakeholder delivery — the professional standard",example:"Desktop: File → Publish → To Power BI Service → choose workspace\nService: Share button → paste email addresses or copy link",how:"Your workflow: build in Desktop → Publish → share link. Update: edit in Desktop → re-Publish to refresh the Service version."}},
+  {sub:"Power BI",q:"In Power BI Model view, you create a relationship by connecting two tables via their shared:",type:"fill",ans:"key column",accept:["key column","column","key","shared key","id column"],tag:"ON THE JOB",tool:"Power BI",ctx:"Relationships connect your star schema inside Power BI. Without them, slicers from dimension tables won't filter your fact table data.",hint:"A shared column that appears in both tables linking them together — in database terms, what do we call that?",card:{what:"Relationships link tables via a shared key column — like product_id appearing in both Sales (fact) and Product (dimension).",use:"Any multi-table data model — required for cross-table filtering",example:"Drag Sales[product_id] → Product[product_id]\n→ Product slicer now filters Sales automatically",how:"Model view: drag key column from one table to matching key in other table. Check cardinality: usually many-to-one (fact to dimension)."}},
+  {sub:"Power BI",q:"A Power BI slicer is used by stakeholders to:",type:"mc",opts:["Delete data from the model","Filter all visuals on the page to show only selected values","Export data to Excel","Change the dashboard theme"],ans:1,tag:"ON THE JOB",tool:"Power BI",ctx:"Slicers are the primary self-service feature — they let stakeholders filter the entire dashboard without touching code or data.",hint:"Think about what happens when a Sales Manager clicks 'West' in a slicer. All charts on the page show what?",card:{what:"A slicer is a visual filter control — clicking a value filters all connected visuals on the page to show only that segment.",use:"Self-service dashboards — the main interactivity feature for stakeholders",example:"Region slicer: click 'West' → all charts filter to West data\nMonth slicer: click '2026-03' → all charts filter to March 2026",how:"Insert → Slicer → drag Region field onto it. Slicers respect relationships — a Region slicer will filter the Sales fact table via the Region dimension."}},
+  {sub:"Power BI",q:"The SWITCH() function in DAX is useful for:",type:"mc",opts:["Switching between pages","Creating conditional labels or categories based on multiple conditions","Filtering data","Changing visual type"],ans:1,tag:"INTERVIEW",tool:"Power BI · DAX",ctx:"SWITCH() replaces nested IF() chains. Instead of IF(x=1, 'A', IF(x=2, 'B', IF(x=3, 'C', 'D'))), SWITCH() is cleaner and more readable.",hint:"Think about what SWITCH does in code generally — it evaluates one expression against multiple possible values and returns different outputs. What kind of logic is that?",card:{what:"SWITCH() evaluates an expression against multiple values and returns the result for the first match — cleaner than nested IFs.",use:"Calculated columns for category labels, custom bucketing, conditional formatting logic",example:"Revenue Category = SWITCH(TRUE(),\n  Sales[Revenue]>1000, \"High\",\n  Sales[Revenue]>500, \"Medium\",\n  \"Low\"\n)",how:"SWITCH(TRUE(), condition1, result1, condition2, result2, else_result) — the TRUE() version lets you use any boolean expression as conditions."}},
+  {sub:"Power BI",q:"Page-level filters in Power BI filter only the current page. Report-level filters filter:",type:"mc",opts:["Only the first page","All pages in the report","Only visuals you select","Only fact tables"],ans:1,tag:"ON THE JOB",tool:"Power BI",ctx:"Filter scope is a practical Power BI skill — using the wrong filter level either shows too much or too little, and affects all stakeholders using the report.",hint:"If report-level applies to everything, and page-level applies to one page, what does 'report-level' cover?",card:{what:"Three filter scopes: Visual (one chart), Page (current page only), Report (all pages in the report).",use:"Report design — controlling what gets filtered where",example:"Report filter: Year=2026 → all pages show 2026 only\nPage filter: Region=West → only this summary page shows West\nVisual filter: applies to one specific chart",how:"Filters pane on the right side of Desktop: drag field to 'Filters on all pages' for report-level, 'Filters on this page' for page-level."}},
+];
+
+const SIM_Q = [
+  {sub:"Stakeholder Requests",scenario:"Sales Manager: 'I need a dashboard showing each rep's monthly revenue, ranked highest to lowest, with a region filter. Can you have it by end of week?'",
+   steps:[
+     {q:"Before opening Power BI, your FIRST action is:",type:"mc",opts:["Open Power BI immediately","Confirm the data has rep name, revenue, month, region columns — and that rep names are stored consistently","Reply Thursday","Ask your manager if you should do it"],
+      ans:1,hint:"Think about what breaks a dashboard before you even build it. If rep names are stored 3 different ways, your ranking is wrong. What do you verify first?",
+      card:{what:"Data discovery before build: verify required columns exist and are clean — especially grouping columns like rep_name.",use:"Every BI project kickoff — non-negotiable first step",example:"SELECT DISTINCT rep_name FROM sales ORDER BY rep_name\n→ Look for same person in different formats",how:"Two-minute check saves 3 hours of rework."}},
+     {q:"Rep names are stored as 'J. Smith', 'John Smith', 'Smith, J.' — same person. You:",type:"mc",opts:["Build anyway — manager will figure it out","Flag the data quality issue, propose a fix, and estimate the delay","Delete two of the three formats","Change the column name in Power BI"],
+      ans:1,hint:"A broken dashboard vs a 1-day delay. Which causes more trust damage?",
+      card:{what:"Surface data quality issues proactively. Propose the fix. Estimate the delay. Let the stakeholder decide.",use:"Any time you discover a data quality issue during project setup",example:"'Found inconsistent rep name formats — 3 variations for same person. Can standardise in Power Query (~2 hours added). Confirm to proceed?'",how:"Fix: Power Query Replace Values, or create a rep_name mapping table."}},
+     {q:"Dashboard is complete. Professional delivery is:",type:"mc",opts:["Email the .pbix file","Publish to Power BI Service, send the link with a one-sentence summary","Print screenshots","Share screen in Zoom"],
+      ans:1,hint:"Stakeholders need to access this on their phone, in a meeting, share with their team. Which delivery method enables all of that?",
+      card:{what:"Professional delivery: Publish → share link → one-line handoff message stating what it shows and what to do with it.",use:"Every dashboard delivery",example:"'Hi [Name], rep dashboard is live: [link]. Shows monthly revenue ranked by rep with region filter — refreshes automatically. Let me know if changes needed.'",how:"File → Publish → Service → Share."},
+      verbal:"Say the delivery message aloud. One sentence. What it is, where it is, what it does. Pause after the link."}
+   ]
+  },
+  {sub:"Data Quality",scenario:"Python shows West revenue = $2,530. SQL shows West revenue = $2,300. A stakeholder already has the $2,530 number.",
+   steps:[
+     {q:"Your FIRST action is:",type:"mc",opts:["Send SQL number — SQL is more reliable","Re-run both, trace exactly why they differ before communicating anything","Update the dashboard silently with SQL number","Average the two numbers"],
+      ans:1,hint:"You don't know which is correct. Would you replace one unverified number with another?",
+      card:{what:"Cross-tool validation: re-run both → compare row counts → identify what each includes/excludes → find root cause.",use:"Any time two tools disagree on the same metric",example:"Python: len(rows)=12, sum=$2,530\nSQL: COUNT(*)=11, SUM=$2,300\n→ 1 row difference. Investigate that row.",how:"Check row counts first — if they differ, one tool sees a row the other doesn't. That's your gap."}},
+     {q:"Root cause: trailing space 'West ' — Python includes it, SQL WHERE region='West' excludes it. Correct action:",type:"mc",opts:["Use Python's number — it sees more data","Use SQL's number — it filters more cleanly","Fix the trailing space at source. Both tools are correct given dirty data.","Report both with a footnote"],
+      ans:2,hint:"Neither tool is broken — they're both working exactly as designed. Where is the actual problem?",
+      card:{what:"When tools disagree, the answer is almost always a data quality issue — not a tool error. Fix at source.",use:"Root cause analysis for any data discrepancy",example:"'West ' ≠ 'West'\nFix:\nPython: row['region'].strip()\nSQL: WHERE TRIM(region)='West'\nBest: fix in source CSV",how:"Apply .strip() in Python at ingestion. TRIM() in SQL queries. Fix source data for all tools to benefit."}},
+     {q:"How do you communicate the correction to the stakeholder who has $2,530?",type:"mc",opts:["Say nothing — update silently","'I identified a data quality issue causing a $230 discrepancy. Corrected figure is $2,300. Fixed at source and report is updated.'","'Excel was wrong'","'Please ignore my last message'"],
+      ans:2,hint:"What does the stakeholder need to hear: what happened, the right number, confirmation it's fixed. Which option covers all three?",
+      card:{what:"Data correction: state cause, give correct number, confirm fix. No deflection, no vagueness.",use:"Any time a reported number needs correction after delivery",example:"✅ 'Data quality issue (trailing space in region) caused $230 discrepancy. Corrected: $2,300. Fixed at source — report updated.'\n❌ 'Sorry the number was wrong'",how:"Template: 'I identified [cause] causing [impact]. Correct figure: [number]. Resolved by [action].'"},
+      verbal:"Say it aloud. No 'sorry'. State what happened, give number, confirm fixed. Done."}
+   ]
+  },
+  {sub:"Prioritisation",scenario:"You have three requests arrive at once: (A) Fix a data error in the live dashboard — stakeholders are seeing wrong numbers. (B) Build a new dashboard for next month's review. (C) Prepare slides for next week's team meeting.",
+   steps:[
+     {q:"Which do you prioritise FIRST?",type:"mc",opts:["B — the new dashboard takes longest","C — the meeting is for next week","A — wrong numbers in a live dashboard damage trust immediately","Do them in alphabetical order"],
+      ans:2,hint:"Stakeholders are looking at wrong numbers RIGHT NOW. What's the trust cost of every minute that goes by?",
+      card:{what:"Prioritise by: (1) live issues affecting stakeholders now, (2) time-sensitive deliverables, (3) new work. Fix before build.",use:"Daily prioritisation — you'll face competing requests constantly as a BI Analyst",example:"Triage:\nA (live error) → fix immediately\nC (next week slides) → block time tomorrow\nB (next month dashboard) → schedule for next sprint",how:"Mental model: is something broken right now? Fix it. Is something due soon? Schedule it. Is it new work? Backlog it."}},
+     {q:"While fixing the live dashboard error, the VP emails asking for an update on the new dashboard (B). You:",type:"mc",opts:["Ignore the VP — you're busy","Stop fixing the error to work on the dashboard","Briefly reply: 'Currently resolving a data issue in the live dashboard — will update on the new dashboard by EOD'","Forward the email to your manager"],
+      ans:2,hint:"Two things happening: fix the error AND acknowledge a stakeholder. Can you do both in 30 seconds?",
+      card:{what:"Brief status responses during triage shows professionalism — you're not ignoring stakeholders, you're managing them.",use:"Any time you're mid-task and a new request arrives",example:"'Currently resolving a data error — will have an update on [B] by EOD. Will confirm once the live issue is resolved.'",how:"Rule: 30-second acknowledgment now > complete silence for 3 hours. Stakeholders want to know you received their request."}},
+     {q:"The live dashboard error is fixed. You send a correction message. What do you include?",type:"mc",opts:["Just the corrected number","The cause, the correct number, what you fixed, and confirmation it's resolved","An apology for the error existing","A list of all future steps to prevent errors"],
+      ans:1,hint:"A correction message has four things: cause, correct number, what you did, status. Which option includes all four?",
+      card:{what:"Correction communication: cause + correct figure + action taken + status. Complete and professional.",use:"Any stakeholder communication after a data error is fixed",example:"'The [metric] showed [wrong number] due to [cause]. Correct figure is [number]. I've [fix action]. The dashboard is now updated and accurate.'",how:"Don't over-apologise. One sentence acknowledging the error, then three sentences on facts and resolution. Professionalism > self-flagellation."},
+      verbal:"Say the full correction message aloud. Confident, factual, complete. No trailing 'sorry about that'."}
+   ]
+  },
+  {sub:"Data Quality",scenario:"A manager sends you an Excel file with this note: 'Can you add this data to the dashboard? It has last quarter's regional sales from our partner system.'",
+   steps:[
+     {q:"Before loading the file into Power BI, your first check is:",type:"mc",opts:["Load immediately — they said it's sales data","Check the column structure matches your existing data model — same column names, same formats, same grain","Ask if it's really from the partner system","Delete your existing data and replace it"],
+      ans:1,hint:"You're about to JOIN two datasets. What breaks a join? What do you need to verify before connecting two tables?",
+      card:{what:"Before merging any new data source: verify column names match, data types match, and grain matches (what each row represents).",use:"Any time you add a new data source to an existing model",example:"Existing: region, revenue, order_date (one row per order)\nNew file: Region, Revenue, Date (different casing, grain unknown)\n→ Need to standardise before merging",how:"Quick check: open both datasets, compare headers. Check grain: is new file also one row per order, or one row per region per month?"}},
+     {q:"You discover the new file has 'Region' (capital R) but your model uses 'region' (lowercase). In Power Query, you:",type:"mc",opts:["Leave it — Power BI handles case differences","Rename the column to 'region' in Power Query before loading","Rename all columns in your existing model instead","Delete the new file"],
+      ans:1,hint:"Consistency is always easier than exception-handling. Which direction is less work: fix one incoming column or update your entire existing model?",
+      card:{what:"Standardise incoming data to match your existing model — don't change the model to match incoming data.",use:"Any ETL step involving merging or appending data sources",example:"Power Query: right-click column header → Rename → 'region'\nOr: Transform tab → Rename Columns",how:"Rule: new data conforms to existing model. Fix in Power Query before loading. This way your existing measures and relationships don't break."}},
+     {q:"The data is loaded and merged. Total revenue jumps 35% higher than expected. You:",type:"mc",opts:["Publish immediately — more revenue is good news","Investigate before publishing — verify the merged data isn't double-counting or overlapping with existing data","Tell the manager the data was wrong","Delete the merged data"],
+      ans:1,hint:"An unexpected 35% jump is almost never a good sign in data work. What does a sudden large change usually indicate?",
+      card:{what:"Unexpected large changes after a data merge almost always indicate overlap, duplication, or incorrect grain — investigate before delivering.",use:"Any time merged data produces unexpected totals",example:"Check: does the new file's date range overlap with existing data?\nDo order IDs duplicate across both datasets?\nIs the grain different (new file = monthly totals, existing = individual orders)?",how:"SELECT COUNT(*), SUM(revenue) before merge vs after. If after is more than before + new file total, you have duplicates."},
+      verbal:"Explain to the manager why you're holding: 'I'm seeing a 35% jump in total revenue after merging — want to verify no data overlap before publishing. Investigating now.'"}
+   ]
+  },
+  {sub:"Communication",scenario:"After presenting a dashboard, the Head of Sales says: 'These numbers don't match what I see in my own Excel report. Which one is right?'",
+   steps:[
+     {q:"Your immediate response is:",type:"mc",opts:["'Your Excel is probably wrong'","'My dashboard is definitely right — I built it carefully'","'Let's look at both right now and trace where they differ — that's the only way to know for certain'","'I'll need to take this away and investigate for a week'"],
+      ans:2,hint:"You don't know which is right yet. What's the only way to find out — and how quickly can you start?",
+      card:{what:"When a stakeholder challenges your numbers: don't defend, don't concede — investigate together. The answer is in the data.",use:"Any time a stakeholder disputes your figures",example:"'Let's pull both reports up right now — if we trace from the same source rows, we can see exactly where they diverge.'",how:"Best outcomes: you were right (live investigation proves it), they were right (you find and fix the error), or it's a definition difference (different time periods, different row inclusions)."}},
+     {q:"You find the difference: your dashboard uses order date. Their Excel uses ship date. Both are technically correct — they're measuring different things. You explain:",type:"mc",opts:["Nothing — just change your dashboard to match theirs","This is a definition difference, not a data error. Both figures are accurate — they measure revenue by different date fields. Recommend aligning on a single definition going forward.","Their Excel is wrong because ship date is less accurate","Your dashboard is wrong and you'll fix it"],
+      ans:1,hint:"Both calculations are correct — they're just answering different questions. What's the real resolution needed here?",
+      card:{what:"Definition differences are common in BI. Different departments measure the same metric differently. The resolution is alignment on a single definition.",use:"Any time stakeholders compare reports from different systems or analysts",example:"'Both figures are accurate — yours uses ship_date, mine uses order_date. We're measuring the same revenue, different timing. Recommend deciding which date is the company standard and aligning all reports to it.'",how:"Document the agreed definition in your data dictionary. Apply consistently to all future reports. This is a governance conversation."}},
+     {q:"The Head of Sales asks you to 'just make both numbers match' by adjusting your data. You:",type:"mc",opts:["Do it immediately — they're the Head of Sales","Explain that changing data to match a target undermines data integrity, and offer instead to align on a shared definition formally","Change the data but document it","Refuse without explanation"],
+      ans:1,hint:"Adjusting data to match an expected number is the beginning of data integrity collapse. How do you say no professionally while offering a real solution?",
+      card:{what:"Never adjust underlying data to match an expected outcome. That's data manipulation. The solution is definition alignment, not data alteration.",use:"Any time someone asks you to 'fix' numbers to match a target",example:"'I can't change the underlying data — that would compromise integrity for all users. What I can do is align on the date definition company-wide and update all reports consistently. Want me to set up that conversation?'",how:"Offer the real solution (definition alignment, governance conversation) instead of just refusing. Always give them a path forward."},
+      verbal:"Say the refusal+offer aloud. Firm but constructive. No 'I can't do that because rules'. Explain the integrity risk, offer the real solution."}
+   ]
+  },
+  {sub:"Insight Communication",scenario:"Your weekly report shows West revenue dropped 42% vs last quarter. The other 3 regions are flat.",
+   steps:[
+     {q:"Your dataset only has revenue and region. When the VP asks 'what happened?', you say:",type:"mc",opts:["'West has been underperforming all year'","'I can confirm West is down 42%. The cause isn't in this dataset — to identify the driver I'd need rep activity or pipeline data. Want me to pull that?'","'Probably a seasonal thing'","'I'm not sure'"],
+      ans:1,hint:"You have the revenue numbers but not the pipeline or rep data. What can you honestly say? What can you honestly offer?",
+      card:{what:"Insight boundary: report what your data shows. Clearly state what additional data is needed. Offer to investigate.",use:"Every stakeholder conversation after presenting a finding",example:"'I can see West is down 42%. The cause isn't in this dataset — I'd need rep activity or pipeline data to identify the driver.'",how:"Template: 'I can confirm [X]. To understand [why], I'd need [data]. Want me to investigate?'"}},
+     {q:"Write a one-sentence insight for the VP's slide about the West drop:",type:"write",
+      template:"West revenue declined 42% versus last quarter — the other three regions are flat — suggesting a West-specific issue rather than a broader market trend.",
+      hint:"Three components: the metric (how much), the comparison (vs what), and the implication (what this suggests). One sentence.",
+      card:{what:"Stakeholder-ready finding: specific number, comparison context, one implication. One sentence, complete.",use:"Every dashboard annotation, slide, verbal briefing",example:"'West declined 42% vs Q3. North, East, South are flat — suggesting West-specific, not market-wide.'",how:"Structure: [what happened] + [comparison/contrast] + [one implication]. Never more than 2 sentences."},
+      verbal:"Say that sentence aloud. Pause after 'flat.' Let the contrast land before stating the implication."}
+   ]
+  },
+];
+
+const INTERVIEW_Q = [
+  // ── Insight Writing (6) ──
+  {sub:"Insight Writing",q:"North=$800, South=$450, East=$620, West=$230. Write a stakeholder-ready insight for the worst-performing region.",type:"write",tag:"INTERVIEW",
+   template:"West is the lowest-performing region with $230 revenue — 14% of the $2,100 total — indicating potential under-resourcing or pipeline gaps. Recommend a Q3 review of West's sales activity and resource allocation.",
+   hint:"Three parts required: (1) metric with context, (2) business meaning — why does it matter, (3) what to do about it. Check you have all three.",
+   card:{what:"Complete insight: metric + business meaning + recommendation. All three. Always.",use:"Every dashboard annotation, slide, report summary",example:"❌ 'West is $230'\n❌ 'West is worst'\n✅ 'West at $230 (14% of total) indicates possible under-resourcing — recommend Q3 resource review'",how:"Template: [Category] at [metric] ([%]), indicating [meaning] — recommend [action]."},
+   verbal:"Say your insight aloud. Pause after the number. Pause after the business meaning. Let the recommendation land last."},
+  {sub:"Insight Writing",q:"Power BI KPI: Revenue $87K | Last Month $74K. Write the dashboard caption.",type:"write",tag:"INTERVIEW",
+   template:"Revenue: $87K | +$13K vs last month (+17.6%) — on track for Q3 target.",
+   hint:"KPI captions need: current value, change (absolute AND %), status vs target. Three data points. Ultra-concise.",
+   card:{what:"KPI captions: current + change + status. Brief — these appear in small font on executive slides.",use:"Every Power BI KPI card, every executive dashboard",example:"Short: $87K | +17.6% MoM | On track\nFull: '$87K this month, up $13K (+17.6%) vs last month'",how:"Calculate: (87-74)/74 = 17.6%. State both absolute ($13K) and relative (17.6%)."},
+   verbal:"Read it aloud as if presenting a slide. One breath. Don't hesitate on the percentage — you calculated it, own it."},
+  {sub:"Insight Writing",q:"You have 3 months of data. Write an insight about whether a trend is 'strong'.",type:"write",tag:"INTERVIEW",
+   template:"Based on 3 months of data, West shows a consistent upward trend — rising from $1,800 in January to $2,530 in March. While this is encouraging, 3 months is insufficient to confirm a sustained trend. Recommend monitoring over the next quarter before drawing conclusions.",
+   hint:"3 months of data — can you confidently claim a 'strong trend'? What's the honest boundary for your claim given the sample size?",
+   card:{what:"Data honesty: 3 months can suggest a trend but rarely confirm one. State what the data shows and the limitation.",use:"Any time you're working with short time series",example:"✅ 'Data over 3 months shows an upward direction — monitor over Q3 to confirm'\n❌ 'Strong upward trend confirmed' (overclaiming)",how:"Signal words for limited data: 'suggests', 'indicates', 'shows an early pattern'. Add: 'Recommend monitoring over [timeframe] to confirm.'"},
+   verbal:"Say this insight aloud. The limitation sentence — don't rush it. Stating your uncertainty clearly sounds MORE credible, not less."},
+  {sub:"Insight Writing",q:"Write the 'so what' sentence for: West revenue grew 22% this quarter.",type:"write",tag:"INTERVIEW",
+   template:"West's 22% growth suggests the Q2 investment in regional sales support is gaining traction — if this continues, West may surpass North as the top revenue region by Q4.",
+   hint:"'22% growth' is the metric. What does that MEAN for the business? What decision or action does it suggest?",
+   card:{what:"The 'so what' converts a number into a business implication. This is what separates BI analysis from data reporting.",use:"Every dashboard annotation — the metric alone is never enough",example:"Metric: West grew 22%\nSo what: 'Indicates the Q2 investment is working — continue allocating resource to West in Q3'",how:"Ask yourself: 'If I were the Sales Manager, what does this number make me want to DO or DECIDE?' That's your so what."},
+   verbal:"Say only the 'so what' sentence aloud. Does it have a business action or implication? Can you say it in one confident sentence?"},
+  {sub:"Insight Writing",q:"A manager asks: 'Is $2,530 good?' Write your response.",type:"write",tag:"INTERVIEW",
+   template:"That depends on the benchmark — $2,530 for West is the highest regional total, representing 52% of overall revenue, which is strong relative to the other regions. Compared to last quarter's $2,100, it's a 20% improvement. If your Q3 target is $3,000, you're on track. What target are you comparing against?",
+   hint:"'Good' is always relative to something. What comparisons exist: vs other regions, vs last period, vs target? Your answer needs context, not just a yes or no.",
+   card:{what:"'Is this good?' always requires a benchmark. Relative to what? Same period last year? Other regions? Target?",use:"Every stakeholder conversation where performance is being judged",example:"'Good relative to other regions (highest). Good vs last quarter (+20%). Against target — what's the Q3 target?'",how:"Always return the question to the benchmark: 'Good relative to [what]?' Give all available comparisons, then ask what they're measuring against."},
+   verbal:"Say this aloud. It should feel like a conversation, not a recitation. End with the question to the stakeholder — let it invite dialogue."},
+  {sub:"Insight Writing",q:"Stakeholder says: 'Just give me the numbers.' How do you respond?",type:"write",tag:"INTERVIEW",
+   template:"Of course — here are the regional totals: West $2,530, North $1,200, East $620, South $450. I've also flagged that West represents 52% of total revenue and South is down 18% vs last quarter, in case that's useful for your meeting.",
+   hint:"They want the numbers — so give them. But what else can you add in one sentence that they might not have thought to ask for?",
+   card:{what:"Give them what they asked for. Then add one proactive observation — not a lecture, just a signal. This is the analyst value-add.",use:"Any 'just give me the numbers' request",example:"Give the numbers first. Then: 'I've also noted [one observation] in case it's useful for your meeting.'",how:"The one-line addition should be the most important thing they might miss — the outlier, the trend, the anomaly. Not a full analysis — one sentence."},
+   verbal:"Say it aloud. Give the numbers confidently. The proactive addition should feel like a helpful colleague, not a report."},
+
+  // ── STAR Builder (6) ──
+  {sub:"STAR Builder",q:"You automated a weekly revenue grouping task previously done manually in Excel.",type:"star",tag:"INTERVIEW",
+   template:{s:"I was analysing a multi-region sales dataset that was manually summarised every Monday in Excel — a 30-minute process prone to formula errors.",t:"I needed to automate the revenue-by-region aggregation to eliminate manual work and ensure consistent, reproducible output.",a:"I built a Python script using csv.DictReader and a dict accumulator pattern to group and rank revenue by region — running in under a second.",r:"The script eliminated the Monday manual step entirely. It's reproducible on any new CSV file and has produced consistent output every week since."},
+   hint:"Four parts: context (situation), what was needed (task), what YOU did with specific tools (action), concrete result.",
+   card:{what:"This STAR: technical execution + automation value + reproducibility. Three quality signals in one story.",use:"'Tell me about a project you completed'",example:"End with something concrete: time saved, error eliminated, reproducible",how:"Always close Result with something measurable or tangible. 'Under a second' and 'every week since' are both concrete."},
+   verbal:"Say this STAR aloud, start to finish. Pause after the Result. Full stop. Do not add anything after the result."},
+  {sub:"STAR Builder",q:"You found a discrepancy between your Excel pivot and SQL query on the same data.",type:"star",tag:"INTERVIEW",
+   template:{s:"During cross-tool validation, I found a $230 discrepancy between my Excel pivot and SQL query for West region revenue.",t:"I needed to identify the root cause and ensure both tools agreed on the accurate figure before any stakeholder delivery.",a:"I traced the gap to a trailing space in the Region field — 'West ' vs 'West'. I cleaned the source data with Python's .strip() and re-ran both tools.",r:"Both tools returned the same figure. I added cross-tool validation as a standard step in my workflow before every stakeholder delivery."},
+   hint:"The key detail in Action is the specific root cause — not just 'I fixed it'. What exactly was the cause? What exactly did you do?",
+   card:{what:"This STAR: data quality thinking, debugging methodology, process improvement — rare in junior candidates.",use:"'Tell me about a time you found an error in your work'",example:"The trailing space detail is what makes this story credible. Generic 'I fixed a data issue' is weak.",how:"In error STARs: always name the specific cause AND the specific fix. Vague = unimpressive. Specific = credible."},
+   verbal:"Slow down on 'trailing space' and '.strip()'. These are the details that make the story. Don't rush them."},
+  {sub:"STAR Builder",q:"You delivered a dashboard and a stakeholder challenged the numbers.",type:"star",tag:"INTERVIEW",
+   template:{s:"After presenting a regional revenue dashboard, the Head of Sales questioned the figures, saying they didn't match his Excel report.",t:"I needed to resolve the discrepancy professionally and maintain stakeholder trust without conceding or defending blindly.",a:"I proposed we investigate together immediately. We traced the difference to a date field definition — my dashboard used order date, his Excel used ship date. I documented the difference and proposed a company-wide definition alignment.",r:"The stakeholder confirmed both figures were accurate — measuring different things. We agreed on order date as the standard. All reports were aligned within the week."},
+   hint:"This is a communication and analytical story. How did you handle being challenged — and what was the actual finding?",
+   card:{what:"Stakeholder challenge STARs show: calmness under pressure, analytical thinking, communication skill, and problem ownership.",use:"'Tell me about a time you dealt with a difficult stakeholder'",example:"The resolution 'both figures were accurate' is the honest answer — and a strong one. It shows you investigated rather than defended.",how:"Action should include: how you responded (calmly, immediately), how you investigated (together), what you found, what you proposed."},
+   verbal:"Say this STAR aloud. The Action section has three verbs: proposed, traced, documented. Give each one its own beat."},
+  {sub:"STAR Builder",q:"You had to prioritise between a live data error and a new dashboard request.",type:"star",tag:"INTERVIEW",
+   template:{s:"I had two competing requests: fix a live dashboard showing wrong numbers to executives, and build a new dashboard needed for next month's review.",t:"I needed to decide which to address first and communicate clearly to both stakeholders.",a:"I fixed the live error first — wrong numbers in a live dashboard damages trust immediately. I sent a brief update to the new dashboard requester acknowledging their ask and giving a timeline. Fixed the error, sent a correction note, then started the new dashboard.",r:"Both stakeholders confirmed satisfaction with the outcome. The correction took 40 minutes; the new dashboard was delivered on schedule."},
+   hint:"Prioritisation stories show judgment. Why did you choose one over the other? What was the reasoning?",
+   card:{what:"Prioritisation STARs show: business judgment, stakeholder management, communication under pressure.",use:"'Tell me about a time you had competing priorities'",example:"The reasoning is the story: 'live error = immediate trust damage' is the explicit business logic behind your decision.",how:"Always state WHY you prioritised as you did. The reasoning is what differentiates a good answer from a great one."},
+   verbal:"When you say 'wrong numbers in a live dashboard damages trust immediately' — slow down on that sentence. It's the insight that shows your business judgment."},
+  {sub:"STAR Builder",q:"You had to explain a technical finding (like a data discrepancy) to a non-technical stakeholder.",type:"star",tag:"INTERVIEW",
+   template:{s:"After finding a discrepancy between two reports, I needed to explain the cause — a trailing space in a data field — to a Sales Manager with no technical background.",t:"I had to communicate the issue clearly without using technical jargon that would confuse or alarm them.",a:"I used an analogy: 'Imagine you search your contacts for John Smith, but the entry is stored as John Smith with an invisible space at the end — your phone finds nothing. That's what happened with the region data.' Then I confirmed what the correct number was and how I fixed it.",r:"The manager immediately understood, said 'oh like a typo I can't see', confirmed the corrected figure, and thanked me for catching it. No confusion, no alarm."},
+   hint:"Technical-to-non-technical communication is a core BI Analyst skill. What's an everyday analogy that captures the technical concept without the jargon?",
+   card:{what:"Non-technical communication: find an analogy from everyday life that captures the concept. Confirm the fix. Don't over-explain.",use:"Every stakeholder conversation where a technical issue affected their data",example:"Trailing space → invisible character analogy\nNULL value → 'the cell exists but it's blank'\nJOIN mismatch → 'two spreadsheets with the same column but different spellings'",how:"Test: could a non-technical person picture your analogy? If yes, use it. If it involves any technical terms, rephrase."},
+   verbal:"Say the analogy aloud. 'Imagine you search your contacts...' — does it land clearly without any technical terms?"},
+  {sub:"STAR Builder",q:"You proactively identified a data quality issue before it reached stakeholders.",type:"star",tag:"INTERVIEW",
+   template:{s:"During routine data validation before publishing the monthly dashboard, I noticed the grand total didn't match between my regional pivot and product pivot — a $400 gap.",t:"I needed to investigate and resolve the discrepancy before the dashboard went live.",a:"I filtered the source data for blank region values and found 3 rows with missing region — their revenue wasn't appearing in the regional view. I traced it to a data entry issue in the source system and flagged it to the data owner for correction.",r:"The dashboard published with accurate numbers. The data owner corrected the entry process, preventing future occurrences. No stakeholder received incorrect data."},
+   hint:"The power of this story is 'before it reached stakeholders'. That's the proactive quality standard. Make sure the timeline is clear.",
+   card:{what:"Proactive QA STARs are rare — most junior analysts only react to problems. Catching issues before delivery shows professional standards.",use:"'Tell me about a time you went above and beyond' or 'How do you ensure data quality'",example:"The key phrase: 'before the dashboard went live'. That's the differentiator.",how:"Every validation step you take is a potential STAR story if it catches something. Document what you find during data prep."},
+   verbal:"'No stakeholder received incorrect data' — that's your close. Deliver it as a complete statement. Pause after it."},
+
+  // ── Spiels (6) ──
+  {sub:"Interview Spiels",q:"Tell me about yourself.",type:"write",tag:"INTERVIEW",
+   template:"I'm a BI Analyst with a background in IT and frontend development. Over the past several months I've built end-to-end reporting pipelines using Python, SQL, Power BI, and Excel — packaged into a portfolio of projects on GitHub. My frontend background means I think carefully about how dashboards are experienced by users, not just how they're built. I'm looking for a role where I can deliver stakeholder-ready BI dashboards and grow into more complex data modelling.",
+   hint:"Three parts: who you are professionally, what you've built recently, what you want next. 45–60 seconds. Not your life story.",
+   card:{what:"Tell me about yourself = professional identity + recent work + goal. 45–60 seconds.",use:"First question in every interview, every format",example:"Lead with BI Analyst. Middle: stack + differentiator (IT+frontend = full-stack data literacy). Close: what you want.",how:"Practice and time it. If over 75 seconds, cut something."},
+   verbal:"Say it aloud. Time yourself. Target 50 seconds. Pause after naming your stack — let Python, SQL, Power BI, Excel land."},
+  {sub:"Interview Spiels",q:"How do you ensure your analysis is accurate?",type:"write",tag:"INTERVIEW",
+   template:"Cross-tool validation is built into my workflow. I run the same calculation in Python, verify it in SQL, then confirm Power BI matches. If there's a discrepancy, I trace it to the source — it's almost always a data quality issue. I also document my DAX measures and SQL queries so anyone can audit the logic. Accuracy is a quality standard, not an afterthought.",
+   hint:"Show: systematic process, named tools, what you do when things go wrong, close with a principle.",
+   card:{what:"Process + tools + root-cause thinking + documentation = four quality signals in four sentences.",use:"'How do you handle data quality?' | 'What's your QA process?'",example:"Last sentence is your close — 'Accuracy is a quality standard, not an afterthought.' Memorable.",how:"Structure: process → tools → when wrong → principle close."},
+   verbal:"The last sentence is your close — full pace, full stop. Don't trail off. Pause before it. Let it land."},
+  {sub:"Interview Spiels",q:"What's your biggest weakness?",type:"write",tag:"INTERVIEW",
+   template:"I sometimes over-invest in data quality checks before moving forward — I want to be sure the numbers are right before building on them. I've been working on getting better at deciding when the data is good enough to proceed versus when to keep investigating. For most BI work the 80/20 rule applies: clean enough to deliver accurate insights is more valuable than perfectly clean but too slow.",
+   hint:"Pick a real weakness that's also professionally relevant. It should show self-awareness AND that you're actively improving it. Don't say 'I work too hard'.",
+   card:{what:"Weakness answers: pick something real, show you're working on it, show you understand the professional trade-off.",use:"This question in every interview",example:"✅ Real weakness + self-awareness + growth action + business framing\n❌ 'I work too hard' or 'I'm a perfectionist' with no substance",how:"Formula: I tend to [weakness] → I've been working on [specific action] → because in BI work [business trade-off]."},
+   verbal:"Say this aloud with no hesitation at the start. Owning a weakness clearly is more impressive than stumbling through a humble-brag."},
+  {sub:"Interview Spiels",q:"Why do you want to be a BI Analyst specifically?",type:"write",tag:"INTERVIEW",
+   template:"I like that BI work sits between technical and business — you're close enough to the data to understand its limitations, and close enough to stakeholders to understand what actually matters to them. My IT background gave me comfort with data systems. My frontend experience gave me an eye for how information is presented. BI is where those two things are most useful together.",
+   hint:"Be specific to BI — not just 'I like data'. What is it about the BI Analyst role specifically that appeals to you? Your background must be in the answer.",
+   card:{what:"'Why BI specifically' answers: connect your background to the BI role uniquely. Don't give a generic data answer.",use:"Motivation questions — these test fit, not just skill",example:"IT background → data system comfort. Frontend background → presentation/UX thinking. Both → ideal for BI Analyst.",how:"The answer should be impossible to give without knowing your specific background. Generic answers feel dishonest."},
+   verbal:"Say it aloud. It should sound like something only you could say — not a template answer from a career website."},
+  {sub:"Interview Spiels",q:"Describe a time you had to learn a new tool quickly.",type:"write",tag:"INTERVIEW",
+   template:"During my bootcamp I had to learn Power BI and DAX from scratch while also working with Python and SQL. I structured my learning by building an actual project from day one — not going through tutorials first. I connected real data, built a real dashboard, and looked up what I needed when I hit a problem. This hands-on approach meant I could build a functional dashboard within a week of starting. I find I learn faster by doing than by watching.",
+   hint:"This is a learning agility story. Show the method (how you learn quickly) not just the outcome. The interviewer wants to predict future learning.",
+   card:{what:"Learning agility stories: show your learning method, not just that you succeeded. The method is what predicts future performance.",use:"'How do you adapt to new tools?' | 'Tell me about a time you learned something new quickly'",example:"Method: project-first, look-up-as-needed. This is more credible than 'I watched all the YouTube videos'.",how:"The last sentence ('I learn faster by doing') is a principle statement that predicts future behaviour — what the interviewer wants to hear."},
+   verbal:"The last sentence is your close. Say it confidently. It should sound like self-knowledge, not modesty."},
+  {sub:"Hard Questions",q:"Your dashboard has been wrong for two weeks and you didn't catch it. The manager found out.",type:"write",tag:"INTERVIEW",
+   template:"I'd own it directly: 'I didn't catch this — that's on me. Here's what went wrong: [specific cause]. Here's what I'm doing to fix it right now. And here's how I'm changing my process to make sure this doesn't repeat.' I wouldn't deflect or minimise. The goal is to resolve it quickly and demonstrate that I can handle errors without losing credibility.",
+   hint:"How you respond to a mistake matters as much as the mistake. The interviewer wants to see: accountability, action, process improvement. No deflection.",
+   card:{what:"Error ownership: acknowledge directly, state cause, state fix, state process change. Credibility comes from how you handle mistakes, not from never making them.",use:"'Tell me about a time you made a mistake' | 'How do you handle errors?'",example:"✅ 'I own it, here's the cause, here's the fix, here's what changes'\n❌ 'Well the data was messy...' or 'My colleague also checked it'",how:"Formula: own it → cause → fix → process change. Four steps, no deflection."},
+   verbal:"Say 'I own it' aloud without hesitation. That directness is what interviewers remember."},
+];
+
+// ════════════════════════════════════════════════
+// STATE + STORAGE (FIXED RESET)
+// ════════════════════════════════════════════════
+
+const STORAGE_KEY = 'bi3';
+const VISITED_KEY = 'bi3_v';
+
+let S = freshState();
+let currentStage=null,queue=[],qIdx=0,hearts=3,combo=0,missed=[],answered=false,selIdx=-1;
+let simIdx=0,simStep=0;
+
+function freshState(){
+  return {streak:0,lastDate:null,scores:{vocab:0,vt:0,tech:0,tt:0,sim:0,st:0,int:0,it:0},weak:[],log:[]};
+}
+function loadS(){try{const d=localStorage.getItem(STORAGE_KEY);if(d)S=JSON.parse(d);}catch(e){}}
+function saveS(){try{localStorage.setItem(STORAGE_KEY,JSON.stringify(S));}catch(e){}}
+function hasVisited(){try{return!!localStorage.getItem(VISITED_KEY);}catch(e){return false;}}
+function setVisited(){try{localStorage.setItem(VISITED_KEY,'1');}catch(e){}}
+
+// FIXED: Reset clears BOTH keys and resets in-memory state
+function resetAll(){
+  if(!confirm('Reset all progress? This cannot be undone.'))return;
+  try{localStorage.removeItem(STORAGE_KEY);localStorage.removeItem(VISITED_KEY);}catch(e){}
+  S = freshState();
+  recallRatings={};
+  updateHome();
+  toast('Progress reset ✓');
+}
+
+window.onload=function(){
+  loadS();
+  if(S.recallRatings)recallRatings=S.recallRatings;
+  updateHomeQ();
+  if(hasVisited()){showScreen('home');updateHome();}else{showScreen('landing');}
+};
+
+function enterApp(){setVisited();showScreen('home');updateHome();updateStreak();}
+function showScreen(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function showTab(t){
+  if(t==='home'){
+    showScreen('home');updateHome();
+    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+  }else{
+    showScreen('study-screen');
+    renderStudy();
+  }
+}
+
+// ── STUDY MODE ──
+let studyMode='browse';
+let studyStage='all';
+let recallCards=[];
+let recallIdx=0;
+let recallRevealed=false;
+let recallTimer=null;
+let recallRatings={};// cardKey -> 'got'|'almost'|'no'
+
+function buildStudyCards(stageFilter){
+  const all=[];
+  const addQ=(q,stageName)=>{
+    if(!q.card)return;
+    const label=q.sub||stageName;
+    const title=q.q?q.q.replace(/<[^>]+>/g,'').slice(0,70):q.scenario?q.scenario.slice(0,70):'Concept';
+    all.push({key:stageName+'|'+title,stage:stageName,sub:label,title,card:q.card,ctx:q.ctx||'',tool:q.tool||''});
+  };
+  const addStep=(step,sc,stageName)=>{
+    if(!step.card)return;
+    const label=sc.sub||stageName;
+    const title=(sc.scenario||'').slice(0,60)+' — '+step.q.slice(0,40);
+    all.push({key:stageName+'|'+title,stage:stageName,sub:label,title,card:step.card,ctx:'',tool:''});
+  };
+  if(stageFilter==='all'||stageFilter==='vocab') VOCAB_Q.forEach(q=>addQ(q,'vocab'));
+  if(stageFilter==='all'||stageFilter==='tech')  TECH_Q.forEach(q=>addQ(q,'tech'));
+  if(stageFilter==='all'||stageFilter==='sim')   SIM_Q.forEach(sc=>sc.steps.forEach(st=>addStep(st,sc,'sim')));
+  if(stageFilter==='all'||stageFilter==='interview') INTERVIEW_Q.forEach(q=>addQ(q,'interview'));
+  return all;
+}
+
+function stageLabel(s){return{vocab:'📚 Language Lab',tech:'⚙️ Technical Labs',sim:'🎯 Stakeholder Sim',interview:'🎤 Interview Prep'}[s]||s;}
+
+function setStudyMode(mode){
+  studyMode=mode;
+  ['browse','recall','log'].forEach(m=>{
+    const btn=document.getElementById('mode-btn-'+m);
+    if(!btn)return;
+    if(m===mode){btn.style.background='var(--green)';btn.style.color='#fff';btn.style.borderColor='var(--green)';}
+    else{btn.style.background='var(--surface2)';btn.style.color='var(--muted)';btn.style.borderColor='var(--border)';}
+    const panel=document.getElementById('study-'+m+'-panel');
+    if(panel)panel.style.display=m===mode?'':'none';
+  });
+  // stage filter only visible for browse and recall
+  const sf=document.getElementById('stage-filter');
+  if(sf)sf.style.display=mode==='log'?'none':'flex';
+  renderStudyPanel();
+}
+
+function setStudyStage(stage){
+  studyStage=stage;
+  ['all','vocab','tech','sim','interview'].forEach(s=>{
+    const btn=document.getElementById('sf-'+s);
+    if(!btn)return;
+    if(s===stage){btn.style.background='var(--green)';btn.style.color='#fff';btn.style.borderColor='var(--green)';}
+    else{btn.style.background='var(--surface2)';btn.style.color='var(--muted)';btn.style.borderColor='var(--border)';}
+  });
+  renderStudyPanel();
+}
+
+function renderStudy(){
+  setStudyMode(studyMode);
+  setStudyStage(studyStage);
+}
+
+function renderStudyPanel(){
+  if(studyMode==='browse') renderBrowse();
+  else if(studyMode==='recall') renderRecall();
+  else renderLog();
+}
+
+// ── BROWSE MODE ──
+function renderBrowse(){
+  const cards=buildStudyCards(studyStage);
+  const panel=document.getElementById('study-browse-panel');
+  if(!panel)return;
+  if(!cards.length){panel.innerHTML='<div style="color:var(--muted);font-size:13px;text-align:center;margin-top:32px">No cards for this filter.</div>';return;}
+  // Group by sub-section
+  const groups={};
+  cards.forEach(c=>{const k=c.sub;if(!groups[k])groups[k]=[];groups[k].push(c);});
+  let html='';
+  Object.entries(groups).forEach(([sub,items])=>{
+    html+=`<div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:3px;color:var(--muted);margin:18px 0 8px">${sub.toUpperCase()}</div>`;
+    items.forEach((c,i)=>{
+      const rating=recallRatings[c.key];
+      const ratingDot=rating==='got'?'🟢':rating==='almost'?'🟡':rating==='no'?'🔴':'';
+      html+=`<div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rs);margin-bottom:8px;overflow:hidden">
+        <button onclick="toggleBrowseCard('bc-${c.key.replace(/[^a-z0-9]/gi,'_')}')" style="width:100%;padding:12px 14px;background:none;border:none;cursor:pointer;text-align:left;display:flex;align-items:center;gap:8px">
+          <span style="flex:1;font-family:'Syne',sans-serif;font-size:13px;font-weight:700;color:var(--ink)">${c.title}</span>
+          <span style="font-size:12px">${ratingDot}</span>
+          <span style="font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)">▼</span>
+        </button>
+        <div id="bc-${c.key.replace(/[^a-z0-9]/gi,'_')}" style="display:none;padding:0 14px 14px">
+          ${c.ctx?`<div style="background:var(--surface2);border-radius:var(--rs);padding:9px 12px;margin-bottom:10px;font-size:12px;color:var(--muted);line-height:1.6"><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--green);display:block;margin-bottom:3px">WHERE YOU USE THIS</span>${c.ctx}</div>`:''}
+          <div style="margin-bottom:8px"><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);display:block;margin-bottom:3px">WHAT IT IS</span><div style="font-size:13px;line-height:1.65">${c.card.what}</div></div>
+          <div style="margin-bottom:8px"><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);display:block;margin-bottom:3px">WHERE USED</span><div style="font-size:13px;line-height:1.65">${c.card.use}</div></div>
+          <div style="margin-bottom:8px"><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);display:block;margin-bottom:3px">REAL EXAMPLE</span><div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:12px;line-height:1.7;white-space:pre-wrap">${c.card.example}</div></div>
+          ${c.card.how?`<div style="margin-bottom:10px"><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);display:block;margin-bottom:3px">HOW TO IN THE TOOL</span><div style="font-size:12px;line-height:1.65;color:var(--muted)">${c.card.how}</div></div>`:''}
+        </div>
+      </div>`;
+    });
+  });
+  panel.innerHTML=html;
+}
+
+function toggleBrowseCard(id){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.style.display=el.style.display==='none'?'block':'none';
+}
+
+// ── ACTIVE RECALL MODE ──
+function renderRecall(){
+  const panel=document.getElementById('study-recall-panel');
+  if(!panel)return;
+  recallCards=buildStudyCards(studyStage);
+  // Sort: 'no' ratings first, then 'almost', then unrated, then 'got'
+  const order={no:0,almost:1,undefined:2,got:3};
+  recallCards.sort((a,b)=>(order[recallRatings[a.key]]??2)-(order[recallRatings[b.key]]??2));
+  recallIdx=0;recallRevealed=false;
+  renderRecallCard();
+}
+
+function renderRecallCard(){
+  const panel=document.getElementById('study-recall-panel');
+  if(!panel)return;
+  if(!recallCards.length){panel.innerHTML='<div style="color:var(--muted);font-size:13px;text-align:center;margin-top:32px">No cards for this filter.</div>';return;}
+  if(recallIdx>=recallCards.length){
+    // Session complete
+    const got=(Object.values(recallRatings).filter(v=>v==='got').length);
+    const no=(Object.values(recallRatings).filter(v=>v==='no').length);
+    const almost=(Object.values(recallRatings).filter(v=>v==='almost').length);
+    panel.innerHTML=`<div style="text-align:center;padding:32px 0">
+      <div style="font-size:40px;margin-bottom:12px">✅</div>
+      <div style="font-family:'Syne',sans-serif;font-size:20px;font-weight:800;margin-bottom:6px">Round complete</div>
+      <div style="color:var(--muted);font-size:13px;margin-bottom:20px">${recallCards.length} cards reviewed</div>
+      <div style="display:flex;gap:8px;justify-content:center;margin-bottom:24px">
+        <div style="background:var(--green-bg);border:1.5px solid var(--green-b);border-radius:var(--rs);padding:10px 16px;text-align:center">
+          <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--green)">${got}</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--green)">GOT IT</div>
+        </div>
+        <div style="background:var(--yellow-bg);border:1.5px solid var(--yellow-b);border-radius:var(--rs);padding:10px 16px;text-align:center">
+          <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--yellow)">${almost}</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--yellow)">ALMOST</div>
+        </div>
+        <div style="background:var(--red-bg);border:1.5px solid var(--red-b);border-radius:var(--rs);padding:10px 16px;text-align:center">
+          <div style="font-family:'Syne',sans-serif;font-size:22px;font-weight:800;color:var(--red)">${no}</div>
+          <div style="font-family:'DM Mono',monospace;font-size:9px;color:var(--red)">NO IDEA</div>
+        </div>
+      </div>
+      ${no>0?`<div style="font-size:13px;color:var(--muted);margin-bottom:16px">🔴 ${no} card${no===1?'':'s'} need drilling — they'll appear first next round.</div>`:''}
+      <button onclick="renderRecall()" style="width:100%;padding:14px;border-radius:var(--rs);background:var(--ink);color:#fff;border:none;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer">Go Again</button>
+    </div>`;
+    return;
+  }
+
+  const c=recallCards[recallIdx];
+  const rating=recallRatings[c.key];
+  const ratingBadge=rating?({'got':'🟢 Got it','almost':'🟡 Almost','no':'🔴 No idea'}[rating]):'';
+  const progress=recallIdx+1;
+  const total=recallCards.length;
+
+  panel.innerHTML=`
+    <!-- Progress -->
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
+      <div style="flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden">
+        <div style="width:${Math.round(recallIdx/total*100)}%;height:100%;background:var(--green);border-radius:2px"></div>
+      </div>
+      <div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);flex-shrink:0">${progress}/${total}</div>
+    </div>
+
+    <!-- Stage label -->
+    <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);margin-bottom:6px">${stageLabel(c.stage)} · ${c.sub}</div>
+
+    <!-- Concept card front -->
+    <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--r);padding:18px;margin-bottom:12px">
+      <div style="font-family:'Syne',sans-serif;font-size:18px;font-weight:800;color:var(--ink);margin-bottom:10px;line-height:1.35">${c.title}</div>
+      ${c.tool?`<div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--blue);background:var(--blue-bg);border:1px solid var(--blue-b);border-radius:99px;padding:3px 9px;display:inline-block;margin-bottom:10px">${c.tool}</div>`:''}
+      ${c.ctx?`<div style="font-size:12px;color:var(--muted);line-height:1.6;border-top:1px solid var(--border);padding-top:10px;margin-top:6px"><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--green);display:block;margin-bottom:3px">WHERE YOU USE THIS</span>${c.ctx}</div>`:''}
+      ${!c.ctx&&c.card.use?`<div style="font-size:12px;color:var(--muted);line-height:1.6;border-top:1px solid var(--border);padding-top:10px;margin-top:6px"><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--green);display:block;margin-bottom:3px">WHERE USED</span>${c.card.use}</div>`:''}
+    </div>
+
+    <!-- Think prompt -->
+    <div style="background:var(--purple-bg);border:1.5px solid var(--purple-b);border-radius:var(--rs);padding:12px 14px;margin-bottom:14px;font-size:13px;color:var(--purple);line-height:1.6">
+      <strong style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;display:block;margin-bottom:4px">BEFORE YOU REVEAL</strong>
+      Can you explain: what this is, where you use it, and give an example?
+    </div>
+
+    <!-- Reveal / answer section -->
+    <div id="recall-answer" style="display:none">
+      <div style="background:var(--surface);border:1.5px solid var(--border);border-radius:var(--rs);padding:14px;margin-bottom:12px">
+        <div style="margin-bottom:10px"><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);display:block;margin-bottom:3px">WHAT IT IS</span><div style="font-size:13px;line-height:1.65">${c.card.what}</div></div>
+        <div style="margin-bottom:10px"><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);display:block;margin-bottom:3px">REAL EXAMPLE</span><div style="background:var(--surface2);border:1px solid var(--border);border-radius:4px;padding:7px 10px;font-family:'DM Mono',monospace;font-size:12px;line-height:1.7;white-space:pre-wrap">${c.card.example}</div></div>
+        ${c.card.how?`<div><span style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);display:block;margin-bottom:3px">HOW TO IN THE TOOL</span><div style="font-size:12px;line-height:1.65;color:var(--muted)">${c.card.how}</div></div>`:''}
+      </div>
+      <!-- Rating buttons -->
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--muted);margin-bottom:8px;text-align:center">HOW DID YOU DO?</div>
+      <div style="display:flex;gap:8px">
+        <button onclick="rateRecall('no')" style="flex:1;padding:13px 6px;border-radius:var(--rs);border:1.5px solid var(--red-b);background:var(--red-bg);color:var(--red);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;font-weight:700">🔴 No Idea</button>
+        <button onclick="rateRecall('almost')" style="flex:1;padding:13px 6px;border-radius:var(--rs);border:1.5px solid var(--yellow-b);background:var(--yellow-bg);color:var(--yellow);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;font-weight:700">🟡 Almost</button>
+        <button id="got-btn" onclick="rateRecall('got')" disabled style="flex:1;padding:13px 6px;border-radius:var(--rs);border:1.5px solid var(--green-b);background:var(--green-bg);color:var(--green);font-family:'DM Mono',monospace;font-size:11px;cursor:pointer;font-weight:700;opacity:.4">🟢 Got It</button>
+      </div>
+      <div id="got-countdown" style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);text-align:center;margin-top:6px">Got It unlocks in <span id="countdown-num">3</span>s — think first</div>
+    </div>
+
+    <!-- Reveal button (shown before reveal) -->
+    <div id="recall-reveal-btn">
+      <button onclick="revealRecallCard()" style="width:100%;padding:14px;border-radius:var(--rs);background:var(--ink);color:#fff;border:none;font-family:'Syne',sans-serif;font-size:14px;font-weight:700;cursor:pointer">Reveal Answer</button>
+    </div>
+
+    ${ratingBadge?`<div style="text-align:center;margin-top:10px;font-family:'DM Mono',monospace;font-size:11px;color:var(--muted)">Last rating: ${ratingBadge}</div>`:''}
+  `;
+}
+
+function revealRecallCard(){
+  document.getElementById('recall-answer').style.display='block';
+  document.getElementById('recall-reveal-btn').style.display='none';
+  // 3-second countdown before Got It is enabled
+  let count=3;
+  const tick=()=>{
+    const num=document.getElementById('countdown-num');
+    const btn=document.getElementById('got-btn');
+    if(!num||!btn)return;
+    if(count<=0){
+      btn.disabled=false;btn.style.opacity='1';
+      const cd=document.getElementById('got-countdown');if(cd)cd.style.display='none';
+    }else{
+      num.textContent=count--;
+      recallTimer=setTimeout(tick,1000);
+    }
+  };
+  tick();
+}
+
+function rateRecall(rating){
+  if(recallTimer)clearTimeout(recallTimer);
+  const c=recallCards[recallIdx];
+  recallRatings[c.key]=rating;
+  // Persist ratings to localStorage
+  try{S.recallRatings=recallRatings;saveS();}catch(e){}
+  recallIdx++;
+  recallRevealed=false;
+  renderRecallCard();
+}
+
+// ── LOG MODE ──
+function renderLog(){
+  renderReview();
+}
+
+function updateStreak(){
+  const today=new Date().toDateString();
+  if(S.lastDate===today)return;
+  const yest=new Date(Date.now()-86400000).toDateString();
+  if(S.lastDate===yest)S.streak=(S.streak||0)+1;
+  else if(S.lastDate&&S.lastDate!==today)S.streak=0;
+  S.lastDate=today;saveS();
+}
+
+function updateHomeQ(){
+  const simTotal=SIM_Q.reduce((a,s)=>a+s.steps.length,0);
+  set('cnt-vocab',VOCAB_Q.length+'q');
+  set('cnt-tech',TECH_Q.length+'q');
+  set('cnt-sim',simTotal+'q');
+  set('cnt-interview',INTERVIEW_Q.length+'q');
+}
+
+function updateHome(){
+  const p=(a,t)=>t>0?Math.round(a/t*100):0;
+  const vp=p(S.scores.vocab,S.scores.vt),tp=p(S.scores.tech,S.scores.tt),sp=p(S.scores.sim,S.scores.st),ip=p(S.scores.int,S.scores.it);
+  set('pct-vocab',vp+'%');bar('bar-vocab',vp);
+  set('pct-tech',tp+'%');bar('bar-tech',tp);
+  set('pct-sim',sp+'%');bar('bar-sim',sp);
+  set('pct-interview',ip+'%');bar('bar-interview',ip);
+  const total=(S.scores.vt||0)+(S.scores.tt||0)+(S.scores.st||0)+(S.scores.it||0);
+  const correct=(S.scores.vocab||0)+(S.scores.tech||0)+(S.scores.sim||0)+(S.scores.int||0);
+  const ov=total>0?Math.round(correct/total*100):0;
+  set('overall-pct',ov+'%');
+  set('overall-sub',ov>=80?'🎉 Interview-ready threshold reached!':ov>=50?'Good progress — drill weak spots':'Complete all stages to see your readiness');
+  set('h-streak',S.streak||0);
+  set('streak-sub',(S.streak||0)>0?`${S.streak} day${S.streak===1?'':'s'} in a row — keep going`:'Practice today to start your streak');
+  const wc=document.getElementById('weak-card'),wl=document.getElementById('weak-list');
+  if(S.weak&&S.weak.length>0){wc.style.display='block';wl.innerHTML=S.weak.slice(0,3).map(w=>`<div class="weak-item">⚠ ${w}</div>`).join('');}
+  else wc.style.display='none';
+}
+
+function set(id,v){const e=document.getElementById(id);if(e)e.textContent=v;}
+function bar(id,p){const e=document.getElementById(id);if(e)e.style.width=p+'%';}
+
+// ── STAGE ──
+function startStage(stage){
+  currentStage=stage;hearts=3;combo=0;missed=[];answered=false;selIdx=-1;
+  updateStreak();
+  if(stage==='vocab'){queue=shuffle([...VOCAB_Q]);qIdx=0;showScreen('game');set('g-title','LANGUAGE LAB');renderHearts();renderQ();}
+  else if(stage==='tech'){queue=shuffle([...TECH_Q]);qIdx=0;showScreen('game');set('g-title','TECHNICAL LABS');renderHearts();renderQ();}
+  else if(stage==='sim'){simIdx=0;simStep=0;showScreen('game');set('g-title','STAKEHOLDER SIM');renderHearts();renderSim();}
+  else if(stage==='interview'){queue=shuffle([...INTERVIEW_Q]);qIdx=0;showScreen('game');set('g-title','INTERVIEW PREP');renderHearts();renderQ();}
+}
+
+function renderQ(){
+  if(qIdx>=queue.length){endStage();return;}
+  const q=queue[qIdx];answered=false;selIdx=-1;
+  updateProg(qIdx,queue.length);set('g-sub-label',q.sub||'');
+  const body=document.getElementById('g-body');
+  let inner='';
+  if(q.type==='star'){
+    inner=`<div style="background:var(--blue-bg);border:1.5px solid var(--blue-b);border-radius:var(--rs);padding:12px 14px;margin-bottom:14px;font-size:13px;color:var(--blue)"><div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;opacity:.7;margin-bottom:3px">SCENARIO</div>${q.q}</div>`+
+    `<div class="q-text">Build your STAR response:</div>`+
+    ['s','t','a','r'].map(k=>`<div style="margin-bottom:10px"><span style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--green);display:block;margin-bottom:4px">${{s:'SITUATION',t:'TASK',a:'ACTION',r:'RESULT'}[k]}</span><textarea id="star-${k}" rows="2" placeholder="${q.template[k]}"></textarea></div>`).join('');
+  }else{
+    inner=buildCtx(q)+buildTagRow(q)+`<div class="q-text">${q.q.replace(/\n/g,'<br>')}</div>`+
+      (q.type==='mc'?buildMC(q):q.type==='fill'?buildFill():buildWrite());
+  }
+  body.innerHTML=inner+`<div class="feedback" id="fb"></div><div class="analyst-card" id="ac"></div>${q.verbal?buildVerbal(q):''}`;
+  document.getElementById('btn-main').textContent='Check';
+}
+
+function renderSim(){
+  const sc=SIM_Q[simIdx];
+  if(!sc){endStage();return;}
+  const step=sc.steps[simStep];
+  const totalSteps=SIM_Q.reduce((a,s)=>a+s.steps.length,0);
+  const doneSteps=SIM_Q.slice(0,simIdx).reduce((a,s)=>a+s.steps.length,0)+simStep;
+  updateProg(doneSteps,totalSteps);set('g-sub-label',sc.sub||'SCENARIO '+(simIdx+1));
+  answered=false;selIdx=-1;
+  const body=document.getElementById('g-body');
+  body.innerHTML=`<div style="font-family:'DM Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--orange);margin-bottom:10px">SCENARIO ${simIdx+1} · STEP ${simStep+1}/${sc.steps.length}</div>`+
+    `<div class="ctx-block"><div class="ctx-where">SITUATION</div><div class="ctx-text"><strong>${sc.scenario}</strong></div></div>`+
+    `<div class="q-text">${step.q}</div>`+
+    (step.type==='mc'?buildMC(step):buildWrite())+
+    `<div class="feedback" id="fb"></div><div class="analyst-card" id="ac"></div>${step.verbal?buildVerbal(step):''}`;
+  document.getElementById('btn-main').textContent=step.type==='write'?'Submit':'Check';
+}
+
+function buildCtx(q){if(!q.ctx)return '';return `<div class="ctx-block"><div class="ctx-where">WHERE YOU'LL USE THIS · ${q.tool||''}</div><div class="ctx-text">${q.ctx}</div></div>`;}
+function buildTagRow(q){let t='';if(q.tag)t+=`<span class="${q.tag==='INTERVIEW'?'int-tag':'job-tag'}">${q.tag}</span>`;if(q.tool)t+=`<span class="tool-tag">${q.tool}</span>`;if(q.sub)t+=`<span class="cat-tag">${q.sub}</span>`;return `<div class="tag-row">${t}</div>`;}
+function buildMC(q){return `<div class="opts">${q.opts.map((o,i)=>`<button class="opt" onclick="selOpt(${i})" id="opt-${i}"><span class="opt-key">${'ABCD'[i]}</span>${o}</button>`).join('')}</div>`;}
+function buildFill(){return `<input class="fill-input" id="fill" placeholder="Type your answer…" onkeydown="if(event.key==='Enter')handleMain()">`;}
+function buildWrite(){return `<textarea id="write-area" rows="4" placeholder="Write your response here…"></textarea>`;}
+function buildVerbal(q){return `<div class="verbal-box" id="vb"><strong>🎤 SAY IT OUT LOUD</strong>${q.verbal}</div>`;}
+
+function showCard(q){
+  const ac=document.getElementById('ac');if(!ac||!q.card)return;
+  const c=q.card;
+  ac.innerHTML=`<div class="ac-header">📎 ANALYST CONTEXT — WHERE THIS LIVES IN YOUR WORKFLOW</div><div class="ac-body">`+
+    `<div class="ac-row"><span class="ac-label">WHAT IT IS</span>${c.what}</div>`+
+    `<div class="ac-row"><span class="ac-label">WHERE USED</span>${c.use}</div>`+
+    `<div class="ac-row"><span class="ac-label">REAL EXAMPLE</span><div class="ac-code">${c.example}</div></div>`+
+    (c.how?`<div class="ac-row"><span class="ac-label">HOW TO IN THE TOOL</span>${c.how}</div>`:'')+
+    `</div>`;
+  ac.classList.add('show');
+  const vb=document.getElementById('vb');if(vb)vb.classList.add('show');
+}
+
+function selOpt(i){
+  if(answered)return;selIdx=i;
+  document.querySelectorAll('.opt').forEach((o,j)=>{o.style.borderColor=j===i?'var(--blue)':'var(--border)';o.style.background=j===i?'var(--blue-bg)':'var(--surface)';});
+}
+
+function handleMain(){if(!answered)checkAnswer();else advance();}
+
+function checkAnswer(){
+  const q=currentStage==='sim'?SIM_Q[simIdx].steps[simStep]:queue[qIdx];
+  if(!q)return;answered=true;
+  if(q.type==='mc'){
+    if(selIdx<0){toast('Pick an answer first');answered=false;return;}
+    const ok=selIdx===q.ans;
+    document.querySelectorAll('.opt').forEach((o,i)=>{o.disabled=true;if(i===q.ans)o.classList.add('correct');if(i===selIdx&&!ok)o.classList.add('wrong');});
+    handleResult(ok,q);
+  }else if(q.type==='fill'){
+    const inp=document.getElementById('fill');if(!inp||!inp.value.trim()){toast('Type an answer');answered=false;return;}
+    const v=inp.value.trim().toLowerCase();
+    const ok=(q.accept||[q.ans]).some(a=>v===a.toLowerCase()||v.includes(a.toLowerCase())||a.toLowerCase().includes(v));
+    inp.classList.add(ok?'correct':'wrong');handleResult(ok,q);
+  }else if(q.type==='star'){
+    const r=document.getElementById('star-r');if(!r||r.value.trim().length<10){toast('Complete the Result field');answered=false;return;}
+    const fb=document.getElementById('fb');
+    fb.className='feedback fb-warn show';
+    fb.innerHTML=`✍ Submitted — model STAR:<br><br><strong>S:</strong> ${q.template.s}<br><strong>T:</strong> ${q.template.t}<br><strong>A:</strong> ${q.template.a}<br><strong>R:</strong> ${q.template.r}`;
+    scoreIt(true);logIt(q,true,r.value);showCard(q);document.getElementById('btn-main').textContent='Continue →';return;
+  }else{
+    const ta=document.getElementById('write-area');if(!ta||ta.value.trim().length<15){toast('Write more');answered=false;return;}
+    const fb=document.getElementById('fb');
+    fb.className='feedback fb-warn show';
+    fb.innerHTML=`✍ Submitted — model answer:<br><br><em>${q.template||''}</em>`;
+    scoreIt(true);logIt(q,true,ta.value);showCard(q);document.getElementById('btn-main').textContent='Continue →';return;
+  }
+  document.getElementById('btn-main').textContent='Continue →';
+}
+
+function handleResult(ok,q){
+  const fb=document.getElementById('fb');
+  if(ok){
+    combo++;
+    if(combo>1){const cp=document.getElementById('combo-pill');if(cp){cp.style.display='flex';document.getElementById('combo-num').textContent=combo;}}
+    fb.className='feedback fb-ok show';fb.textContent='✓ Correct';
+    scoreIt(true);logIt(q,true);
+  }else{
+    combo=0;const cp=document.getElementById('combo-pill');if(cp)cp.style.display='none';
+    loseHeart();
+    fb.className='feedback fb-no show';
+    fb.innerHTML=q.type==='fill'?`✗ Answer: <strong>${q.ans}</strong>`:`✗ Incorrect — see Analyst Context below`;
+    scoreIt(false);
+    // For MC: pass what was picked so review log can show both
+    const picked=q.type==='mc'&&selIdx>=0?q.opts[selIdx]:null;
+    logIt(q,false,picked);
+    addMissed(q);addWeak(q.q.slice(0,55)+'…');
+  }
+  showCard(q);
+}
+
+function advance(){
+  answered=false;selIdx=-1;
+  if(currentStage==='sim'){
+    const sc=SIM_Q[simIdx];simStep++;
+    if(simStep>=sc.steps.length){simIdx++;simStep=0;}
+    renderSim();
+  }else{qIdx++;renderQ();}
+}
+
+function useHint(){
+  const q=currentStage==='sim'?SIM_Q[simIdx].steps[simStep]:queue[qIdx];if(!q)return;
+  const h=q.hint||'Think about the analyst workflow — what would you do first in this situation?';
+  const fb=document.getElementById('fb');fb.className='feedback fb-warn show';fb.textContent='💡 '+h;
+}
+
+function scoreIt(ok){
+  const map={vocab:['vocab','vt'],tech:['tech','tt'],sim:['sim','st'],interview:['int','it']};
+  const [ck,tk]=map[currentStage]||['vocab','vt'];
+  S.scores[tk]=(S.scores[tk]||0)+1;if(ok)S.scores[ck]=(S.scores[ck]||0)+1;saveS();
+  // Update home screen percentages live after every answer
+  if(document.getElementById('pct-vocab'))updateHome();
+}
+function loseHeart(){hearts--;renderHearts();if(hearts<=0)setTimeout(()=>showScreen('no-hearts'),700);}
+function renderHearts(){const r=document.getElementById('hearts-row');if(r)r.innerHTML=[...Array(3)].map((_,i)=>`<span class="heart${i>=hearts?' lost':''}">❤️</span>`).join('');}
+function addMissed(q){missed.push({q:(q.q||q.scenario||'').slice(0,80),a:q.type==='mc'?q.opts[q.ans]:(q.ans||'')});}
+function addWeak(t){if(!S.weak)S.weak=[];if(!S.weak.includes(t)){S.weak.unshift(t);if(S.weak.length>10)S.weak.pop();saveS();}}
+
+function logIt(q,ok,pickedOrWritten){
+  if(!S.log)S.log=[];
+  const correct=(q.type==='mc'?q.opts[q.ans]:(q.ans||q.template||'')).toString().slice(0,120);
+  let yours;
+  if(ok){
+    yours='✓ Correct';
+  }else if(q.type==='mc'&&pickedOrWritten){
+    yours=`✗ Picked: "${pickedOrWritten.slice(0,80)}" — Correct: "${correct.slice(0,80)}"`;
+  }else if(pickedOrWritten){
+    yours=`✗ ${pickedOrWritten.toString().slice(0,80)}`;
+  }else{
+    yours='✗ Incorrect';
+  }
+  S.log.unshift({q:(q.q||q.scenario||'').slice(0,100),yours,model:correct,stage:currentStage,ts:new Date().toLocaleString()});
+  if(S.log.length>100)S.log.pop();saveS();
+}
+
+function updateProg(done,total){
+  const p=total>0?Math.round(done/total*100):0;
+  const f=document.getElementById('g-fill'),c=document.getElementById('g-count');
+  if(f)f.style.width=p+'%';if(c)c.textContent=`${done+1} / ${total}`;
+}
+
+function endStage(){
+  const map={vocab:['vocab','vt','LANGUAGE LAB'],tech:['tech','tt','TECHNICAL LABS'],sim:['sim','st','STAKEHOLDER SIM'],interview:['int','it','INTERVIEW PREP']};
+  const [ck,tk,label]=map[currentStage]||['vocab','vt','STAGE'];
+  const score=S.scores[ck]||0,total=S.scores[tk]||0;
+  const pct=total>0?Math.round(score/total*100):0;
+  set('sum-eyebrow',label+' COMPLETE');set('sum-num',score);set('sum-total',total);
+  set('sum-pct',pct+'% accuracy');
+  set('sum-verdict',pct>=80?'Interview-ready on this stage 🎉':pct>=60?'Solid — keep drilling weak spots.':'Keep going — this is how it sticks.');
+  const ml=document.getElementById('missed-list'),ms=document.getElementById('missed-section');
+  if(missed.length>0&&ml&&ms){ms.style.display='block';ml.innerHTML=missed.map(m=>`<div class="missed-item"><div style="font-size:12px;color:var(--muted);margin-bottom:3px">${m.q}</div><div style="font-size:12px;font-weight:600;color:var(--red);font-family:'DM Mono',monospace">✓ ${m.a}</div></div>`).join('');}
+  else if(ms)ms.style.display='none';
+  showScreen('summary');
+}
+
+function renderReview(){
+  const list=document.getElementById('review-list');if(!list)return;
+  if(!S.log||S.log.length===0){list.innerHTML='<div style="color:var(--muted);text-align:center;margin-top:48px;font-size:13px">No entries yet. Complete a stage to start logging.</div>';return;}
+  list.innerHTML=S.log.map(r=>`<div class="review-item"><div style="font-size:13px;font-weight:600;margin-bottom:4px">${r.q}</div><div style="font-family:'DM Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:8px">${r.ts} · ${r.stage}</div><div class="review-cols"><div class="review-col" style="background:var(--red-bg);border:1px solid var(--red-b)"><div class="review-col-lbl" style="color:var(--red)">YOURS</div><div class="review-ans">${r.yours}</div></div><div class="review-col" style="background:var(--green-bg);border:1px solid var(--green-b)"><div class="review-col-lbl" style="color:var(--green)">MODEL</div><div class="review-ans">${r.model}</div></div></div></div>`).join('');
+}
+function exportReview(){
+  const t=(S.log||[]).map(r=>`[${r.ts}] ${r.stage}\nQ: ${r.q}\nYours: ${r.yours}\nModel: ${r.model}\n---`).join('\n');
+  const b=new Blob([t],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='bi_review.txt';a.click();
+}
+
+function backToHome(){showScreen('home');updateHome();}
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+</script>
+</body>
+</html>
