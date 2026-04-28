@@ -463,6 +463,11 @@ a{color:var(--green);text-decoration:none}a:hover{text-decoration:underline}
 .break-card.revealed .break-card-fix{display:block}
 
 .apply-card{background:#EFF6FF;border:1px solid #BFDBFE;border-radius:var(--radius);padding:14px 16px;margin-bottom:10px}
+.apply-card:last-child{margin-bottom:0}
+.apply-thread{background:linear-gradient(135deg,#F0F9FF,#E0F2FE);border:1px solid #BAE6FD;border-radius:var(--radius);padding:12px 14px;margin-bottom:14px;font-size:12.5px;color:#075985;line-height:1.55}
+.apply-thread strong{color:#0C4A6E}
+.apply-why{background:#FEF7ED;border-left:3px solid #D97706;padding:7px 11px;margin-top:8px;margin-bottom:10px;font-size:11.5px;color:#78350F;line-height:1.5;font-style:italic;border-radius:0 3px 3px 0}
+.apply-why strong{color:#7C2D12;font-style:normal}
 .apply-scenario{font-size:13.5px;color:var(--gray-900);line-height:1.55;margin-bottom:10px;font-weight:500}
 .apply-scenario em{color:#1E3A8A;font-style:italic}
 .apply-know{font-size:12px;color:var(--gray-700);background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:8px 12px;margin-bottom:10px;line-height:1.5}
@@ -598,6 +603,57 @@ a{color:var(--green);text-decoration:none}a:hover{text-decoration:underline}
   .pomo-widget{bottom:8px;right:8px;left:8px;width:auto}
   .pomo-widget.mini{left:auto}
 }
+
+/* ═══ POMODORO PAUSED-STATE PULSE (Group H) ═══ */
+@keyframes pomoPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+.pomo-widget.paused .pomo-timer { animation: pomoPulse 1.2s ease-in-out infinite; color: var(--gray-500); }
+.pomo-widget.paused #pomo-mini-display { animation: pomoPulse 1.2s ease-in-out infinite; color: var(--gray-500) !important; }
+.pomo-widget.paused { border-color: #F59E0B; box-shadow: 0 0 0 3px rgba(245,158,11,.18), var(--shadow-lg); }
+
+/* ═══ DB REFERENCE PANEL (Group F) ═══ */
+.db-ref-panel{margin-bottom:14px;border:1px solid #BAE6FD;border-radius:var(--radius);background:var(--white);overflow:hidden;box-shadow:0 1px 2px rgba(7,89,133,.06)}
+.db-ref-header{padding:10px 14px;background:linear-gradient(135deg,#F0F9FF,#E0F2FE);cursor:pointer;display:flex;align-items:center;justify-content:space-between;user-select:none;transition:background .15s}
+.db-ref-header:hover{background:linear-gradient(135deg,#E0F2FE,#BAE6FD)}
+.db-ref-panel.open .db-ref-header{border-bottom:1px solid #BAE6FD}
+.db-ref-title{font-size:12px;font-weight:700;color:#075985;display:flex;align-items:center;gap:6px;letter-spacing:.02em}
+.db-ref-toggle{font-size:13px;color:#075985;transition:transform .15s;display:inline-block;line-height:1}
+.db-ref-panel.open .db-ref-toggle{transform:rotate(90deg)}
+.db-ref-body{display:none}
+.db-ref-panel.open .db-ref-body{display:block}
+.db-ref-table{width:100%;border-collapse:collapse;font-size:12px}
+.db-ref-table th{background:var(--gray-50);text-align:left;padding:7px 12px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--gray-500);border-bottom:1px solid var(--gray-200)}
+.db-ref-table td{padding:7px 12px;border-bottom:1px solid var(--gray-100);vertical-align:top}
+.db-ref-table tr:last-child td{border-bottom:none}
+.db-ref-tname{font-family:var(--mono);font-weight:700;color:#075985;white-space:nowrap;font-size:11.5px}
+.db-ref-cols{font-family:var(--mono);color:var(--gray-700);font-size:11px;line-height:1.55}
+.db-ref-cols .pk{color:#9A3412;font-weight:700}
+.db-ref-cols .fk{color:#1E40AF;font-weight:600}
+.db-ref-joins{font-family:var(--mono);color:var(--gray-500);font-size:10.5px;line-height:1.55}
+.db-ref-note{padding:8px 14px;background:var(--gray-50);font-size:11px;color:var(--gray-600);font-style:italic;line-height:1.5;border-top:1px solid var(--gray-100)}
+.db-ref-note code{background:#fff;padding:1px 5px;border:1px solid var(--gray-200);border-radius:3px;font-size:10.5px;color:#075985}
+.db-ref-stub{padding:14px;font-size:12.5px;color:var(--gray-700);line-height:1.6}
+.db-ref-stub code{background:#F0F9FF;padding:1px 5px;border:1px solid #BAE6FD;border-radius:3px;font-size:11.5px;color:#075985;font-family:var(--mono)}
+@media (max-width:600px){
+  .db-ref-table{font-size:11px}
+  .db-ref-table th,.db-ref-table td{padding:6px 8px}
+  .db-ref-tname{font-size:10.5px}
+  .db-ref-cols{font-size:10px}
+  .db-ref-joins{font-size:10px}
+}
+
+/* ═══ QUERY PREVIEW MINI-TABLE (Group C) ═══ */
+.qry-preview-label{font-size:9.5px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray-400);margin-top:10px;margin-bottom:4px}
+.qry-preview{margin-bottom:6px;border:1px solid var(--gray-200);border-radius:var(--radius-sm);overflow:hidden;background:var(--white);max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.qry-preview table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11px;min-width:200px}
+.qry-preview th{background:#0F172A;color:#5EEAD4;padding:5px 9px;text-align:left;font-weight:700;font-size:10px;letter-spacing:.02em;border-bottom:1px solid #1E293B;white-space:nowrap}
+.qry-preview td{padding:5px 9px;color:var(--gray-700);border-bottom:1px solid var(--gray-100);white-space:nowrap}
+.qry-preview tr:last-child td{border-bottom:none}
+.qry-preview td.muted{color:var(--gray-400);font-style:italic;font-size:10.5px;background:var(--gray-50);text-align:center}
+.qry-preview-note{font-size:11px;color:var(--gray-600);font-style:italic;margin-top:4px;margin-bottom:8px;padding:5px 10px;border-left:2px solid var(--gray-300);line-height:1.5;background:var(--gray-50);border-radius:0 3px 3px 0}
+.qry-preview-note code{background:#fff;padding:1px 5px;border:1px solid var(--gray-200);border-radius:3px;font-size:10.5px;color:#075985;font-family:var(--mono)}
 
 /* ═══ POMO NOTE + SETTINGS MODALS ═══ */
 .pomo-modal{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:210;display:none;align-items:center;justify-content:center;padding:20px}
@@ -976,7 +1032,7 @@ a{color:var(--green);text-decoration:none}a:hover{text-decoration:underline}
 // DEFAULT DATA — 65 days
 // ─────────────────────────────────────────────
 const DEFAULT_DATA = [
-{day:1,date:"Wed Apr 16",phase:"Foundation",title:"SQL: Basic Retrieval — SELECT, FROM, LIMIT",skills:["SQL"],purpose:["Company-ready","Freelance-ready"],primary_tool:"VS Code",tools_today:["VS Code","PostgreSQL"],build_skill:null,build_task:"Open Claude Chat. Paste this prompt: Write 3 SQL SELECT queries against a retail database with customers, orders, and products tables. Query 1: retrieve all customer names and emails. Query 2: retrieve product name, price, category. Query 3: retrieve the first 10 orders by date using LIMIT.",claude_task:"Explain what each of these 3 SQL queries does in plain English. What is the business purpose of LIMIT in a reporting context? When would a BI Analyst use LIMIT in a real dashboard query?",deliverable:"day01_select_queries.sql",git_commit:"Add day01_select_queries.sql — Day 1: SQL Basic Retrieval",resource:"https://www.postgresql.org/docs/current/tutorial-select.html",freelance_connection:"SQL SELECT queries are required in 80%+ of Upwork data analyst gigs. Entry rate: $20–25 USD/hr.",company_connection:"SaskTel Business Metrics Analyst role requires SQL to extract KPIs from operational telecom databases.",game_stage:"Language Lab",game_drill:"Drill Core BI Terms: query, schema, SELECT, filter, aggregate. Aim for 5 correct answers in a row before stopping.",star_moment:false,status:null,anchor:"Open VS Code, connect SQLTools to your Northwind PostgreSQL database, and run one SELECT query — this is how SaskTel analysts query operational data.",mae_sentence:"A SELECT query retrieves exactly the rows and columns you ask for — SaskTel uses this every morning to pull call volume data.",video_ref:[{label:"SQL Beginner — The Basics: SELECT, FROM",url:"https://youtu.be/7mz73uXD9DA?t=1011",dur:"17 min"},{label:"SQL Beginner — Setup PostgreSQL + VS Code",url:"https://youtu.be/7mz73uXD9DA?t=5178",dur:"18 min"}]},
+{day:1,date:"Wed Apr 16",phase:"Foundation",title:"SQL: Basic Retrieval — SELECT, FROM, ORDER BY, LIMIT",skills:["SQL"],purpose:["Company-ready","Freelance-ready"],primary_tool:"VS Code",tools_today:["VS Code","PostgreSQL"],build_skill:null,build_task:"Open Claude Chat. Paste this prompt: Write 3 SQL SELECT queries against a retail database with customers, orders, and products tables. Query 1: retrieve all customer names and emails. Query 2: retrieve product name, price, category. Query 3: retrieve the first 10 orders by date using LIMIT.",claude_task:"Explain what each of these 3 SQL queries does in plain English. What is the business purpose of LIMIT in a reporting context? When would a BI Analyst use LIMIT in a real dashboard query?",deliverable:"day01_select_queries.sql",git_commit:"Add day01_select_queries.sql — Day 1: SQL Basic Retrieval",resource:"https://www.postgresql.org/docs/current/tutorial-select.html",freelance_connection:"SQL SELECT queries are required in 80%+ of Upwork data analyst gigs. Entry rate: $20–25 USD/hr.",company_connection:"SaskTel Business Metrics Analyst role requires SQL to extract KPIs from operational telecom databases.",game_stage:"Language Lab",game_drill:"Drill Core BI Terms: query, schema, SELECT, filter, aggregate. Aim for 5 correct answers in a row before stopping.",star_moment:false,status:null,anchor:"Open VS Code, open the PostgreSQL Explorer panel from the left sidebar, connect to your Northwind database, and run one SELECT query — this is how SaskTel analysts query operational data.",mae_sentence:"A SELECT query retrieves exactly the rows and columns you ask for — SaskTel uses this every morning to pull call volume data.",video_ref:[{label:"SQL Beginner — The Basics: SELECT, FROM",url:"https://youtu.be/7mz73uXD9DA?t=1011",dur:"17 min"},{label:"SQL Beginner — Setup PostgreSQL + VS Code",url:"https://youtu.be/7mz73uXD9DA?t=5178",dur:"18 min"}]},
 {day:2,date:"Thu Apr 17",phase:"Foundation",title:"SQL: Filtering Data — WHERE Clauses",skills:["SQL"],purpose:["Company-ready","Freelance-ready"],primary_tool:"VS Code",tools_today:["VS Code","PostgreSQL"],build_skill:null,build_task:"Open Claude Chat. Paste this prompt: Write 4 SQL WHERE clause queries on the retail schema. Query 1: customers from a specific city (text filter). Query 2: orders over $500 (numeric filter). Query 3: orders placed in Q1 2024 (date filter). Query 4: products in 'Electronics' category with price under $200.",claude_task:"Explain how the WHERE clause filters rows before results are returned. What happens if a date format is wrong in a WHERE clause? How does this affect BI reporting accuracy?",deliverable:"day02_where_clauses.sql",git_commit:"Add day02_where_clauses.sql — Day 2: SQL WHERE Filtering",resource:"https://www.postgresql.org/docs/current/queries-table-expressions.html",freelance_connection:"WHERE clause filtering is in every data cleaning and reporting gig on Upwork. $20–25 USD/hr entry.",company_connection:"FCC (Farm Credit Canada) uses SQL filtering to segment loan portfolios by risk category and region.",game_stage:"Language Lab",game_drill:"Drill: filter, WHERE clause, predicate, operator, NULL. Match each term to its definition in Language Lab.",star_moment:false,status:null,anchor:"Open the PostgreSQL WHERE docs and review one filtered query example, then try it in VS Code against Northwind.",mae_sentence:"A WHERE clause filters rows before the database returns anything — FCC uses it to show only high-risk loan segments.",video_ref:[{label:"SQL Beginner — Comparisons + WHERE",url:"https://youtu.be/7mz73uXD9DA?t=2039",dur:"11 min"}]},
 {day:3,date:"Fri Apr 18",phase:"Foundation",title:"SQL: Logical Operators — LIKE, IN, BETWEEN",skills:["SQL"],purpose:["Company-ready","Freelance-ready"],primary_tool:"VS Code",tools_today:["VS Code","PostgreSQL"],build_skill:null,build_task:"Open Claude Chat. Paste this prompt: Write a complex SQL query using LIKE, IN, BETWEEN, AND, and OR to find customers in Saskatoon or Regina who placed orders between $200 and $1000 in the Electronics or Home Goods categories. Then write two simplified versions isolating LIKE and IN.",claude_task:"Break down the logic of this query step by step. Why use IN instead of multiple OR statements? When is BETWEEN inclusive vs exclusive? How does LIKE with % differ from exact match?",deliverable:"day03_logical_operators.sql",git_commit:"Add day03_logical_operators.sql — Day 3: SQL Logical Operators",resource:"https://www.postgresql.org/docs/current/functions-comparison.html",freelance_connection:"Complex WHERE logic is required for client data segmentation gigs — $25 USD/hr at this skill level.",company_connection:"Government of Saskatchewan uses complex SQL filters for citizen service reporting and program eligibility queries.",game_stage:"Language Lab",game_drill:"Drill Technical Labs: SQL operators quiz — LIKE vs =, IN vs OR, BETWEEN. Aim 5 correct in a row.",star_moment:false,status:null,anchor:"Open the PostgreSQL comparison functions docs and read one compound-filter query example, then try it in VS Code.",mae_sentence:"LIKE, IN, and BETWEEN let you filter by pattern, list, or range in one query — Government of Saskatchewan uses all three for citizen service reporting.",video_ref:[{label:"SQL Beginner — Wildcards: LIKE, IN, BETWEEN",url:"https://youtu.be/7mz73uXD9DA?t=2723",dur:"6 min"}]},
 {day:4,date:"Mon Apr 21",phase:"Foundation",title:"SQL: Aggregation — COUNT, SUM, AVG, MIN, MAX",skills:["SQL"],purpose:["Company-ready","Freelance-ready"],primary_tool:"VS Code",tools_today:["VS Code","PostgreSQL"],build_skill:null,build_task:"Open Claude Chat. Paste this prompt: Write 5 SQL aggregation queries on the retail schema. 1: COUNT total orders. 2: SUM total revenue. 3: AVG order value. 4: MIN and MAX product prices by category. 5: COUNT orders vs COUNT(customer_id) to show NULL difference.",claude_task:"Explain the difference between COUNT(*) and COUNT(column_name). Why does this matter when columns have NULL values? How does a BI Analyst use these aggregates to build KPI cards in Power BI?",deliverable:"day04_aggregations.sql",git_commit:"Add day04_aggregations.sql — Day 4: SQL Aggregation Functions",resource:"https://www.postgresql.org/docs/current/functions-aggregate.html",freelance_connection:"Aggregation queries are the foundation of every data summary deliverable on Upwork. $25 USD/hr.",company_connection:"Affinity Credit Union uses SQL aggregation to calculate total assets, loan portfolio growth, and member counts in quarterly reports.",game_stage:"Language Lab",game_drill:"Drill: COUNT, SUM, AVG, aggregate function, KPI. Write each in a sentence from memory without looking.",star_moment:false,status:null,anchor:"Open the PostgreSQL aggregate functions docs and study one COUNT versus SUM example, then try it in VS Code against Northwind.",mae_sentence:"SUM adds all the values in a column. COUNT counts how many rows exist. Affinity Credit Union runs both every quarter.",video_ref:[{label:"SQL Beginner — Operations + Aggregation",url:"https://youtu.be/7mz73uXD9DA?t=3241",dur:"10 min"}]},
@@ -1115,20 +1171,20 @@ const PILOT_DATA = {
     day_type_class: 'hands-on',
     day_type_icon: '💪',
     day_mix: '85% hands-on typing · 15% reading/reflecting',
-    purpose: 'Learn the single most common action a BI Analyst performs every day: <strong>retrieving data from a database with SELECT queries</strong>. By the end of today, typing a SELECT query should feel as natural as typing an email.',
+    purpose: 'Learn the four keywords that build every BI query: <strong>SELECT, FROM, ORDER BY, LIMIT</strong>. By the end of today, typing these in order should feel as natural as typing an email — and you will answer a real stakeholder question with them.',
     outcomes: [
-      'Write and run 5 SQL queries yourself in VS Code + SQLTools against Northwind (no copy-paste from Claude)',
+      'Write and run 5 SQL queries yourself in VS Code + PostgreSQL Explorer against Northwind (no copy-paste from Claude)',
       'Diagnose and fix 3 broken queries by reading real database error messages',
-      'Answer 1 real stakeholder question in SQL using only SELECT / FROM / LIMIT',
+      'Answer 1 real stakeholder question in SQL using SELECT / FROM / ORDER BY / LIMIT',
       'Commit a complete .sql file to GitHub with explanatory comments'
     ],
     tool_setup: {
-      name: 'VS Code + SQLTools + PostgreSQL (Northwind DB)',
+      name: 'VS Code + PostgreSQL Explorer + PostgreSQL (Northwind DB)',
       url: 'https://www.postgresql.org/docs/current/tutorial-select.html',
-      note: 'Database: Northwind (customers, products, orders, categories, suppliers). Run queries in VS Code via SQLTools extension connected to your local PostgreSQL Docker container.'
+      note: 'Database: Northwind (customers, products, orders, order_details, categories, employees, suppliers, shippers — 8 tables total). Run queries in VS Code via the PostgreSQL Explorer extension connected to your local PostgreSQL Northwind database. Save your file as <code>day01_select_queries.sql</code> — PostgreSQL Explorer also recognizes <code>.pgsql</code> (both run identically), but <code>.sql</code> is the universal portfolio convention.'
     },
     see_it: {
-      instruction: 'Open VS Code. Click the SQLTools icon in the sidebar. Connect to your PostgreSQL Northwind database. Open a new SQL file and run: <strong>SELECT * FROM customers LIMIT 5;</strong> A result table appears in the panel below. That\'s the feedback loop. Feel it before learning theory.',
+      instruction: 'Open VS Code. Open the PostgreSQL Explorer panel from the left sidebar (or press <code>Ctrl+Shift+P</code> → type "PostgreSQL: Select Connection" → pick <code>localhost → northwind</code>). Open a new SQL file and type: <strong>SELECT * FROM customers LIMIT 5;</strong> Select all (<code>Ctrl+A</code>) → <code>Ctrl+Shift+P</code> → "PostgreSQL: Run Query". A result table appears in the panel below. That\'s the feedback loop. Feel it before learning theory.',
       expected: 'A table of 5 customers appears with columns like customer_id, company_name, contact_name, etc.'
     },
     practice_queries: [
@@ -1144,15 +1200,37 @@ const PILOT_DATA = {
       {id:'b3', broken:'SELECT company_name, FROM customers;', predict:'What will the database say?', reality:'<strong>Error:</strong> "syntax error at or near \\"FROM\\"" — the trailing comma before FROM is invalid.', fix:'SELECT company_name FROM customers;', lesson:'Trailing comma before FROM is the single most common beginner mistake. You will make it again. Now you know the error signature.'}
     ],
     apply_it: {
-      scenario: 'A SaskTel sales manager Slacks you: <em>"Can you pull me the 3 most recent orders — order_id, customer_id, and order_date?"</em>',
-      what_you_know: '<strong>You have:</strong> SELECT, FROM, LIMIT. <strong>You don\'t yet have:</strong> JOIN (Day 6) — so you can\'t return the customer\'s name, only their ID. That\'s fine — the manager asked for customer_id, which is literally a column.',
-      hint: 'You need: the columns they asked for, a table, a way to sort newest-first, and a cap at 3. <strong>ORDER BY column DESC</strong> sorts results — DESC = newest first, ASC = oldest first. Day 2 covers it formally; today you can use it.',
-      solution: 'SELECT order_id, customer_id, order_date FROM orders ORDER BY order_date DESC LIMIT 3;',
-      stretch: 'You just answered a real SaskTel-style stakeholder request on Day 1. That\'s the whole job — translating a business question into SQL.'
+      thread: '<strong>Monday morning standup.</strong> Your SaskTel sales manager has 15 minutes before her regional review meeting and needs three quick data pulls to prep her notes. She is looking at her phone, not her laptop. Three asks, three queries, all in Day 1 keywords.',
+      asks: [
+        {
+          scenario: '<strong>Ask 1 — Recency check.</strong> <em>"Pull me the 3 most recent orders — order_id, customer_id, and order_date."</em>',
+          why: 'Standup opens with what just shipped. Anchors her review in fresh activity.',
+          what_you_know: '<strong>You have:</strong> SELECT, FROM, ORDER BY, LIMIT. <strong>You don\'t yet have:</strong> JOIN (Day 6) — so you cannot return the customer name yet, only their ID. The manager asked for customer_id, which is literally a column.',
+          hint: 'Need: 3 columns, the orders table, sort newest-first, cap at 3. <strong>ORDER BY column DESC</strong> sorts descending — DESC = newest first, ASC = oldest first.',
+          solution: 'SELECT order_id, customer_id, order_date FROM orders ORDER BY order_date DESC LIMIT 3;',
+          stretch: 'You just answered a real SaskTel-style stakeholder request on Day 1.'
+        },
+        {
+          scenario: '<strong>Ask 2 — Premium-tier review.</strong> <em>"What are our top 5 most expensive products — name and price? I want to see if any are sitting in the catalog without much movement."</em>',
+          why: 'After recency comes pricing-tier review. High-margin products that are under-promoted surface here — items to feature in the regional push.',
+          what_you_know: '<strong>You have:</strong> SELECT specific columns, FROM products, ORDER BY unit_price DESC, LIMIT 5.',
+          hint: 'Sort products by price descending. Cap at 5. Pick the columns the manager actually wants — name and price, not all 10 product columns.',
+          solution: 'SELECT product_name, unit_price FROM products ORDER BY unit_price DESC LIMIT 5;',
+          stretch: 'Two filters and a sort in 7 keywords. This is the executive summary query pattern.'
+        },
+        {
+          scenario: '<strong>Ask 3 — Outreach list.</strong> <em>"Give me the first 10 customers alphabetically by company name — I want to start working through the call list from the top."</em>',
+          why: 'After recency and premium reviews, she wants a structured outreach list. Alphabetical = predictable starting point.',
+          what_you_know: '<strong>You have:</strong> SELECT specific columns, FROM customers, ORDER BY company_name (ASC is the default — you can leave it off), LIMIT 10.',
+          hint: 'Pick company_name and contact_name so she has someone to call. ORDER BY company_name without ASC because ASC is the default sort direction.',
+          solution: 'SELECT company_name, contact_name FROM customers ORDER BY company_name LIMIT 10;',
+          stretch: 'Three asks, three queries, all in SELECT/FROM/ORDER BY/LIMIT. Day 1 keywords carry you through a real morning workflow.'
+        }
+      ]
     },
     commit_payload: [
-      '-- Day 1 — SQL: SELECT, FROM, LIMIT',
-      '-- Environment: VS Code + SQLTools + PostgreSQL (Northwind DB)',
+      '-- Day 1 — SQL: SELECT, FROM, ORDER BY, LIMIT',
+      '-- Environment: VS Code + PostgreSQL Explorer + PostgreSQL (Northwind DB)',
       '',
       '-- PRACTICE (5 queries I typed and ran)',
       'SELECT company_name FROM customers;',
@@ -1171,7 +1249,7 @@ const PILOT_DATA = {
       'SELECT order_id, customer_id, order_date FROM orders ORDER BY order_date DESC LIMIT 3;'
     ].join('\n'),
     teach_it: {
-      say_aloud: 'A SELECT query picks specific columns from a specific table. LIMIT caps how many rows I get back. If I mistype a keyword or table name, the error tells me where.',
+      say_aloud: '<strong>Pick — From — Sort — Stop.</strong> Pick the columns (SELECT), name the table you are From (FROM), Sort by a column DESC or ASC (ORDER BY), Stop at N rows (LIMIT). If I mistype a keyword or table name, the error tells me where. (This is the order I type — the order it actually runs is different, covered on Day 5.)',
       record_prompt: 'Optional: record a 30-second voice memo saying this to Mae. Playback reveals gaps you can\'t hear while speaking.'
     }
   },
@@ -1188,9 +1266,9 @@ const PILOT_DATA = {
       'Commit a complete .sql file to GitHub with explanatory comments'
     ],
     tool_setup: {
-      name: 'VS Code + SQLTools + PostgreSQL (Northwind DB)',
+      name: 'VS Code + PostgreSQL Explorer + PostgreSQL (Northwind DB)',
       url: 'https://www.postgresql.org/docs/current/queries-table-expressions.html',
-      note: 'Same setup as Day 1. Open VS Code, connect SQLTools to your Northwind PostgreSQL database. All queries run against real Northwind tables.'
+      note: 'Same setup as Day 1. Open VS Code, connect via PostgreSQL Explorer to your Northwind database. All queries run against real Northwind tables.'
     },
     see_it: {
       instruction: 'Run this in VS Code: <strong>SELECT company_name, country FROM customers WHERE country = \'Germany\';</strong> — notice only German customers appear. The WHERE clause filtered out every other country before returning results.',
@@ -1209,15 +1287,37 @@ const PILOT_DATA = {
       {id:'b3', broken:'SELECT product_name FROM products WHERE unit_price > 20 OR unit_price < 10 AND discontinued = 0;', predict:'Does this return only active products?', reality:'<strong>No error but wrong results.</strong> AND binds tighter than OR, so this reads as: price > 20 (any status) OR (price < 10 AND active). Some discontinued products sneak in.', fix:'SELECT product_name FROM products WHERE (unit_price > 20 OR unit_price < 10) AND discontinued = 0;', lesson:'AND has higher precedence than OR. Use parentheses to control logic. Misplaced parentheses corrupt query results silently — no error, just wrong data.'}
     ],
     apply_it: {
-      scenario: 'An account manager Slacks you: <em>"Which of our customers are in France? I need the company name and contact person for my call list."</em>',
-      what_you_know: '<strong>You have:</strong> SELECT, FROM, WHERE with text comparison. <strong>You don\'t yet have:</strong> ORDER BY for sorting (trivial to add). The manager wants two specific columns plus a filter.',
-      hint: 'You need: company_name, contact_name, filtered to country = \'France\'. Optional: add ORDER BY company_name for a clean sorted list.',
-      solution: 'SELECT company_name, contact_name FROM customers WHERE country = \'France\' ORDER BY company_name;',
-      stretch: 'You just built a filtered call list in 10 seconds. A non-SQL employee would have scrolled through a spreadsheet for 5 minutes. That\'s the BI analyst value proposition.'
+      thread: '<strong>FCC (Farm Credit Canada) risk-review prep.</strong> A regional account manager is prepping for Wednesday\'s risk review. She needs three customer/order segments to flag in the meeting — geography, value, and inventory. Each ask layers another WHERE filter.',
+      asks: [
+        {
+          scenario: '<strong>Ask 1 — Geography focus.</strong> <em>"Which of our customers are in France? I need company name and contact person for my call list."</em>',
+          why: 'France was flagged as a focus market last quarter. She opens the meeting with this segment.',
+          what_you_know: '<strong>You have:</strong> SELECT, FROM, WHERE with text comparison. <strong>You don\'t yet have:</strong> ORDER BY for sorting (trivial to add). The manager wants two specific columns plus a filter.',
+          hint: 'Need: company_name, contact_name, filtered to country = \'France\'. Optional: add ORDER BY company_name for a clean sorted list.',
+          solution: 'SELECT company_name, contact_name FROM customers WHERE country = \'France\' ORDER BY company_name;',
+          stretch: 'You just built a filtered call list in 10 seconds. A non-SQL employee would have scrolled through a spreadsheet for 5 minutes. That is the BI analyst value proposition.'
+        },
+        {
+          scenario: '<strong>Ask 2 — Value + time window.</strong> <em>"Show me all orders from Q4 1997 with freight over $100. I want to see which big-ticket shipments closed at year-end."</em>',
+          why: 'Year-end revenue concentration is a risk indicator. Combining a date range with a value threshold tells her how dependent Q4 was on premium-freight customers.',
+          what_you_know: '<strong>You have:</strong> WHERE with a date range filter AND a numeric filter on freight. Two conditions joined with AND.',
+          hint: 'Q4 1997 = order_date BETWEEN \'1997-10-01\' AND \'1997-12-31\' (BETWEEN is on Day 3 — for now use >= and <=). Combine with freight > 100 using AND. Sort by freight DESC.',
+          solution: 'SELECT order_id, customer_id, order_date, freight FROM orders WHERE order_date >= \'1997-10-01\' AND order_date <= \'1997-12-31\' AND freight > 100 ORDER BY freight DESC;',
+          stretch: 'Three filters layered with AND, sorted by what matters. Risk-review queries always combine geography, time, and value.'
+        },
+        {
+          scenario: '<strong>Ask 3 — Inventory audit.</strong> <em>"Find products where units_in_stock is 0 OR discontinued is 1. We have a stocking-gap conversation tomorrow."</em>',
+          why: 'Inventory audit prep. Two failure modes (zero stock OR discontinued) — both flag the product as unavailable for new orders.',
+          what_you_know: '<strong>You have:</strong> WHERE with two conditions joined by OR. Day 2 covered AND/OR precedence — wrap OR in parens if you mix with AND elsewhere (not needed here, only one connector).',
+          hint: 'units_in_stock = 0 OR discontinued = 1. Both are red flags. Show product_name and both columns so she can see which problem each row has.',
+          solution: 'SELECT product_name, units_in_stock, discontinued FROM products WHERE units_in_stock = 0 OR discontinued = 1;',
+          stretch: 'OR-based audit query — common pattern for "any of these red flags?" reports.'
+        }
+      ]
     },
     commit_payload: [
       '-- Day 2 — SQL: WHERE Clauses (Filtering Data)',
-      '-- Environment: VS Code + SQLTools + PostgreSQL (Northwind DB)',
+      '-- Environment: VS Code + PostgreSQL Explorer + PostgreSQL (Northwind DB)',
       '',
       '-- PRACTICE (5 queries I typed and ran)',
       'SELECT company_name, contact_name, country FROM customers WHERE country = \'Germany\';',
@@ -1253,9 +1353,9 @@ const PILOT_DATA = {
       'Commit a complete .sql file to GitHub with explanatory comments'
     ],
     tool_setup: {
-      name: 'VS Code + SQLTools + PostgreSQL (Northwind DB)',
+      name: 'VS Code + PostgreSQL Explorer + PostgreSQL (Northwind DB)',
       url: 'https://www.postgresql.org/docs/current/functions-comparison.html',
-      note: 'Same setup as Day 1-2. All queries run against real Northwind tables in your local PostgreSQL Docker container.'
+      note: 'Same setup as Day 1-2. All queries run against real Northwind tables in your local PostgreSQL Northwind database.'
     },
     see_it: {
       instruction: 'Run this in VS Code: <strong>SELECT company_name, country FROM customers WHERE country IN (\'Germany\', \'France\', \'Brazil\');</strong> — IN replaces three separate OR conditions in one clean line.',
@@ -1274,15 +1374,37 @@ const PILOT_DATA = {
       {id:'b3', broken:'SELECT * FROM customers WHERE country IN \'Germany\', \'France\';', predict:'What will PostgreSQL say?', reality:'<strong>Error:</strong> "syntax error at or near \\",\\"" — IN requires parentheses around the list.', fix:'SELECT * FROM customers WHERE country IN (\'Germany\', \'France\');', lesson:'IN values must be wrapped in parentheses: IN (\'a\', \'b\', \'c\'). Missing parens is a syntax error.'}
     ],
     apply_it: {
-      scenario: 'A regional sales director Slacks you: <em>"I need all orders shipped to Canada, Brazil, or Argentina in 1997. Just the order ID, ship country, and order date."</em>',
-      what_you_know: '<strong>You have:</strong> SELECT, WHERE, IN, BETWEEN, AND. You can combine IN for the country list with BETWEEN for the date range.',
-      hint: 'You need: order_id, ship_country, order_date. Filter: ship_country IN (list) AND order_date BETWEEN (range). Two filters combined with AND.',
-      solution: 'SELECT order_id, ship_country, order_date FROM orders WHERE ship_country IN (\'Canada\', \'Brazil\', \'Argentina\') AND order_date BETWEEN \'1997-01-01\' AND \'1997-12-31\';',
-      stretch: 'You just answered a cross-country date-ranged query in one statement. A spreadsheet user would have built three separate filters manually. This is why SQL analysts get hired.'
+      thread: '<strong>Government of Saskatchewan compliance report.</strong> The citizen-service reporting team is filing a quarterly report. You are pulling three customer/order segments to validate eligibility and shipping patterns — LIKE, IN, and BETWEEN cover all three.',
+      asks: [
+        {
+          scenario: '<strong>Ask 1 — Country watchlist.</strong> <em>"Pull me all orders shipped to Canada, Brazil, or Argentina in 1997. Just order ID, ship country, and order date."</em>',
+          why: 'Three Americas countries on a watchlist for the trade-data crosswalk. IN handles the country list cleanly; BETWEEN handles the date range.',
+          what_you_know: '<strong>You have:</strong> IN for the country list, BETWEEN for the date range, AND to combine.',
+          hint: 'ship_country IN (list) AND order_date BETWEEN (range). Two filters combined with AND.',
+          solution: 'SELECT order_id, ship_country, order_date FROM orders WHERE ship_country IN (\'Canada\', \'Brazil\', \'Argentina\') AND order_date BETWEEN \'1997-01-01\' AND \'1997-12-31\';',
+          stretch: 'Cross-country date-ranged query in one statement. A spreadsheet user would have built three separate filters manually.'
+        },
+        {
+          scenario: '<strong>Ask 2 — Alphabet distribution check.</strong> <em>"Show me every customer whose company name starts with a vowel (A, E, I, O, U). I am cross-referencing alphabet distribution for the audit."</em>',
+          why: 'Auditors look for unusual clustering in name distributions. Vowel-start is a quick way to see if any letter range is overrepresented.',
+          what_you_know: '<strong>You have:</strong> Multiple LIKE patterns combined with OR. Five LIKE clauses, joined by OR.',
+          hint: 'company_name LIKE \'A%\' OR company_name LIKE \'E%\' OR ... five total. Each LIKE needs its full column reference — PostgreSQL won\'t let you skip it.',
+          solution: 'SELECT company_name, country FROM customers WHERE company_name LIKE \'A%\' OR company_name LIKE \'E%\' OR company_name LIKE \'I%\' OR company_name LIKE \'O%\' OR company_name LIKE \'U%\' ORDER BY company_name;',
+          stretch: 'Five OR conditions in one WHERE — auditable, readable, no regex needed.'
+        },
+        {
+          scenario: '<strong>Ask 3 — Pricing tier validation.</strong> <em>"Give me products priced between $15 and $40 with \'crab\', \'shrimp\', or \'salmon\' in the name. Catalog team wants to validate seafood pricing tier."</em>',
+          why: 'Mid-tier seafood pricing review. BETWEEN handles the price range; OR-of-LIKEs handles the keyword set; parens stop AND/OR precedence from corrupting the result.',
+          what_you_know: '<strong>You have:</strong> BETWEEN for price, LIKE \'%keyword%\' for substring match, AND to combine. <strong>Critical:</strong> wrap the OR-of-LIKEs in parentheses or AND will bind to the last LIKE only.',
+          hint: 'price BETWEEN 15 AND 40 AND (name LIKE \'%crab%\' OR LIKE \'%shrimp%\' OR LIKE \'%salmon%\'). Parens are critical — Day 2 precedence rule applies here.',
+          solution: 'SELECT product_name, unit_price FROM products WHERE unit_price BETWEEN 15 AND 40 AND (product_name LIKE \'%crab%\' OR product_name LIKE \'%shrimp%\' OR product_name LIKE \'%salmon%\');',
+          stretch: 'BETWEEN + LIKE-OR + parens — Day 2 precedence rule meets Day 3 operators in one query.'
+        }
+      ]
     },
     commit_payload: [
       '-- Day 3 — SQL: LIKE, IN, BETWEEN (Logical Operators)',
-      '-- Environment: VS Code + SQLTools + PostgreSQL (Northwind DB)',
+      '-- Environment: VS Code + PostgreSQL Explorer + PostgreSQL (Northwind DB)',
       '',
       '-- PRACTICE (5 queries I typed and ran)',
       'SELECT company_name, contact_name FROM customers WHERE company_name LIKE \'A%\';',
@@ -1318,7 +1440,7 @@ const PILOT_DATA = {
       'Commit a complete .sql file to GitHub with explanatory comments'
     ],
     tool_setup: {
-      name: 'VS Code + SQLTools + PostgreSQL (Northwind DB)',
+      name: 'VS Code + PostgreSQL Explorer + PostgreSQL (Northwind DB)',
       url: 'https://www.postgresql.org/docs/current/functions-aggregate.html',
       note: 'Same setup. Key Northwind fact: customers.region and orders.shipped_date contain NULL values — perfect for learning COUNT behavior.'
     },
@@ -1339,15 +1461,37 @@ const PILOT_DATA = {
       {id:'b3', broken:'SELECT product_name, AVG(unit_price) FROM products;', predict:'What will PostgreSQL say?', reality:'<strong>Error:</strong> "column \\"products.product_name\\" must appear in the GROUP BY clause or be used in an aggregate function." You mixed a single-row aggregate (AVG) with a multi-row column (product_name).', fix:'SELECT AVG(unit_price) FROM products;', lesson:'Aggregates collapse many rows into one. You cannot mix a single aggregate result with individual row values unless you GROUP BY. This error previews tomorrow\'s lesson.'}
     ],
     apply_it: {
-      scenario: 'A finance director Slacks you: <em>"How many orders do we have, what\'s the total freight cost, and what\'s the average freight per order? I need these three numbers for my board report."</em>',
-      what_you_know: '<strong>You have:</strong> COUNT, SUM, AVG, aliasing with AS. Three aggregates in one SELECT gives three KPI numbers in one query.',
-      hint: 'Stack all three in one SELECT: COUNT(*), SUM(freight), ROUND(AVG(freight), 2). Use AS for clean column names the finance director can read.',
-      solution: 'SELECT COUNT(*) AS total_orders, SUM(freight) AS total_freight, ROUND(AVG(freight), 2) AS avg_freight_per_order FROM orders;',
-      stretch: 'Three KPI numbers in 10 seconds. This exact query — count, sum, average — is the skeleton of every executive summary you will ever build.'
+      thread: '<strong>Affinity Credit Union monthly board pack.</strong> The finance director needs three KPI roll-ups — volume + cost, price spread, and data-quality completeness. Five aggregate functions (COUNT, SUM, AVG, MIN, MAX) cover the pack.',
+      asks: [
+        {
+          scenario: '<strong>Ask 1 — Three KPIs.</strong> <em>"How many orders, total freight, and average freight per order? I need these three numbers for my board report."</em>',
+          why: 'Opens the board pack with volume + cost + unit-economics. Three aggregates in one query, three KPI cards.',
+          what_you_know: '<strong>You have:</strong> COUNT, SUM, AVG, aliasing with AS. Three aggregates in one SELECT gives three KPI numbers in one query.',
+          hint: 'Stack all three in one SELECT: COUNT(*), SUM(freight), ROUND(AVG(freight), 2). Use AS for clean column names the finance director can read.',
+          solution: 'SELECT COUNT(*) AS total_orders, SUM(freight) AS total_freight, ROUND(AVG(freight), 2) AS avg_freight_per_order FROM orders;',
+          stretch: 'Three KPI numbers in 10 seconds. This exact query — count, sum, average — is the skeleton of every executive summary you will ever build.'
+        },
+        {
+          scenario: '<strong>Ask 2 — Price spread.</strong> <em>"What is the cheapest and most expensive product we sell? Just two numbers — I want to see our price range at a glance."</em>',
+          why: 'Pricing context for the merchandising slide. The spread tells the board whether we cover both budget and premium tiers.',
+          what_you_know: '<strong>You have:</strong> MIN, MAX. Two aggregates in one row, alias each.',
+          hint: 'MIN(unit_price) and MAX(unit_price) in one SELECT. Alias as cheapest and most_expensive — readable column names matter for the board read.',
+          solution: 'SELECT MIN(unit_price) AS cheapest, MAX(unit_price) AS most_expensive FROM products;',
+          stretch: 'Two aggregates, one row. MIN/MAX also work on dates (earliest/latest order) and text (alphabetical first/last) — same pattern, different columns.'
+        },
+        {
+          scenario: '<strong>Ask 3 — Data-quality KPI.</strong> <em>"How complete is our customer data? Tell me total customer count vs how many have region filled in. I am flagging data-quality issues for the audit committee."</em>',
+          why: 'Data-quality KPI for the audit committee. The gap between COUNT(*) and COUNT(region) IS the data-quality story.',
+          what_you_know: '<strong>You have:</strong> COUNT(*) (counts all rows) and COUNT(column) (skips NULLs). The difference between them shows missing data.',
+          hint: 'Two COUNT aggregates side by side: COUNT(*) AS total, COUNT(region) AS has_region. The audit committee will read the gap.',
+          solution: 'SELECT COUNT(*) AS total, COUNT(region) AS has_region FROM customers;',
+          stretch: 'COUNT(*) vs COUNT(column) is the most-asked aggregate interview question. You just answered it with a real KPI.'
+        }
+      ]
     },
     commit_payload: [
       '-- Day 4 — SQL: Aggregation Functions (COUNT, SUM, AVG, MIN, MAX)',
-      '-- Environment: VS Code + SQLTools + PostgreSQL (Northwind DB)',
+      '-- Environment: VS Code + PostgreSQL Explorer + PostgreSQL (Northwind DB)',
       '',
       '-- PRACTICE (5 queries I typed and ran)',
       'SELECT COUNT(*) AS total_orders FROM orders;',
@@ -1383,7 +1527,7 @@ const PILOT_DATA = {
       'Verbally explain the SQL execution order (FROM → WHERE → GROUP BY → HAVING → SELECT → ORDER BY) as a STAR moment'
     ],
     tool_setup: {
-      name: 'VS Code + SQLTools + PostgreSQL (Northwind DB)',
+      name: 'VS Code + PostgreSQL Explorer + PostgreSQL (Northwind DB)',
       url: 'https://www.postgresql.org/docs/current/queries-table-expressions.html#QUERIES-GROUP',
       note: 'Same setup. GROUP BY collapses rows into groups. HAVING filters those groups. Together they power every "by category" and "by region" report.'
     },
@@ -1404,15 +1548,37 @@ const PILOT_DATA = {
       {id:'b3', broken:'SELECT ship_country, COUNT(*) AS order_count FROM orders GROUP BY ship_country ORDER BY orders DESC;', predict:'What will PostgreSQL say?', reality:'<strong>Error:</strong> "column \\"orders\\" does not exist" — you typed the table name instead of the alias. ORDER BY uses column names or aliases, not table names.', fix:'SELECT ship_country, COUNT(*) AS order_count FROM orders GROUP BY ship_country ORDER BY order_count DESC;', lesson:'ORDER BY uses column aliases from SELECT. Double-check you\'re referencing the alias (order_count), not the table name (orders). Typo-level mistakes waste real debugging time.'}
     ],
     apply_it: {
-      scenario: 'A logistics VP Slacks you: <em>"Which shipping countries cost us more than $50 average freight? I want the country, average freight, and order count — sorted by cost, highest first. Only show countries with at least 5 orders so we\'re not looking at noise."</em>',
-      what_you_know: '<strong>You have:</strong> GROUP BY, HAVING, AVG, COUNT, ORDER BY. The VP wants grouped data with two filters: AVG(freight) > 50 AND COUNT(*) >= 5.',
-      hint: 'GROUP BY ship_country. HAVING with two conditions joined by AND. ORDER BY avg_freight DESC.',
-      solution: 'SELECT ship_country, ROUND(AVG(freight), 2) AS avg_freight, COUNT(*) AS order_count FROM orders GROUP BY ship_country HAVING AVG(freight) > 50 AND COUNT(*) >= 5 ORDER BY avg_freight DESC;',
-      stretch: 'Two HAVING conditions in one query. The VP gets a clean, filtered, sorted summary. This is exactly what "show me the expensive shipping lanes with enough data to matter" looks like in SQL.'
+      thread: '<strong>Cameco freight-review session.</strong> The logistics VP wants three slices of shipping data — country volume, country cost with quality threshold, and category pricing tiers. GROUP BY collapses; HAVING filters the groups.',
+      asks: [
+        {
+          scenario: '<strong>Ask 1 — Volume by country.</strong> <em>"Show me which countries place the most orders — country and order count, top 5."</em>',
+          why: 'Geographic concentration check — where does the volume come from? Anchors regional capacity planning.',
+          what_you_know: '<strong>You have:</strong> COUNT(*) per group, GROUP BY ship_country, ORDER BY count DESC, LIMIT 5.',
+          hint: 'Group by ship_country, count rows per group, sort descending, cap at 5. No HAVING needed — straight grouped count.',
+          solution: 'SELECT ship_country, COUNT(*) AS order_count FROM orders GROUP BY ship_country ORDER BY order_count DESC LIMIT 5;',
+          stretch: 'Top-N per group is the most common BI dashboard pattern. You will write this query 100 times.'
+        },
+        {
+          scenario: '<strong>Ask 2 — Cost outliers.</strong> <em>"Which shipping countries cost us more than $50 average freight? Country, average freight, and order count, sorted by cost. Only show countries with at least 5 orders so we are not looking at noise."</em>',
+          why: 'Two-criteria HAVING — quality threshold (≥5 orders) plus cost threshold (>$50). Filters statistical noise from real signal.',
+          what_you_know: '<strong>You have:</strong> GROUP BY, HAVING with two conditions joined by AND, AVG, COUNT, ORDER BY.',
+          hint: 'GROUP BY ship_country. HAVING with two conditions joined by AND. ORDER BY avg_freight DESC.',
+          solution: 'SELECT ship_country, ROUND(AVG(freight), 2) AS avg_freight, COUNT(*) AS order_count FROM orders GROUP BY ship_country HAVING AVG(freight) > 50 AND COUNT(*) >= 5 ORDER BY avg_freight DESC;',
+          stretch: 'Two HAVING conditions in one query. The VP gets a clean, filtered, sorted summary. This is exactly what "show me the expensive shipping lanes with enough data to matter" looks like in SQL.'
+        },
+        {
+          scenario: '<strong>Ask 3 — Premium pricing tiers.</strong> <em>"Which product categories average more than $30 per item? Category ID, avg price, and product count. Helps me see where premium pricing lives."</em>',
+          why: 'Pricing-tier clustering — which categories anchor the premium end. HAVING runs after AVG is computed, so this can\'t be done with WHERE alone.',
+          what_you_know: '<strong>You have:</strong> AVG per group, HAVING on the aggregated value, ROUND for clean output.',
+          hint: 'GROUP BY category_id, HAVING AVG(unit_price) > 30. Round the avg in the SELECT for readability. ORDER BY avg_price DESC.',
+          solution: 'SELECT category_id, ROUND(AVG(unit_price), 2) AS avg_price, COUNT(*) AS product_count FROM products GROUP BY category_id HAVING AVG(unit_price) > 30 ORDER BY avg_price DESC;',
+          stretch: 'HAVING AVG > N — this exact pattern surfaces "above-threshold" segments in every dashboard. Pricing, performance, anything.'
+        }
+      ]
     },
     commit_payload: [
       '-- Day 5 — SQL: GROUP BY and HAVING',
-      '-- Environment: VS Code + SQLTools + PostgreSQL (Northwind DB)',
+      '-- Environment: VS Code + PostgreSQL Explorer + PostgreSQL (Northwind DB)',
       '',
       '-- PRACTICE (5 queries I typed and ran)',
       'SELECT country, COUNT(*) AS customer_count FROM customers GROUP BY country ORDER BY customer_count DESC;',
@@ -1451,7 +1617,7 @@ const PILOT_DATA = {
       'Commit a complete .sql file to GitHub with explanatory comments'
     ],
     tool_setup: {
-      name: 'VS Code + SQLTools + PostgreSQL (Northwind DB)',
+      name: 'VS Code + PostgreSQL Explorer + PostgreSQL (Northwind DB)',
       url: 'https://www.postgresql.org/docs/current/tutorial-join.html',
       note: 'JOINs connect tables via shared columns (foreign keys). Northwind relationships: customers.customer_id → orders.customer_id, products.category_id → categories.category_id.'
     },
@@ -1472,15 +1638,37 @@ const PILOT_DATA = {
       {id:'b3', broken:'SELECT c.company_name, o.order_id FROM customers c INNER JOIN orders o ON c.customer_id = o.employee_id LIMIT 5;', predict:'Will this error or return wrong data?', reality:'<strong>No error but completely wrong results.</strong> Joining on customer_id = employee_id matches customers to orders handled by employee number X, not orders placed by customer X. The data looks plausible but is meaningless.', fix:'SELECT c.company_name, o.order_id FROM customers c INNER JOIN orders o ON c.customer_id = o.customer_id LIMIT 5;', lesson:'Wrong JOIN column = wrong data, zero errors. This is the most dangerous JOIN bug because it produces results that look fine. Always verify: does the ON column represent the same entity in both tables?'}
     ],
     apply_it: {
-      scenario: 'A sales manager Slacks you: <em>"Which of our customers have never placed an order? I want their company name and contact person so I can reach out."</em>',
-      what_you_know: '<strong>You have:</strong> LEFT JOIN to keep all customers, WHERE IS NULL to find unmatched ones. The manager needs to see who\'s been missed.',
-      hint: 'LEFT JOIN customers to orders. WHERE o.order_id IS NULL finds customers with no matching order. SELECT company_name and contact_name for the call list.',
-      solution: 'SELECT c.company_name, c.contact_name, c.phone FROM customers c LEFT JOIN orders o ON c.customer_id = o.customer_id WHERE o.order_id IS NULL;',
-      stretch: 'You just identified lost revenue opportunities in one query. This exact LEFT JOIN + IS NULL pattern is how BI analysts find "customers who churned," "products never sold," and "employees with no sales." It\'s a career pattern.'
+      thread: '<strong>SaskTel customer success monthly churn-analysis prep.</strong> You need three customer-side views — dormant customers (never ordered), top-engaged customers, and unsold catalog items. INNER JOIN finds the active; LEFT JOIN + IS NULL finds the missing.',
+      asks: [
+        {
+          scenario: '<strong>Ask 1 — Dormant customers.</strong> <em>"Which of our customers have never placed an order? Company name and contact person — I want to reach out."</em>',
+          why: 'Missed revenue opportunity — customers in the system but never converted. LEFT JOIN keeps them visible; IS NULL filters to only the missed ones.',
+          what_you_know: '<strong>You have:</strong> LEFT JOIN to keep all customers, WHERE IS NULL to find unmatched ones. The manager needs to see who has been missed.',
+          hint: 'LEFT JOIN customers to orders. WHERE o.order_id IS NULL finds customers with no matching order. SELECT company_name and contact_name for the call list.',
+          solution: 'SELECT c.company_name, c.contact_name, c.phone FROM customers c LEFT JOIN orders o ON c.customer_id = o.customer_id WHERE o.order_id IS NULL;',
+          stretch: 'You just identified lost revenue opportunities in one query. This exact LEFT JOIN + IS NULL pattern is how BI analysts find "customers who churned," "products never sold," and "employees with no sales." It is a career pattern.'
+        },
+        {
+          scenario: '<strong>Ask 2 — Top-engaged customers.</strong> <em>"Top 10 customers by total orders placed. Company name and order count."</em>',
+          why: 'Identifying our most-engaged customers — they get retention attention first if early churn signals appear.',
+          what_you_know: '<strong>You have:</strong> INNER JOIN customers to orders, COUNT per customer, GROUP BY, ORDER BY DESC, LIMIT.',
+          hint: 'INNER JOIN customers to orders on customer_id. COUNT(o.order_id) per customer. GROUP BY company_name. ORDER BY count DESC LIMIT 10.',
+          solution: 'SELECT c.company_name, COUNT(o.order_id) AS order_count FROM customers c INNER JOIN orders o ON c.customer_id = o.customer_id GROUP BY c.company_name ORDER BY order_count DESC LIMIT 10;',
+          stretch: 'Top-N customers by activity — the "VIP list" query that drives retention strategy.'
+        },
+        {
+          scenario: '<strong>Ask 3 — Unsold catalog.</strong> <em>"Are there products in our catalog that have never appeared on an order? Product name and price."</em>',
+          why: 'Catalog hygiene — products with zero sales might be discontinued, mispriced, or dead inventory. Same LEFT JOIN + IS NULL pattern, different tables.',
+          what_you_know: '<strong>You have:</strong> LEFT JOIN products to order_details, WHERE order_id IS NULL filters to products that never appeared in any order line.',
+          hint: 'Start from products (LEFT side). LEFT JOIN order_details on product_id. WHERE od.order_id IS NULL. This is the same pattern as Ask 1, applied to a different "missing" question.',
+          solution: 'SELECT p.product_name, p.unit_price FROM products p LEFT JOIN order_details od ON p.product_id = od.product_id WHERE od.order_id IS NULL;',
+          stretch: 'LEFT JOIN + IS NULL is the universal "find what is missing" pattern. Customers without orders, products without sales, employees without performance data — same query shape every time.'
+        }
+      ]
     },
     commit_payload: [
       '-- Day 6 — SQL: INNER JOIN and LEFT JOIN',
-      '-- Environment: VS Code + SQLTools + PostgreSQL (Northwind DB)',
+      '-- Environment: VS Code + PostgreSQL Explorer + PostgreSQL (Northwind DB)',
       '',
       '-- PRACTICE (5 queries I typed and ran)',
       'SELECT c.company_name, o.order_id, o.order_date FROM customers c INNER JOIN orders o ON c.customer_id = o.customer_id ORDER BY o.order_date DESC LIMIT 15;',
@@ -1516,7 +1704,7 @@ const PILOT_DATA = {
       'Commit a complete .sql file to GitHub with explanatory comments'
     ],
     tool_setup: {
-      name: 'VS Code + SQLTools + PostgreSQL (Northwind DB)',
+      name: 'VS Code + PostgreSQL Explorer + PostgreSQL (Northwind DB)',
       url: 'https://www.postgresql.org/docs/current/tutorial-join.html',
       note: 'The Northwind JOIN chain: orders → order_details (ON order_id) → products (ON product_id) → categories (ON category_id). Learn this chain — it\'s the backbone of every order analysis.'
     },
@@ -1537,15 +1725,37 @@ const PILOT_DATA = {
       {id:'b3', broken:'SELECT c.category_name, SUM(od.unit_price * od.quantity) AS revenue FROM order_details od JOIN products p ON od.product_id = p.product_id JOIN categories c ON p.category_id = c.category_id;', predict:'What will PostgreSQL say?', reality:'<strong>Error:</strong> "column \\"c.category_name\\" must appear in the GROUP BY clause or be used in an aggregate function." SUM collapses to one row but category_name is still multi-row.', fix:'SELECT c.category_name, SUM(od.unit_price * od.quantity) AS revenue FROM order_details od JOIN products p ON od.product_id = p.product_id JOIN categories c ON p.category_id = c.category_id GROUP BY c.category_name;', lesson:'Multi-table JOINs with aggregates still need GROUP BY. The rule from Day 5 applies everywhere: every non-aggregated column in SELECT must be in GROUP BY.'}
     ],
     apply_it: {
-      scenario: 'A category manager Slacks you: <em>"Which product categories generated the most revenue last year? I need category name, total revenue, and number of orders — sorted by revenue, top to bottom."</em>',
-      what_you_know: '<strong>You have:</strong> 3-table JOIN (order_details → products → categories), SUM for revenue, COUNT for orders, GROUP BY for per-category breakdown, ORDER BY for sorting.',
-      hint: 'Chain: order_details → products (product_id) → categories (category_id). SUM(od.unit_price * od.quantity) for revenue. COUNT(DISTINCT od.order_id) for unique orders. GROUP BY category_name. ORDER BY revenue DESC.',
-      solution: 'SELECT cat.category_name, ROUND(SUM(od.unit_price * od.quantity)::numeric, 2) AS total_revenue, COUNT(DISTINCT od.order_id) AS order_count FROM order_details od JOIN products p ON od.product_id = p.product_id JOIN categories cat ON p.category_id = cat.category_id GROUP BY cat.category_name ORDER BY total_revenue DESC;',
-      stretch: 'Three tables, two aggregates, grouped and sorted. This is a production-ready category performance report. A Power BI dashboard would visualize this exact query as a bar chart.'
+      thread: '<strong>Nutrien quarterly category-performance review.</strong> The category manager wants three multi-table rollups — revenue by category, employee performance, and customer concentration. All three need 3-table chains; aliases and explicit ON clauses are the safety rails.',
+      asks: [
+        {
+          scenario: '<strong>Ask 1 — Category performance.</strong> <em>"Which product categories generated the most revenue last year? Category name, total revenue, and number of orders — sorted by revenue, top to bottom."</em>',
+          why: 'Top-line category review — which categories anchor the quarter? Drives merchandising and shelf-space decisions.',
+          what_you_know: '<strong>You have:</strong> 3-table JOIN (order_details → products → categories), SUM for revenue, COUNT(DISTINCT) for unique orders, GROUP BY, ORDER BY.',
+          hint: 'Chain: order_details → products (product_id) → categories (category_id). SUM(od.unit_price * od.quantity) for revenue. COUNT(DISTINCT od.order_id) for unique orders. GROUP BY category_name. ORDER BY revenue DESC.',
+          solution: 'SELECT cat.category_name, ROUND(SUM(od.unit_price * od.quantity)::numeric, 2) AS total_revenue, COUNT(DISTINCT od.order_id) AS order_count FROM order_details od JOIN products p ON od.product_id = p.product_id JOIN categories cat ON p.category_id = cat.category_id GROUP BY cat.category_name ORDER BY total_revenue DESC;',
+          stretch: 'Three tables, two aggregates, grouped and sorted. This is a production-ready category performance report. A Power BI dashboard would visualize this exact query as a bar chart.'
+        },
+        {
+          scenario: '<strong>Ask 2 — Employee performance.</strong> <em>"Show me each employee\'s total orders and total revenue. Sorted by revenue. Helps me see who is driving the top line."</em>',
+          why: 'Sales performance review — which employees own the revenue? Drives quota-setting and territory adjustments.',
+          what_you_know: '<strong>You have:</strong> 3-table chain (employees → orders → order_details), SUM for revenue, COUNT(DISTINCT) for unique orders, string concatenation with ||.',
+          hint: 'JOIN employees to orders on employee_id. JOIN order_details on order_id. SUM(od.unit_price * od.quantity) for revenue. GROUP BY employee_id, first_name, last_name (every non-aggregated column). ORDER BY revenue DESC.',
+          solution: 'SELECT e.first_name || \' \' || e.last_name AS employee_name, COUNT(DISTINCT o.order_id) AS order_count, ROUND(SUM(od.unit_price * od.quantity)::numeric, 2) AS total_revenue FROM employees e JOIN orders o ON e.employee_id = o.employee_id JOIN order_details od ON o.order_id = od.order_id GROUP BY e.first_name, e.last_name ORDER BY total_revenue DESC;',
+          stretch: 'Three tables, two aggregates, one concatenated name column. This is the employee-performance dashboard core query.'
+        },
+        {
+          scenario: '<strong>Ask 3 — Customer concentration.</strong> <em>"Top 5 customers by total revenue. Company name, total revenue, and number of distinct products purchased."</em>',
+          why: 'Customer concentration risk — are we dependent on a few big buyers? Drives account-management priority. If top 5 = 60% of revenue, that is a board-level conversation.',
+          what_you_know: '<strong>You have:</strong> 3-table chain (customers → orders → order_details), SUM for revenue, COUNT(DISTINCT) for product variety, GROUP BY, LIMIT.',
+          hint: 'JOIN customers to orders on customer_id. JOIN order_details on order_id. SUM(od.unit_price * od.quantity). COUNT(DISTINCT od.product_id) for unique products. GROUP BY company_name. ORDER BY revenue DESC LIMIT 5.',
+          solution: 'SELECT c.company_name, ROUND(SUM(od.unit_price * od.quantity)::numeric, 2) AS total_revenue, COUNT(DISTINCT od.product_id) AS unique_products FROM customers c JOIN orders o ON c.customer_id = o.customer_id JOIN order_details od ON o.order_id = od.order_id GROUP BY c.company_name ORDER BY total_revenue DESC LIMIT 5;',
+          stretch: 'Customer concentration risk in one query. Same 3-table chain as Ask 2, different anchor table. Once you see the pattern, every multi-table report is a variation of it.'
+        }
+      ]
     },
     commit_payload: [
       '-- Day 7 — SQL: Multi-Table Joins (3-4 Table Queries)',
-      '-- Environment: VS Code + SQLTools + PostgreSQL (Northwind DB)',
+      '-- Environment: VS Code + PostgreSQL Explorer + PostgreSQL (Northwind DB)',
       '',
       '-- PRACTICE (5 queries I typed and ran)',
       'SELECT o.order_id, o.order_date, p.product_name, od.quantity, ROUND((od.unit_price * od.quantity)::numeric, 2) AS line_total FROM orders o JOIN order_details od ON o.order_id = od.order_id JOIN products p ON od.product_id = p.product_id ORDER BY o.order_id LIMIT 20;',
@@ -1605,7 +1815,7 @@ const PURPOSE_COLORS = {
 const TOOL_COLORS = {
   'Claude Chat':'#1E3A8A','Claude Code':'#312E81',
   Cowork:'#1E1B4B',NotebookLM:'#4A044E',Gemini:'#1D4ED8','Copilot Pro':'#0078D4','Indeed MCP':'#2164F3',
-  'VS Code':'#0E639C',PostgreSQL:'#336791',SQLTools:'#1F6FEB'
+  'VS Code':'#0E639C',PostgreSQL:'#336791','PostgreSQL Explorer':'#1F6FEB'
 };
 const GAME_COLORS = {
   'Language Lab':'#6D28D9','Technical Labs':'#0369A1',
@@ -1615,6 +1825,197 @@ const PHASE_COLORS = {
   Foundation:'#3B82F6',Applied:'#10B981','Project Build':'#8B5CF6',
   Certification:'#F59E0B',Launch:'#14B8A6'
 };
+
+// ─────────────────────────────────────────────
+// DB REFERENCE SCHEMAS (Group F)
+// ─────────────────────────────────────────────
+const SCHEMA_REGISTRY = {
+  northwind: {
+    name: 'Northwind',
+    tables: [
+      {table:'customers',     cols:[{n:'customer_id',t:'pk'},{n:'company_name'},{n:'country'},{n:'contact_name'},{n:'phone'}], joins:'orders.customer_id'},
+      {table:'orders',        cols:[{n:'order_id',t:'pk'},{n:'customer_id',t:'fk'},{n:'order_date'},{n:'ship_country'},{n:'freight'},{n:'employee_id',t:'fk'}], joins:'customers, order_details, employees'},
+      {table:'order_details', cols:[{n:'order_id',t:'fk'},{n:'product_id',t:'fk'},{n:'quantity'},{n:'unit_price'},{n:'discount'}], joins:'orders, products'},
+      {table:'products',      cols:[{n:'product_id',t:'pk'},{n:'product_name'},{n:'unit_price'},{n:'category_id',t:'fk'},{n:'supplier_id',t:'fk'},{n:'discontinued'}], joins:'order_details, categories, suppliers'},
+      {table:'categories',    cols:[{n:'category_id',t:'pk'},{n:'category_name'}], joins:'products'},
+      {table:'employees',     cols:[{n:'employee_id',t:'pk'},{n:'first_name'},{n:'last_name'}], joins:'orders'},
+      {table:'suppliers',     cols:[{n:'supplier_id',t:'pk'},{n:'company_name'},{n:'country'}], joins:'products'},
+      {table:'shippers',      cols:[{n:'shipper_id',t:'pk'},{n:'company_name'}], joins:'orders.ship_via'}
+    ],
+    note: '<span class="pk">red = primary key</span> · <span class="fk">blue = foreign key</span> · PostgreSQL is case-sensitive for quoted identifiers — use snake_case exactly as shown.'
+  },
+  retail: {
+    name: 'Retail Sales (Kaggle)',
+    tables: [
+      {table:'transactions', cols:[{n:'transaction_id',t:'pk'},{n:'date'},{n:'customer_id'},{n:'gender'},{n:'age'},{n:'product_category'},{n:'quantity'},{n:'price_per_unit'},{n:'total_amount'}], joins:'(single-table dataset — no joins yet)'}
+    ],
+    note: 'Single-table dataset. You created this schema on Day 21 — open <code>day21_retail_schema_import.sql</code> for the CREATE TABLE definitions.'
+  },
+  ag: {
+    name: 'AG Commodities',
+    stub: 'You build this schema on <strong>Day 37</strong> (Power Query import). Schema lives in <code>day37_ag_power_query_schema.pbix</code> and the source CSV (canola, wheat pricing). Open Day 37 lesson notes for column definitions before today\'s validation queries.'
+  },
+  financial: {
+    name: 'Financial Statements',
+    stub: 'You build this star schema on <strong>Day 49</strong>. Schema lives in <code>day49_financial_star_schema.pbix</code> — fact_revenue + dim tables. Open Day 49 lesson notes for the column list before today\'s SQL analysis.'
+  }
+};
+const DAY_SCHEMA = {
+  1:'northwind', 2:'northwind', 3:'northwind', 4:'northwind', 5:'northwind', 6:'northwind', 7:'northwind',
+  21:'retail', 22:'retail', 23:'retail', 30:'retail',
+  42:'ag',
+  47:'financial'
+};
+
+function renderDbReferencePanel(n, d) {
+  if (!d || !d.skills || !d.skills.includes('SQL')) return '';
+  const schemaKey = DAY_SCHEMA[n];
+  if (!schemaKey) return '';
+  const schema = SCHEMA_REGISTRY[schemaKey];
+  if (!schema) return '';
+  const id = 'db-ref-' + n;
+  const openByDefault = (n <= 7); // Days 1-7 open, others closed
+  const openClass = openByDefault ? ' open' : '';
+  let body;
+  if (schema.stub) {
+    body = '<div class="db-ref-stub">' + schema.stub + '</div>';
+  } else {
+    let rows = '';
+    schema.tables.forEach(function(t){
+      const cols = t.cols.map(function(c){
+        const cls = c.t === 'pk' ? 'pk' : (c.t === 'fk' ? 'fk' : '');
+        return cls ? '<span class="' + cls + '">' + c.n + '</span>' : c.n;
+      }).join(', ');
+      rows += '<tr><td class="db-ref-tname">' + t.table + '</td><td class="db-ref-cols">' + cols + '</td><td class="db-ref-joins">' + t.joins + '</td></tr>';
+    });
+    body = '<table class="db-ref-table"><thead><tr><th>Table</th><th>Key columns</th><th>Joins to</th></tr></thead><tbody>' + rows + '</tbody></table>';
+    if (schema.note) body += '<div class="db-ref-note">' + schema.note + '</div>';
+  }
+  const tableCount = schema.tables ? schema.tables.length : 0;
+  const countLabel = tableCount > 0 ? ' (' + tableCount + ' table' + (tableCount===1?'':'s') + ')' : '';
+  return '<div class="db-ref-panel' + openClass + '" id="' + id + '">' +
+    '<div class="db-ref-header" onclick="toggleDbRef(\'' + id + '\')">' +
+      '<span class="db-ref-title">📊 DB Reference — ' + schema.name + countLabel + '</span>' +
+      '<span class="db-ref-toggle">▸</span>' +
+    '</div>' +
+    '<div class="db-ref-body">' + body + '</div>' +
+  '</div>';
+}
+
+function toggleDbRef(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle('open');
+}
+
+// ─────────────────────────────────────────────
+// PILOT PREVIEWS + MNEMONIC OVERRIDES (Groups C + D)
+// ─────────────────────────────────────────────
+const PILOT_PREVIEWS = {
+  '1.p1':    {cols:['company_name'], rows:[['Alfreds Futterkiste'],['Ana Trujillo Emparedados'],['Antonio Moreno Taqueria']], more:88},
+  '1.p2':    {cols:['product_name','unit_price'], rows:[['Chai','18.00'],['Chang','19.00'],['Aniseed Syrup','10.00']], more:74},
+  '1.p3':    {cols:['order_id','customer_id','order_date','...'], rows:[['10248','VINET','1996-07-04','…'],['10249','TOMSP','1996-07-05','…'],['10250','HANAR','1996-07-08','…']], more:7, note:'<code>SELECT *</code> returns 9 more columns (employee_id, ship_country, freight, etc.) — that is why <code>*</code> is risky in production.'},
+  '1.p4':    {cols:['product_name','unit_price'], rows:[['Chai','18.00'],['Chang','19.00'],['Aniseed Syrup','10.00'],['Chef Anton&#39;s Cajun Seasoning','22.00'],['Chef Anton&#39;s Gumbo Mix','21.35']]},
+  '1.p5':    {cols:['order_id','order_date'], rows:[['10248','1996-07-04'],['10249','1996-07-05'],['10250','1996-07-08']]},
+  '1.apply.0': {cols:['order_id','customer_id','order_date'], rows:[['11077','RATTC','1998-05-06'],['11076','BONAP','1998-05-06'],['11075','RICSU','1998-05-06']], note:'Most recent first thanks to <code>ORDER BY order_date DESC</code>.'},
+  '1.apply.1': {cols:['product_name','unit_price'], rows:[['Côte de Blaye','263.50'],['Thüringer Rostbratwurst','123.79'],['Mishi Kobe Niku','97.00'],['Sir Rodney&#39;s Marmalade','81.00'],['Carnarvon Tigers','62.50']], note:'Top 5 by price descending — premium-tier products for the regional push.'},
+  '1.apply.2': {cols:['company_name','contact_name'], rows:[['Alfreds Futterkiste','Maria Anders'],['Ana Trujillo Emparedados','Ana Trujillo'],['Antonio Moreno Taqueria','Antonio Moreno']], more:7, note:'Alphabetical (ASC is the default direction).'},
+
+  '2.p1':    {cols:['company_name','contact_name','country'], rows:[['Alfreds Futterkiste','Maria Anders','Germany'],['Blauer See Delikatessen','Hanna Moos','Germany'],['Drachenblut Delikatessen','Sven Ottlieb','Germany']], more:8},
+  '2.p2':    {cols:['product_name','unit_price'], rows:[['Mishi Kobe Niku','97.00'],['Côte de Blaye','263.50'],['Manjimup Dried Apples','53.00']], more:22},
+  '2.p3':    {cols:['order_id','customer_id','order_date'], rows:[['10400','EASTC','1997-01-01'],['10401','HANAR','1997-01-01'],['10402','ERNSH','1997-01-02']], more:405},
+  '2.p4':    {cols:['product_name','unit_price'], rows:[['Chai','18.00'],['Chang','19.00'],['Aniseed Syrup','10.00']], more:66},
+  '2.p5':    {cols:['product_name','unit_price'], rows:[['Mishi Kobe Niku','97.00'],['Côte de Blaye','263.50'],['Carnarvon Tigers','62.50']], more:25},
+  '2.b2':    {cols:['product_name','unit_price'], rows:[], note:'<strong>0 rows.</strong> Silent failure — NULL never equals NULL. Use <code>IS NULL</code>.'},
+  '2.b3':    {cols:['product_name','unit_price','discontinued'], rows:[['Côte de Blaye','263.50','0'],['Manjimup Dried Apples','53.00','0'],['Chartreuse verte','18.00','1']], more:18, note:'<strong>Silent bug.</strong> Discontinued products leaked in (last row). Wrap <code>(price &gt; 20 OR price &lt; 10)</code> in parentheses before <code>AND discontinued = 0</code>.'},
+  '2.apply.0': {cols:['company_name','contact_name'], rows:[['Blondel père et fils','Frédérique Citeaux'],['Bon app&#39;','Laurence Lebihan'],['Du monde entier','Janine Labrune']], more:8},
+  '2.apply.1': {cols:['order_id','customer_id','order_date','freight'], rows:[['10691','QUICK','1997-10-03','810.05'],['10540','QUICK','1997-05-19','1007.64'],['10745','QUICK','1997-11-24','142.33']], more:25, note:'Sorted by freight DESC — the biggest year-end shipments first. Notice QUICK-Stop dominates premium freight.'},
+  '2.apply.2': {cols:['product_name','units_in_stock','discontinued'], rows:[['Chef Anton&#39;s Cajun Seasoning','53','1'],['Chef Anton&#39;s Gumbo Mix','0','1'],['Mishi Kobe Niku','29','1']], more:5, note:'OR catches both red flags — discontinued items AND zero-stock items appear in one report.'},
+
+  '3.p1':    {cols:['company_name','contact_name'], rows:[['Alfreds Futterkiste','Maria Anders'],['Ana Trujillo Emparedados','Ana Trujillo'],['Antonio Moreno Taqueria','Antonio Moreno']], more:1},
+  '3.p2':    {cols:['company_name','country'], rows:[['Alfreds Futterkiste','Germany'],['Blondel père et fils','France'],['Comércio Mineiro','Brazil']], more:27},
+  '3.p3':    {cols:['product_name','unit_price'], rows:[['Aniseed Syrup','10.00'],['Chai','18.00'],['Chang','19.00']], more:26},
+  '3.p4':    {cols:['company_name','country'], rows:[['Ana Trujillo Emparedados','Mexico'],['Antonio Moreno Taqueria','Mexico'],['Berglunds snabbköp','Sweden']], more:75},
+  '3.p5':    {cols:['product_name','unit_price'], rows:[['Chai','18.00'],['Chartreuse verte','18.00']], more:1},
+  '3.b1':    {cols:['company_name'], rows:[], note:'<strong>0 rows.</strong> <code>LIKE &#39;A&#39;</code> without a wildcard is exact match — no company is named just "A". Use <code>LIKE &#39;A%&#39;</code>.'},
+  '3.b2':    {cols:['order_id'], rows:[], note:'<strong>0 rows.</strong> <code>BETWEEN low AND high</code> — low must come first. Swapped silently returns nothing.'},
+  '3.apply.0': {cols:['order_id','ship_country','order_date'], rows:[['10544','Brazil','1997-05-21'],['10546','Brazil','1997-05-23'],['10567','Argentina','1997-07-23']], more:25},
+  '3.apply.1': {cols:['company_name','country'], rows:[['Alfreds Futterkiste','Germany'],['Ana Trujillo Emparedados','Mexico'],['Antonio Moreno Taqueria','Mexico']], more:25, note:'Vowel-start customers, alphabetical. Distribution check input — auditors look for clustering.'},
+  '3.apply.2': {cols:['product_name','unit_price'], rows:[['Boston Crab Meat','18.40']], note:'Northwind has limited seafood in the $15–40 range — query correctness, not row volume, is the test here. The parens are what make this query work.'},
+
+  '4.p1':    {cols:['total_orders'], rows:[['830']], note:'One row, one number. That is what aggregation does — collapses the entire table.'},
+  '4.p2':    {cols:['total_freight'], rows:[['64942.69']]},
+  '4.p3':    {cols:['avg_price'], rows:[['28.87']]},
+  '4.p4':    {cols:['cheapest','most_expensive'], rows:[['2.50','263.50']], note:'Geitost (cheap dairy) to Côte de Blaye (premium wine). Two aggregates in one row.'},
+  '4.p5':    {cols:['order_count','total_freight','avg_freight'], rows:[['830','64942.69','78.24']]},
+  '4.b1':    {cols:['total','has_region'], rows:[['91','31']], note:'<strong>NULL trap.</strong> COUNT(*) = 91 (every customer). COUNT(region) = 31 (only customers with non-NULL region). The 60-row gap is the silent bug.'},
+  '4.apply.0': {cols:['total_orders','total_freight','avg_freight_per_order'], rows:[['830','64942.69','78.24']], note:'Three KPIs in one query — the skeleton of every executive summary.'},
+  '4.apply.1': {cols:['cheapest','most_expensive'], rows:[['2.50','263.50']], note:'Geitost (cheap dairy) to Côte de Blaye (premium wine). Two MIN/MAX aggregates in one row.'},
+  '4.apply.2': {cols:['total','has_region'], rows:[['91','31']], note:'<strong>The data-quality story.</strong> 60-row gap between total customers and customers-with-region — that is the audit-committee headline.'},
+
+  '5.p1':    {cols:['country','customer_count'], rows:[['USA','13'],['Germany','11'],['France','11']], more:18},
+  '5.p2':    {cols:['ship_country','total_freight'], rows:[['USA','14087.65'],['Germany','12381.27'],['Austria','9011.21']], more:18},
+  '5.p3':    {cols:['category_id','avg_price','product_count'], rows:[['6','54.01','6'],['8','20.68','12'],['4','28.73','10']], more:5},
+  '5.p4':    {cols:['ship_country','order_count'], rows:[['USA','122'],['Germany','122'],['Brazil','82']], more:7},
+  '5.p5':    {cols:['ship_country','avg_freight','order_count'], rows:[['Austria','187.74','40'],['USA','115.47','122'],['Switzerland','96.83','18']], more:4},
+  '5.apply.0': {cols:['ship_country','order_count'], rows:[['USA','122'],['Germany','122'],['Brazil','82']], more:2, note:'Pure GROUP BY + ORDER BY + LIMIT — no HAVING needed for a clean top-N.'},
+  '5.apply.1': {cols:['ship_country','avg_freight','order_count'], rows:[['Austria','187.74','40'],['Switzerland','96.83','18'],['Sweden','74.42','37']], more:3, note:'Two HAVING conditions filter out the noisy countries — VP gets a clean prioritized list.'},
+  '5.apply.2': {cols:['category_id','avg_price','product_count'], rows:[['6','54.01','6'],['1','37.98','12'],['8','20.68','12']], more:0, note:'Categories above $30 average — premium pricing tiers surface clearly.'},
+
+  '6.p1':    {cols:['company_name','order_id','order_date'], rows:[['Rattlesnake Canyon Grocery','11077','1998-05-06'],['Bottom-Dollar Markets','11076','1998-05-06'],['Richter Supermarkt','11075','1998-05-06']], more:12},
+  '6.p2':    {cols:['company_name','contact_name','order_id'], rows:[['FISSA Fabrica Inter Salchichas','Diego Roel','NULL'],['Paris spécialités','Marie Bertrand','NULL']], note:'Both customers exist but never ordered. INNER JOIN would have hidden them entirely.'},
+  '6.p3':    {cols:['product_name','category_name','unit_price'], rows:[['Aniseed Syrup','Condiments','10.00'],['Chai','Beverages','18.00'],['Chang','Beverages','19.00']], more:74},
+  '6.p4':    {cols:['order_id','product_name','unit_price','quantity'], rows:[['10248','Queso Cabrales','14.00','12'],['10248','Singaporean Hokkien Mee','9.80','5'],['10248','Mozzarella di Giovanni','34.80','5']], more:12},
+  '6.p5':    {cols:['company_name','order_count'], rows:[['Save-a-lot Markets','31'],['Ernst Handel','30'],['QUICK-Stop','28']], more:88, note:'FISSA and Paris spécialités appear at the bottom with 0 — LEFT JOIN kept them visible.'},
+  '6.b3':    {cols:['company_name','order_id'], rows:[['Around the Horn','10248'],['Berglunds snabbköp','10249'],['Centro comercial Moctezuma','10250']], more:'?', note:'<strong>Looks plausible. Completely wrong.</strong> Customer "Around the Horn" did not place order 10248 — the JOIN was on <code>employee_id</code> by mistake. Most dangerous JOIN bug because there is no error.'},
+  '6.apply.0': {cols:['company_name','contact_name','phone'], rows:[['FISSA Fabrica Inter Salchichas','Diego Roel','(91) 555 94 44'],['Paris spécialités','Marie Bertrand','(1) 42.34.22.66']], note:'Two customers identified for outreach — concrete revenue opportunity in one query.'},
+  '6.apply.1': {cols:['company_name','order_count'], rows:[['Save-a-lot Markets','31'],['Ernst Handel','30'],['QUICK-Stop','28']], more:7, note:'Top 10 by activity — the VIP list. INNER JOIN excludes the dormant ones automatically.'},
+  '6.apply.2': {cols:['product_name','unit_price'], rows:[], note:'<strong>Northwind has no never-sold products.</strong> Real-world result: every product has at least one order line. Same query against your company\'s catalog would expose dead inventory immediately.'},
+
+  '7.p1':    {cols:['order_id','order_date','product_name','quantity','line_total'], rows:[['10248','1996-07-04','Queso Cabrales','12','168.00'],['10248','1996-07-04','Singaporean Hokkien Mee','5','49.00'],['10248','1996-07-04','Mozzarella di Giovanni','5','174.00']], more:17},
+  '7.p2':    {cols:['category_name','total_revenue'], rows:[['Beverages','286526.95'],['Dairy Products','234506.55'],['Confections','177099.10']], more:5},
+  '7.p3':    {cols:['company_name','order_id','order_date','items_ordered'], rows:[['Rattlesnake Canyon Grocery','11077','1998-05-06','25'],['Bottom-Dollar Markets','11076','1998-05-06','3'],['Richter Supermarkt','11075','1998-05-06','3']], more:12},
+  '7.p4':    {cols:['product_name','category_name','total_revenue','units_sold'], rows:[['Côte de Blaye','Beverages','141396.74','623'],['Thüringer Rostbratwurst','Meat-Poultry','80368.67','746'],['Raclette Courdavault','Dairy Products','71155.70','1496']], more:7},
+  '7.p5':    {cols:['employee_name','order_count','unique_customers'], rows:[['Margaret Peacock','156','76'],['Janet Leverling','127','72'],['Nancy Davolio','123','66']], more:6},
+  '7.b2':    {cols:['order_id','product_name','quantity'], rows:[['10248','Queso Cabrales','12'],['10248','Singaporean Hokkien','5'],['10248','Mozzarella di Giovanni','5']], more:'~137,000,000', note:'<strong>Cartesian product disaster.</strong> LIMIT 10 hides it: 830 × 2,155 × 77 ≈ 137 million junk rows. Without LIMIT this would crash a real production server.'},
+  '7.apply.0': {cols:['category_name','total_revenue','order_count'], rows:[['Beverages','286526.95','404'],['Dairy Products','234506.55','366'],['Confections','177099.10','334']], more:5, note:'Three tables, two aggregates, grouped and sorted — production-ready category performance report.'},
+  '7.apply.1': {cols:['employee_name','order_count','total_revenue'], rows:[['Margaret Peacock','156','250187.45'],['Janet Leverling','127','213051.30'],['Nancy Davolio','123','202812.84']], more:6, note:'Three tables, two aggregates, ORDER BY revenue DESC — the employee-performance dashboard core query.'},
+  '7.apply.2': {cols:['company_name','total_revenue','unique_products'], rows:[['QUICK-Stop','110277.31','58'],['Ernst Handel','104874.98','62'],['Save-a-lot Markets','104361.95','60']], more:2, note:'Customer concentration risk in one query. If top 5 = 60% of revenue, that is a board-level conversation.'},
+};
+
+const PILOT_TEACH_OVERRIDES = {
+  // Day 1 lives in PILOT_DATA (set in Batch 1)
+  2: '<strong>WHERE = the bouncer.</strong> Rows must pass the test BEFORE they get past the door. Text values get single quotes. NULL gets <code>IS NULL</code>, never <code>= NULL</code>. Wrap mixed AND/OR in parentheses or precedence will burn you silently.',
+  3: '<strong>Pattern — List — Range.</strong> LIKE matches a pattern with % wildcards. IN tests a list (cleaner than chained ORs). BETWEEN sets a range (inclusive on both ends). All three replace ugly OR chains with one readable line.',
+  4: '<strong>Crush many into one.</strong> COUNT, SUM, AVG, MIN, MAX collapse a column into a single number. Always alias with <code>AS</code> — your stakeholder reads the column name. Watch the NULL trap: COUNT(*) counts rows; COUNT(column) skips NULLs.',
+  5: '<strong>Group, then filter the groups.</strong> GROUP BY collapses rows by category. HAVING is WHERE for groups — it runs AFTER aggregation. WHERE filters rows, HAVING filters groups. That distinction is the most-asked SQL interview question.',
+  6: '<strong>Inner = both. Left = keep left.</strong> INNER JOIN keeps only matching rows. LEFT JOIN keeps every row from the left even if the right is missing. To find the missing ones: LEFT JOIN + <code>WHERE right_id IS NULL</code>.',
+  7: '<strong>Chain through the keys.</strong> Three or four tables connect via foreign keys, each JOIN with its own ON clause. Use short aliases (c, o, od, p). Millions of rows = you forgot an ON — that is a cartesian product.'
+};
+
+function renderPreview(p) {
+  if (!p) return '';
+  const colCount = (p.cols && p.cols.length) || 1;
+  let html = '<div class="qry-preview-label">Expected output</div><div class="qry-preview"><table>';
+  if (p.cols && p.cols.length) {
+    html += '<tr>' + p.cols.map(function(c){return '<th>' + c + '</th>';}).join('') + '</tr>';
+  }
+  if (p.rows && p.rows.length) {
+    p.rows.forEach(function(r){
+      html += '<tr>' + r.map(function(v){return '<td>' + v + '</td>';}).join('') + '</tr>';
+    });
+  } else {
+    html += '<tr><td class="muted" colspan="' + colCount + '">(no rows returned)</td></tr>';
+  }
+  if (p.more && p.more !== 0) {
+    const moreLabel = (typeof p.more === 'number') ? ('… ' + p.more + ' more row' + (p.more === 1 ? '' : 's')) : ('… ' + p.more + ' rows total');
+    html += '<tr><td class="muted" colspan="' + colCount + '">' + moreLabel + '</td></tr>';
+  }
+  html += '</table></div>';
+  if (p.note) {
+    html += '<div class="qry-preview-note">' + p.note + '</div>';
+  }
+  return html;
+}
 
 // ─────────────────────────────────────────────
 // STATE
@@ -2074,6 +2475,9 @@ function selectDay(n) {
       <div style="margin-top:10px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:#1E40AF;margin-bottom:3px">🏢 SK Employer Connection</div>
       <div style="font-size:12px;color:#1E3A8A;line-height:1.5">${d.company_connection||'—'}</div>
     </div>
+
+    <!-- DB Reference panel (Group F) — renders on SQL days only, no-op otherwise -->
+    ${renderDbReferencePanel(n, d)}
 
     <!-- ═══ STEP GUIDE — flat, no toggles ════════════════════════ -->
     <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--gray-400);margin-bottom:12px;display:flex;align-items:center;gap:8px">
@@ -3970,6 +4374,7 @@ function renderPilotGuide(n, d, cols, isComplete) {
     html += '<button class="practice-btn primary" onclick="copyTextValue(\'' + pq.query.replace(/'/g,"\\'") + '\',this)">📋 Copy query</button>';
     html += '</div>';
     html += '<div class="practice-card-hint">' + pomoEscape(pq.hint) + '</div>';
+    html += renderPreview(PILOT_PREVIEWS[n + '.' + pq.id]);
     html += '</div>';
   });
   html += '</div></div>';
@@ -3990,25 +4395,58 @@ function renderPilotGuide(n, d, cols, isComplete) {
     html += '<div class="break-card-reality">' + b.reality + '</div>';
     html += '<div class="break-card-fix">' + pomoEscape(b.fix) + '</div>';
     html += '<div class="break-card-lesson"><strong>Lesson:</strong> ' + pomoEscape(b.lesson) + '</div>';
+    html += renderPreview(PILOT_PREVIEWS[n + '.' + b.id]);
     html += '</div>';
   });
   html += '</div></div>';
 
-  // Step 4 — APPLY IT
+  // Step 4 — APPLY IT (supports new asks[] shape and legacy single-ask shape)
   html += '<div class="pilot-step">';
-  html += pilotHdr(4, cols[3], 'Apply it — real stakeholder ask', '30m');
+  const stepTitle = (p.apply_it && p.apply_it.asks && p.apply_it.asks.length > 1)
+    ? 'Apply it — real stakeholder asks'
+    : 'Apply it — real stakeholder ask';
+  html += pilotHdr(4, cols[3], stepTitle, '30m');
   html += '<div class="pilot-step-body">';
-  html += '<div class="apply-card">';
-  html += '<div class="apply-scenario">' + p.apply_it.scenario + '</div>';
-  html += '<div class="apply-know">' + p.apply_it.what_you_know + '</div>';
-  html += '<div class="apply-reveals">';
-  html += '<button class="practice-btn" onclick="toggleApply(\'h\')">💡 Hint</button>';
-  html += '<button class="practice-btn" onclick="toggleApply(\'s\')">🔑 Reveal solution</button>';
-  html += '</div>';
-  html += '<div class="apply-hint">' + pomoEscape(p.apply_it.hint) + '</div>';
-  html += '<div class="apply-solution">' + pomoEscape(p.apply_it.solution) + '</div>';
-  html += '<div class="apply-stretch"><strong>Why this matters:</strong> ' + pomoEscape(p.apply_it.stretch) + '</div>';
-  html += '</div>';
+
+  // Build a unified asks array (legacy shape gets wrapped to a 1-element array)
+  const askList = (p.apply_it && p.apply_it.asks)
+    ? p.apply_it.asks
+    : [{
+        scenario: p.apply_it.scenario,
+        why: '',
+        what_you_know: p.apply_it.what_you_know,
+        hint: p.apply_it.hint,
+        solution: p.apply_it.solution,
+        stretch: p.apply_it.stretch
+      }];
+
+  // Optional thread/business-context preface (only present in new shape)
+  if (p.apply_it && p.apply_it.thread) {
+    html += '<div class="apply-thread">' + p.apply_it.thread + '</div>';
+  }
+
+  askList.forEach(function(ask, idx){
+    const cardId = 'apply-' + n + '-' + idx;
+    const previewKey = (p.apply_it && p.apply_it.asks)
+      ? (n + '.apply.' + idx)
+      : (n + '.apply');
+    html += '<div class="apply-card" id="' + cardId + '">';
+    html += '<div class="apply-scenario">' + ask.scenario + '</div>';
+    if (ask.why) {
+      html += '<div class="apply-why"><strong>Why this ask:</strong> ' + ask.why + '</div>';
+    }
+    html += '<div class="apply-know">' + ask.what_you_know + '</div>';
+    html += '<div class="apply-reveals">';
+    html += '<button class="practice-btn" onclick="toggleApplyCard(\'' + cardId + '\',\'h\')">💡 Hint</button>';
+    html += '<button class="practice-btn" onclick="toggleApplyCard(\'' + cardId + '\',\'s\')">🔑 Reveal solution</button>';
+    html += '</div>';
+    html += '<div class="apply-hint">' + pomoEscape(ask.hint) + '</div>';
+    html += '<div class="apply-solution">' + pomoEscape(ask.solution) + '</div>';
+    html += '<div class="apply-stretch"><strong>Why this matters:</strong> ' + pomoEscape(ask.stretch) + '</div>';
+    html += renderPreview(PILOT_PREVIEWS[previewKey]);
+    html += '</div>';
+  });
+
   html += '</div></div>';
 
   // Step 5 — COMMIT IT
@@ -4034,7 +4472,8 @@ function renderPilotGuide(n, d, cols, isComplete) {
   html += pilotHdr(6, cols[4], 'Teach it — say it aloud', '15m');
   html += '<div class="pilot-step-body">';
   html += '<div class="pilot-intro">Close your editor. Say this out loud twice, no notes. If it feels awkward, go back to Step 3 and break more queries until it doesn\'t.</div>';
-  html += '<div style="background:rgba(15,158,94,.08);border-left:3px solid var(--green);padding:12px 14px;border-radius:0 var(--radius) var(--radius) 0;font-size:13.5px;color:var(--green-dark);font-style:italic;line-height:1.6;margin-bottom:10px">"' + pomoEscape(p.teach_it.say_aloud) + '"</div>';
+  const teachText = PILOT_TEACH_OVERRIDES[n] || p.teach_it.say_aloud;
+  html += '<div style="background:rgba(15,158,94,.08);border-left:3px solid var(--green);padding:12px 14px;border-radius:0 var(--radius) var(--radius) 0;font-size:13.5px;color:var(--green-dark);font-style:italic;line-height:1.6;margin-bottom:10px">"' + teachText + '"</div>';
   html += '<div class="apply-know">' + pomoEscape(p.teach_it.record_prompt) + '</div>';
   html += '</div></div>';
 
@@ -4080,6 +4519,10 @@ function toggleApply(which) {
   cards.forEach(function(c){
     c.classList.toggle(which === 'h' ? 'h-shown' : 's-shown');
   });
+}
+function toggleApplyCard(cardId, which) {
+  const card = document.getElementById(cardId);
+  if (card) card.classList.toggle(which === 'h' ? 'h-shown' : 's-shown');
 }
 function copyTextValue(text, btn) {
   // Copy a literal string (not from an element)
