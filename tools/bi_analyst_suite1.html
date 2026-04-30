@@ -1296,16 +1296,14 @@ function buildStudyCards(stageFilter){
   const addQ=(q,stageName)=>{
     if(!q.card)return;
     const label=q.sub||stageName;
-    const titleKey=q.q?q.q.replace(/<[^>]+>/g,'').slice(0,70):q.scenario?q.scenario.slice(0,70):'Concept';
-    const titleFull=q.q?q.q.replace(/<[^>]+>/g,''):q.scenario?q.scenario:'Concept';
-    all.push({key:stageName+'|'+titleKey,stage:stageName,sub:label,title:titleFull,card:q.card,ctx:q.ctx||'',tool:q.tool||''});
+    const title=q.q?q.q.replace(/<[^>]+>/g,'').slice(0,70):q.scenario?q.scenario.slice(0,70):'Concept';
+    all.push({key:stageName+'|'+title,stage:stageName,sub:label,title,card:q.card,ctx:q.ctx||'',tool:q.tool||''});
   };
   const addStep=(step,sc,stageName)=>{
     if(!step.card)return;
     const label=sc.sub||stageName;
-    const titleKey=(sc.scenario||'').slice(0,60)+' — '+step.q.slice(0,40);
-    const titleFull=(sc.scenario||'')+' — '+step.q;
-    all.push({key:stageName+'|'+titleKey,stage:stageName,sub:label,title:titleFull,card:step.card,ctx:'',tool:''});
+    const title=(sc.scenario||'').slice(0,60)+' — '+step.q.slice(0,40);
+    all.push({key:stageName+'|'+title,stage:stageName,sub:label,title,card:step.card,ctx:'',tool:''});
   };
   if(stageFilter==='all'||stageFilter==='vocab') VOCAB_Q.forEach(q=>addQ(q,'vocab'));
   if(stageFilter==='all'||stageFilter==='tech')  TECH_Q.forEach(q=>addQ(q,'tech'));
