@@ -122,6 +122,54 @@ textarea:focus{border-color:var(--blue)}
 .nav-icon{font-size:18px}
 @keyframes slideUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 .g-body>*{animation:slideUp .18s ease forwards}
+
+/* ═══ SUITE FAQ / HELP SYSTEM ═════════════════════════════════════════ */
+.s-faq-fab{position:fixed;right:14px;bottom:78px;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,#7C3AED 0%,#5B21B6 100%);color:#fff;border:none;cursor:pointer;box-shadow:0 4px 12px rgba(124,58,237,.4),0 1px 3px rgba(0,0,0,.12);font-size:21px;font-weight:700;z-index:60;transition:.15s;display:flex;align-items:center;justify-content:center;font-family:var(--font)}
+.s-faq-fab:hover{transform:scale(1.07);box-shadow:0 6px 16px rgba(124,58,237,.5)}
+.s-faq-fab:active{transform:scale(.96)}
+
+.s-faq-bg{position:fixed;inset:0;background:rgba(0,0,0,.62);display:none;z-index:200;align-items:flex-start;justify-content:center;padding:16px 10px;overflow-y:auto}
+.s-faq-bg.open{display:flex}
+.s-faq{background:var(--surface);border-radius:var(--r);max-width:640px;width:100%;box-shadow:0 20px 60px rgba(0,0,0,.3);max-height:90vh;display:flex;flex-direction:column;overflow:hidden}
+.s-faq-hdr{display:flex;align-items:center;gap:10px;padding:14px 16px;border-bottom:1px solid var(--border);background:linear-gradient(135deg,#5B21B6 0%,#7C3AED 100%);color:#fff;flex-shrink:0}
+.s-faq-hdr-icon{font-size:20px}
+.s-faq-hdr-title{font-size:15px;font-weight:700;flex:1;line-height:1.3;font-family:var(--font)}
+.s-faq-hdr-sub{font-size:10px;color:rgba(255,255,255,.7);margin-top:1px;font-family:var(--mono);letter-spacing:.5px}
+.s-faq-close{background:rgba(255,255,255,.18);border:none;color:#fff;font-size:17px;cursor:pointer;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:.12s}
+.s-faq-close:hover{background:rgba(255,255,255,.28)}
+
+.s-faq-tabs{display:flex;gap:0;border-bottom:1px solid var(--border);overflow-x:auto;flex-shrink:0;background:var(--surface2)}
+.s-faq-tab{background:transparent;border:none;font-size:11.5px;font-weight:600;color:var(--muted);padding:10px 13px;cursor:pointer;border-bottom:2px solid transparent;transition:.15s;white-space:nowrap;font-family:var(--font)}
+.s-faq-tab:hover{color:var(--text);background:var(--border)}
+.s-faq-tab.active{color:var(--purple);border-bottom-color:var(--purple);background:var(--surface)}
+
+.s-faq-body{padding:18px 18px 22px;overflow-y:auto;flex:1;line-height:1.6}
+.s-faq-pane{display:none}
+.s-faq-pane.active{display:block}
+.s-faq-pane h3{font-size:14px;font-weight:700;color:var(--text);margin:0 0 8px;line-height:1.3;font-family:var(--font)}
+.s-faq-pane h4{font-size:12.5px;font-weight:700;color:var(--text);margin:14px 0 5px;line-height:1.3;font-family:var(--font)}
+.s-faq-pane p{font-size:13px;color:#374151;margin:0 0 9px;line-height:1.6}
+.s-faq-pane strong{color:var(--text);font-weight:700}
+.s-faq-pane em{color:var(--muted);font-style:italic}
+.s-faq-pane ul, .s-faq-pane ol{margin:0 0 10px;padding-left:20px;font-size:13px;color:#374151}
+.s-faq-pane li{margin-bottom:4px;line-height:1.55}
+.s-faq-pane code{background:var(--surface2);padding:1px 5px;border-radius:3px;font-family:var(--mono);font-size:11.5px;color:var(--text)}
+
+.s-faq-callout{background:var(--blue-bg);border:1px solid var(--blue-b);border-left:3px solid var(--blue);border-radius:var(--rs);padding:10px 12px;margin:9px 0;font-size:12px;color:#1E3A8A;line-height:1.55}
+.s-faq-callout.warn{background:var(--yellow-bg);border-color:var(--yellow-b);border-left-color:var(--yellow);color:#78350F}
+.s-faq-callout.win{background:var(--green-bg);border-color:var(--green-b);border-left-color:var(--green);color:var(--green-dark)}
+.s-faq-callout strong{font-weight:700}
+
+.s-faq-table{width:100%;border-collapse:collapse;font-size:12px;margin:6px 0 12px}
+.s-faq-table th{background:var(--surface2);text-align:left;padding:6px 9px;font-weight:700;color:#374151;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;border-bottom:2px solid var(--border)}
+.s-faq-table td{padding:6px 9px;border-bottom:1px solid var(--border);color:#374151;vertical-align:top;line-height:1.5}
+.s-faq-table td:first-child{font-weight:600;color:var(--text);white-space:nowrap}
+
+.s-faq-step{display:flex;gap:10px;align-items:flex-start;padding:9px 11px;background:var(--surface2);border-radius:var(--rs);margin-bottom:7px}
+.s-faq-step-num{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:var(--purple);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;font-family:var(--mono)}
+.s-faq-step-body{flex:1;font-size:12px;color:#374151;line-height:1.55}
+.s-faq-step-body strong{display:block;color:var(--text);margin-bottom:1px}
+
 </style>
 </head>
 <body>
@@ -161,6 +209,15 @@ textarea:focus{border-color:var(--blue)}
       <div style="display:flex;gap:8px;flex-wrap:wrap">
         <button onclick="startTodayDrill()" style="padding:9px 16px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:var(--rs);font-family:var(--font);font-size:12px;font-weight:700;cursor:pointer" id="tb-drill-btn">🎯 Start Today's Drill →</button>
         <a href="" id="tb-dashboard-link" target="_blank" rel="noopener" style="padding:9px 16px;background:none;color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.2);border-radius:var(--rs);font-family:var(--mono);font-size:11px;text-decoration:none;display:inline-flex;align-items:center">← Back to Day Plan</a>
+      </div>
+    </div>
+    <!-- DRILL MODE BANNER (Batch 9 — from Weak Concept Radar) -->
+    <div id="drill-banner" style="display:none;background:linear-gradient(135deg,#7F1D1D 0%,#DC2626 100%);border-radius:var(--r);padding:14px 16px;margin-bottom:14px;color:#fff">
+      <div style="font-family:var(--mono);font-size:9px;letter-spacing:2px;color:rgba(255,255,255,.6);margin-bottom:4px">🎯 DRILL MODE — WEAK CONCEPT FOCUS</div>
+      <div style="font-family:var(--font);font-size:16px;font-weight:700;margin-bottom:4px" id="drill-banner-concept">—</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.85);margin-bottom:8px;line-height:1.5" id="drill-banner-detail">Next stage you start will only include questions on this concept.</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap">
+        <button onclick="clearDrillConcept()" style="padding:9px 16px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.3);border-radius:var(--rs);font-family:var(--font);font-size:12px;font-weight:700;cursor:pointer">✕ Exit Drill Mode</button>
       </div>
     </div>
     <div id="weak-card" class="weak-card" style="display:none">
@@ -1205,6 +1262,119 @@ const STORAGE_KEY = 'bi3';
 const VISITED_KEY = 'bi3_v';
 const DASHBOARD_URL = 'https://jeweljohngapuz-arch.github.io/data-analytics-bootcamp/jewel_analytics_dashboard.html';
 
+// ──────────────────────────────────────────────────────────
+// WEAK CONCEPT TRACKING (Batch 9) — shared with dashboard
+// ──────────────────────────────────────────────────────────
+const SHARED_WEAK_KEY  = 'jewel_weak_concepts_v1';
+const SHARED_DRILL_KEY = 'jewel_drill_concept';
+
+const SUITE_CONCEPT_KEYWORDS = [
+  { concept: 'JOIN logic',              patterns: [/\bINNER\s+JOIN\b/i, /\bLEFT\s+JOIN\b/i, /\bRIGHT\s+JOIN\b/i, /multi-?table join/i, /foreign key/i, /\bJOIN\b/i] },
+  { concept: 'NULL handling',           patterns: [/\bIS\s+NULL\b/i, /\bIS\s+NOT\s+NULL\b/i, /NULL value/i, /\bNULL\b/i] },
+  { concept: 'Window functions',        patterns: [/window function/i, /\bOVER\s*\(/i, /PARTITION\s+BY/i, /\bRANK\s*\(/i, /running total/i, /\bLAG\s*\(/i, /\bLEAD\s*\(/i] },
+  { concept: 'GROUP BY / aggregation',  patterns: [/\bGROUP\s+BY\b/i, /\bHAVING\b/i, /aggregat/i, /\bgrain\b/i, /\bCOUNT\s*\(/i, /\bAVG\s*\(/i] },
+  { concept: 'WHERE / filtering',       patterns: [/\bWHERE\b/i, /\bfilter\b/i, /\bpredicate\b/i] },
+  { concept: 'SQL SELECT basics',       patterns: [/\bSELECT\b/i, /\bFROM\b/i, /\bORDER\s+BY\b/i, /\bLIMIT\b/i, /\bDISTINCT\b/i] },
+  { concept: 'DAX filter context',      patterns: [/CALCULATE/i, /filter context/i, /context transition/i, /SAMEPERIOD/i, /\bRELATED\s*\(/i] },
+  { concept: 'DAX measures',            patterns: [/\bDAX\b/i, /\bmeasure\b/i, /\bSUMX\b/i, /\bDIVIDE\s*\(/i, /calculated column/i] },
+  { concept: 'Data modeling / star schema', patterns: [/star schema/i, /\bfact table/i, /dimension table/i, /\bdim_\w/i, /\bfact_\w/i, /snowflake/i] },
+  { concept: 'Relationships / cardinality', patterns: [/cardinality/i, /one-to-many/i, /many-to-many/i, /bridge table/i, /\brelationship/i] },
+  { concept: 'Power Query / data cleaning', patterns: [/Power Query/i, /Applied Steps/i, /\bM code\b/i, /unpivot/i, /merge quer/i, /append/i, /transform/i] },
+  { concept: 'Excel formulas',          patterns: [/\bVLOOKUP\b/i, /\bXLOOKUP\b/i, /\bINDEX-?MATCH\b/i, /Excel formula/i] },
+  { concept: 'Pivot tables / slicers',  patterns: [/PivotTable/i, /\bpivot table\b/i, /\bslicer\b/i, /\bsync slicer\b/i] },
+  { concept: 'Dashboard UX / visuals',  patterns: [/dashboard UX/i, /dashboard design/i, /chart type/i, /KPI card/i, /\bvisual\b/i, /\btheme\b/i, /\bbar chart\b/i, /\bline chart\b/i] },
+  { concept: 'Stakeholder communication', patterns: [/stakeholder/i, /non-technical/i, /executive/i, /business user/i, /\bplain English\b/i] },
+  { concept: 'Business insight writing', patterns: [/\binsight\b/i, /\brecommend/i, /\bfinding\b/i, /SO\s+WHAT/i, /implication/i] },
+  { concept: 'Interview / STAR',        patterns: [/\bSTAR\b/i, /\binterview\b/i, /walkthrough/i, /\bmock\b/i] },
+  { concept: 'Data quality / validation', patterns: [/data quality/i, /\bvalidate/i, /\bdiscrepancy/i, /double-count/i, /\boutlier/i, /\bIQR\b/i, /reconcile/i] },
+  { concept: 'Git / portfolio practices', patterns: [/\bGit\b/i, /\bGitHub\b/i, /\.gitignore/i, /portfolio/i, /file naming/i, /ISO date/i, /README/i] },
+  { concept: 'ETL / data pipeline',     patterns: [/\bETL\b/i, /extract.*transform.*load/i, /\bpipeline\b/i, /data refresh/i]  }
+];
+
+function classifyConcept(q) {
+  if (!q) return 'Other';
+  const text = ((q.q || '') + ' ' + (q.sub || '') + ' ' + (q.scenario || '') + ' ' + (q.ctx || '') + ' ' + (q.tool || '')).toString();
+  for (const c of SUITE_CONCEPT_KEYWORDS) {
+    for (const p of c.patterns) {
+      if (p.test(text)) return c.concept;
+    }
+  }
+  return 'Other';
+}
+
+function logConceptAttempt(q, ok) {
+  if (!q) return;
+  const concept = classifyConcept(q);
+  let data;
+  try {
+    const raw = localStorage.getItem(SHARED_WEAK_KEY);
+    data = raw ? JSON.parse(raw) : { concepts: {}, total_misses: 0, total_attempts: 0 };
+  } catch(e) {
+    data = { concepts: {}, total_misses: 0, total_attempts: 0 };
+  }
+  if (!data.concepts) data.concepts = {};
+  if (!data.concepts[concept]) {
+    data.concepts[concept] = { miss_count: 0, attempts: 0, last_missed: null, sample_question: '', sample_card: null, tool: '' };
+  }
+  const c = data.concepts[concept];
+  c.attempts = (c.attempts||0) + 1;
+  if (!ok) {
+    c.miss_count = (c.miss_count||0) + 1;
+    c.last_missed = new Date().toISOString();
+    c.sample_question = (q.q || q.scenario || '').slice(0, 200);
+    c.sample_card = q.card || null;
+    c.tool = q.tool || '';
+    data.total_misses = (data.total_misses||0) + 1;
+  }
+  data.total_attempts = (data.total_attempts||0) + 1;
+  data.last_updated = new Date().toISOString();
+  try { localStorage.setItem(SHARED_WEAK_KEY, JSON.stringify(data)); } catch(e) {}
+}
+
+// Drill mode — dashboard sets jewel_drill_concept; Suite reads on load + filters queue
+let _drillConcept = null;
+
+function loadDrillConcept() {
+  try {
+    _drillConcept = localStorage.getItem(SHARED_DRILL_KEY) || null;
+  } catch(e) { _drillConcept = null; }
+}
+
+function clearDrillConcept() {
+  _drillConcept = null;
+  try { localStorage.removeItem(SHARED_DRILL_KEY); } catch(e) {}
+  renderDrillBanner();
+  updateHome();
+}
+
+function renderDrillBanner() {
+  const banner = document.getElementById('drill-banner');
+  if (!banner) return;
+  if (_drillConcept) {
+    banner.style.display = 'block';
+    const c = document.getElementById('drill-banner-concept');
+    const d = document.getElementById('drill-banner-detail');
+    if (c) c.textContent = _drillConcept;
+    if (d) {
+      // Count how many questions match this concept across all stages
+      let cnt = 0;
+      try {
+        const allQ = [].concat(VOCAB_Q||[], TECH_Q||[], INTERVIEW_Q||[]);
+        cnt = allQ.filter(q => classifyConcept(q) === _drillConcept).length;
+      } catch(e) {}
+      d.textContent = `${cnt} ${cnt===1?'question matches':'questions match'} this concept across all stages. Start any stage and the queue will be filtered.`;
+    }
+  } else {
+    banner.style.display = 'none';
+  }
+}
+
+function filterByDrillConcept(pool) {
+  if (!_drillConcept) return pool;
+  const filtered = pool.filter(q => classifyConcept(q) === _drillConcept);
+  return filtered.length > 0 ? filtered : pool;
+}
+
 // Phase gating: stages unlock at specific days
 const PHASE_GATES = {
   vocab: 1,      // Language Lab — Day 1
@@ -1247,16 +1417,24 @@ function resetAll(){
 
 window.onload=function(){
   loadS();
+  loadDrillConcept();
   if(S.recallRatings)recallRatings=S.recallRatings;
   updateHomeQ();
   if(hasVisited()){showScreen('home');updateStreak();updateHome();}else{showScreen('landing');}
+  renderDrillBanner();
 };
 
 // ── CROSS-TAB SYNC ──
 // When Dashboard writes 'jewel_current_day' (e.g., user marks day complete or
 // switches days), refresh the visible screen so today-banner + spiral deck +
 // phase gates pick up the new context without a manual reload.
+// Batch 9 — also pick up 'jewel_drill_concept' changes for the drill banner.
 window.addEventListener('storage', function(e){
+  if (e.key === 'jewel_drill_concept') {
+    loadDrillConcept();
+    renderDrillBanner();
+    return;
+  }
   if (e.key !== 'jewel_current_day') return;
   try {
     const homeActive = document.getElementById('home') && document.getElementById('home').classList.contains('active');
@@ -1920,10 +2098,19 @@ function startStage(stage){
   if (!isStageUnlocked(stage)) { toast('🔒 Unlocks on Day ' + PHASE_GATES[stage]); return; }
   currentStage=stage;hearts=3;combo=0;missed=[];answered=false;selIdx=-1;lastSub=null;
   updateStreak();
-  if(stage==='vocab'){queue=sortedThenShuffled([...VOCAB_Q]);qIdx=0;showScreen('game');set('g-title','LANGUAGE LAB');renderHearts();renderQ();}
-  else if(stage==='tech'){queue=sortedThenShuffled([...TECH_Q]);qIdx=0;showScreen('game');set('g-title','TECHNICAL LABS');renderHearts();renderQ();}
+  if(stage==='vocab'){
+    let pool=filterByDrillConcept([...VOCAB_Q]);
+    queue=sortedThenShuffled(pool);qIdx=0;showScreen('game');set('g-title','LANGUAGE LAB'+(_drillConcept?' · DRILL':''));renderHearts();renderQ();
+  }
+  else if(stage==='tech'){
+    let pool=filterByDrillConcept([...TECH_Q]);
+    queue=sortedThenShuffled(pool);qIdx=0;showScreen('game');set('g-title','TECHNICAL LABS'+(_drillConcept?' · DRILL':''));renderHearts();renderQ();
+  }
   else if(stage==='sim'){simIdx=0;simStep=0;showScreen('game');set('g-title','STAKEHOLDER SIM');renderHearts();renderSim();}
-  else if(stage==='interview'){queue=[...INTERVIEW_Q];qIdx=0;showScreen('game');set('g-title','INTERVIEW PREP');renderHearts();renderQ();}
+  else if(stage==='interview'){
+    let pool=filterByDrillConcept([...INTERVIEW_Q]);
+    queue=pool;qIdx=0;showScreen('game');set('g-title','INTERVIEW PREP'+(_drillConcept?' · DRILL':''));renderHearts();renderQ();
+  }
 }
 
 let lastSub = null;
@@ -2084,6 +2271,8 @@ function checkAnswer(){
 
 function handleResult(ok,q){
   const fb=document.getElementById('fb');
+  // Batch 9 — log every attempt to the shared weak-concept tracker
+  logConceptAttempt(q, ok);
   if(ok){
     combo++;
     if(combo>1){const cp=document.getElementById('combo-pill');if(cp){cp.style.display='flex';document.getElementById('combo-num').textContent=combo;}}
@@ -2185,6 +2374,232 @@ function exportReview(){
 function backToHome(){currentStage=null;queue=[];qIdx=0;hearts=3;combo=0;missed=[];answered=false;selIdx=-1;simIdx=0;simStep=0;showScreen('home');updateHome();}
 function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
 function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000);}
+
+// ─────────────────────────────────────────────
+// FAQ / HELP MODAL
+// ─────────────────────────────────────────────
+function openSuiteFaq(){
+  const bg=document.getElementById('s-faq-bg');
+  if(bg)bg.classList.add('open');
+}
+function closeSuiteFaq(){
+  const bg=document.getElementById('s-faq-bg');
+  if(bg)bg.classList.remove('open');
+}
+function setSuiteFaqTab(tabId){
+  document.querySelectorAll('.s-faq-tab').forEach(t=>t.classList.toggle('active',t.dataset.faq===tabId));
+  document.querySelectorAll('.s-faq-pane').forEach(p=>p.classList.toggle('active',p.id==='s-faq-'+tabId));
+  const body=document.querySelector('.s-faq-body');
+  if(body)body.scrollTop=0;
+}
+document.addEventListener('keydown',function(e){
+  if(e.key!=='Escape')return;
+  const bg=document.getElementById('s-faq-bg');
+  if(bg&&bg.classList.contains('open'))closeSuiteFaq();
+});
 </script>
+
+<!-- FAQ / HELP FLOATING BUTTON -->
+<button class="s-faq-fab" onclick="openSuiteFaq()" aria-label="Help" title="Help">?</button>
+
+<!-- FAQ / HELP MODAL -->
+<div class="s-faq-bg" id="s-faq-bg" onclick="if(event.target===this)closeSuiteFaq()">
+  <div class="s-faq" role="dialog" aria-modal="true">
+    <div class="s-faq-hdr">
+      <div class="s-faq-hdr-icon">📘</div>
+      <div style="flex:1">
+        <div class="s-faq-hdr-title">Suite Help</div>
+        <div class="s-faq-hdr-sub">QUICK REFERENCE · MID-DRILL OK</div>
+      </div>
+      <button class="s-faq-close" onclick="closeSuiteFaq()" aria-label="Close">✕</button>
+    </div>
+    <div class="s-faq-tabs">
+      <button class="s-faq-tab active" data-faq="how" onclick="setSuiteFaqTab('how')">⚡ How It Works</button>
+      <button class="s-faq-tab" data-faq="rules" onclick="setSuiteFaqTab('rules')">❤️ Game Rules</button>
+      <button class="s-faq-tab" data-faq="stages" onclick="setSuiteFaqTab('stages')">🔓 4 Stages</button>
+      <button class="s-faq-tab" data-faq="drill" onclick="setSuiteFaqTab('drill')">🎯 Drill Mode</button>
+      <button class="s-faq-tab" data-faq="data" onclick="setSuiteFaqTab('data')">💾 Reset &amp; Data</button>
+      <button class="s-faq-tab" data-faq="dash" onclick="setSuiteFaqTab('dash')">📊 Back to Dashboard</button>
+    </div>
+    <div class="s-faq-body">
+
+      <!-- ⚡ HOW IT WORKS -->
+      <div class="s-faq-pane active" id="s-faq-how">
+        <h3>What this is</h3>
+        <p>Practice tool. Companion to the Dashboard. Drill BI terms, technical concepts, stakeholder scenarios, and interview answers. <strong>20–30 min/day max</strong> — your main work is on the Dashboard.</p>
+
+        <h3>How a session goes</h3>
+        <div class="s-faq-step"><div class="s-faq-step-num">1</div><div class="s-faq-step-body"><strong>Pick a stage from home.</strong> 4 to choose from. Locked stages show what day they unlock.</div></div>
+        <div class="s-faq-step"><div class="s-faq-step-num">2</div><div class="s-faq-step-body"><strong>Answer questions.</strong> Multiple choice, fill-in-the-blank, STAR (Situation-Task-Action-Result), or short written.</div></div>
+        <div class="s-faq-step"><div class="s-faq-step-num">3</div><div class="s-faq-step-body"><strong>Read the Analyst Context card</strong> after each answer. What it is · when to use · example · how it works in practice. This is the actual learning.</div></div>
+        <div class="s-faq-step"><div class="s-faq-step-num">4</div><div class="s-faq-step-body"><strong>Lose all 3 hearts → run ends.</strong> Tap "Try Again" to restart the stage. Your streak + concept misses still save.</div></div>
+
+        <div class="s-faq-callout">
+          <strong>Today's Context banner (blue, top of home):</strong> appears when the Dashboard has assigned today's bootcamp day. Tap "Start Today's Drill" to jump straight into questions matched to today's topic.
+        </div>
+
+        <h3>What gets tracked</h3>
+        <ul>
+          <li><strong>Day streak</strong> — consecutive days you practiced (1+ question)</li>
+          <li><strong>Combo</strong> — consecutive correct answers in the current run</li>
+          <li><strong>Per-concept misses</strong> — feeds Dashboard's Weak Concept Radar</li>
+          <li><strong>Review log</strong> — last 100 answers, downloadable as .txt</li>
+        </ul>
+      </div>
+
+      <!-- ❤️ GAME RULES -->
+      <div class="s-faq-pane" id="s-faq-rules">
+        <h3>Hearts ❤️</h3>
+        <p>Start each stage with <strong>3 hearts</strong>. Each wrong answer loses one. Lose all 3 → "Out of Hearts" screen. No penalty in real life — just restart and try again.</p>
+        <p><em>Why hearts?</em> They force you to slow down and read the question instead of guessing. Three misses in a row means you should stop and look at the Analyst Context cards from those misses.</p>
+
+        <h3>Streak 🔥</h3>
+        <p>Updates when you answer <strong>at least 1 question</strong> in a day. Daily streak, not per-stage. Missing a day breaks it.</p>
+
+        <h3>Combo ⚡</h3>
+        <p>Counts consecutive correct answers in the current run. Shows up after combo 2. Wrong answer resets it to 0.</p>
+
+        <h3>Question types</h3>
+        <table class="s-faq-table">
+          <thead><tr><th>Type</th><th>How to answer</th></tr></thead>
+          <tbody>
+            <tr><td>MC (multiple choice)</td><td>Tap one option. Lock in. See result.</td></tr>
+            <tr><td>Fill</td><td>Type the word/phrase. Case-insensitive. Partial matches accepted from a list.</td></tr>
+            <tr><td>STAR</td><td>Type your S, T, A, R fields. Submit when R is at least 10 chars. Then read the model STAR.</td></tr>
+            <tr><td>Write</td><td>Free-form answer, min 15 chars. Compare to the model answer after.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Hints 💡</h3>
+        <p>Tap the lightbulb (when available) to see a hint. No penalty.</p>
+
+        <h3>Spiral Deck (spaced repetition)</h3>
+        <p>If you see a "spiral deck" option, it surfaces concepts you've rated weak in past sessions. After answering, rate your recall — those ratings drive what comes back.</p>
+      </div>
+
+      <!-- 🔓 4 STAGES -->
+      <div class="s-faq-pane" id="s-faq-stages">
+        <h3>The 4 stages</h3>
+        <table class="s-faq-table">
+          <thead><tr><th>Stage</th><th>Unlocks</th><th>Drills</th></tr></thead>
+          <tbody>
+            <tr><td>📚 Language Lab</td><td>Day 1</td><td>BI terms, tools, file habits, dashboard concepts. Vocabulary layer.</td></tr>
+            <tr><td>⚙️ Technical Labs</td><td>Day 11</td><td>SQL · Python · Excel · Power BI · DAX hands-on. The technical fluency layer.</td></tr>
+            <tr><td>🎯 Stakeholder Sim</td><td>Day 28</td><td>Real BI scenarios — "what would you do?". Step-by-step decisions. Builds judgment.</td></tr>
+            <tr><td>🎤 Interview Prep</td><td>Day 35</td><td>Common interview questions + STAR templates. Final layer before applying.</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Why stages are gated</h3>
+        <p>You don't need Stakeholder Sim until you've built enough technical skill to have something to communicate. The Dashboard's current day controls which stages unlock here.</p>
+
+        <div class="s-faq-callout warn">
+          <strong>A stage is locked:</strong> tap it anyway — a tooltip shows the unlock day. The Dashboard's current day determines this; if you're past day 28, Stakeholder Sim opens.
+        </div>
+
+        <h3>How questions are picked</h3>
+        <p>Vocab + Tech: shuffled within sub-categories, kept in step order so concepts build on each other. Sim: scenarios in fixed order, each with multi-step decisions. Interview: shuffled question pool.</p>
+      </div>
+
+      <!-- 🎯 DRILL MODE -->
+      <div class="s-faq-pane" id="s-faq-drill">
+        <h3>What Drill Mode is</h3>
+        <p>A filtered version of the Suite. Instead of all questions across all sub-categories, you see <strong>only questions about one specific weak concept</strong> — JOIN logic, DAX filter context, NULL handling, etc.</p>
+
+        <h3>How to activate it</h3>
+        <ol>
+          <li>Open the Dashboard in another tab.</li>
+          <li>Go to <strong>🪫 Weak Concept Radar</strong>. Your top 3 weakest concepts show up there.</li>
+          <li>Click <strong>🎯 Drill this concept</strong> on any of them.</li>
+          <li>The Suite (this app) opens in a new tab with a <strong>red drill banner</strong> on the home screen.</li>
+          <li>Start any stage. The queue is filtered to only that concept's questions.</li>
+        </ol>
+
+        <h3>How to exit it</h3>
+        <p>Tap <strong>✕ Exit Drill Mode</strong> in the red banner. Or pick a different concept from the Dashboard — it auto-replaces.</p>
+
+        <div class="s-faq-callout">
+          <strong>Stage titles change in drill mode.</strong> "LANGUAGE LAB" becomes "LANGUAGE LAB · DRILL" so you always know you're in filtered mode.
+        </div>
+
+        <h3>When to use it</h3>
+        <ul>
+          <li><strong>3+ misses on one concept</strong> — that's the threshold. Drill until misses drop.</li>
+          <li><strong>Before an interview</strong> — drill your weakest topic the day before.</li>
+          <li><strong>After a project walkthrough rep</strong> — if Gemini caught you on a specific area, drill that.</li>
+        </ul>
+
+        <div class="s-faq-callout warn">
+          <strong>If a stage has zero matching questions for your drill concept,</strong> the full pool plays instead. The 20-concept classifier covers most BI questions, but rare ones can slip through.
+        </div>
+      </div>
+
+      <!-- 💾 RESET & DATA -->
+      <div class="s-faq-pane" id="s-faq-data">
+        <h3>Where your Suite data lives</h3>
+        <p>Two browser localStorage keys:</p>
+        <ul>
+          <li><code>bi3</code> — your Suite state: streak, scores, weak list, review log, recall ratings</li>
+          <li><code>jewel_weak_concepts_v1</code> — concept-by-concept miss tracking (shared with Dashboard)</li>
+        </ul>
+
+        <div class="s-faq-callout warn">
+          <strong>The Suite has no export function.</strong> It's reinforcement, not the source of truth. If you switch laptops, your Suite progress (streak / hearts) resets — but the Dashboard's Weak Concept Radar data <em>does</em> get carried via the shared key if you export from Dashboard there.
+        </div>
+
+        <h3>Reset buttons</h3>
+        <table class="s-faq-table">
+          <thead><tr><th>Where</th><th>Wipes</th><th>Confirmation</th></tr></thead>
+          <tbody>
+            <tr><td>Suite — Reset Progress</td><td><code>bi3</code> + visited flag (Suite state only)</td><td>Type "RESET"</td></tr>
+            <tr><td>Dashboard — Weak Concept Radar → Reset</td><td><code>jewel_weak_concepts_v1</code> (shared key)</td><td>Confirm-twice</td></tr>
+          </tbody>
+        </table>
+
+        <h3>Streak protection</h3>
+        <p>If you miss a day, the streak goes to 0 next time you open the Suite. There's no streak freeze. The point is consistency — if you miss, start a new streak.</p>
+
+        <h3>Download review log</h3>
+        <p>From home: tap the review log button to download <code>bi_review.txt</code> with your last 100 answers. Useful for spotting patterns or for showing recruiters the practice habit.</p>
+      </div>
+
+      <!-- 📊 BACK TO DASHBOARD -->
+      <div class="s-faq-pane" id="s-faq-dash">
+        <h3>The Suite is the smaller half</h3>
+        <p>This file (the Suite) is for reinforcement. The <strong>Dashboard</strong> is where the actual bootcamp lives — daily lessons, evidence logging, portfolio tracking, job applications, runway control.</p>
+
+        <h3>Open the Dashboard</h3>
+        <p>From any home screen, tap the <strong>"← Back to Day Plan"</strong> link inside the blue Today's Context banner. Or if you didn't come from the Dashboard, paste the Dashboard URL.</p>
+
+        <h3>The full FAQ lives there</h3>
+        <p>The Dashboard has its own <strong>?</strong> button (bottom-right). 8 tabs covering: Quick Start · Daily Loop · Sections · Proof Loop · How To · Save Work · Rules · Suite. Open that for the system-level docs.</p>
+
+        <h3>How the two files talk</h3>
+        <table class="s-faq-table">
+          <thead><tr><th>Direction</th><th>What flows</th></tr></thead>
+          <tbody>
+            <tr><td>Dashboard → Suite</td><td>Today's day context (for the blue banner) · Drill concept (for filtering questions)</td></tr>
+            <tr><td>Suite → Dashboard</td><td>Concept-by-concept miss data (feeds Weak Concept Radar)</td></tr>
+          </tbody>
+        </table>
+
+        <div class="s-faq-callout win">
+          <strong>Tip:</strong> open both files in separate tabs while you work. Cross-tab sync is real-time — drill a concept on Dashboard, the Suite's banner appears within milliseconds.
+        </div>
+
+        <h3>Daily order of operations</h3>
+        <ol>
+          <li>Open Dashboard. Open today's day card. Do the build work.</li>
+          <li>Mark Day Complete. Log evidence.</li>
+          <li><strong>Then</strong> open Suite for 20–30 min reinforcement.</li>
+          <li>If Weak Concept Radar shows a top 3 miss, drill it.</li>
+          <li>End-of-week: fill Weekly Market Validation in Dashboard. Export progress to OneDrive.</li>
+        </ol>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 </body>
 </html>
