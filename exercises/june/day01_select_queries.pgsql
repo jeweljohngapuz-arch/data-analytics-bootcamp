@@ -90,5 +90,3 @@ SELECT
 FROM customers
 ORDER BY company_name
 LIMIT 10;
-
-/**/
