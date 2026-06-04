@@ -486,21 +486,6 @@ a{color:var(--green);text-decoration:none}a:hover{text-decoration:underline}
 .apply-card.h-shown .apply-hint{display:block;background:#FEF3C7;border-left:3px solid var(--amber);color:#78350F}
 .apply-card.s-shown .apply-solution{display:block;background:#0F172A;color:#5EEAD4;font-family:var(--mono);white-space:pre-wrap;word-break:break-word}
 .apply-card.s-shown .apply-stretch{display:block;background:#F5F3FF;border-left:3px solid #7C3AED;color:#5B21B6;margin-top:8px;font-family:var(--font)}
-/* Apply-it insight capture */
-.apply-finding{margin-top:12px;padding-top:10px;border-top:1px dashed var(--gray-200)}
-.apply-finding-label{font-size:11px;font-weight:700;color:var(--gray-600);margin-bottom:5px}
-.apply-finding-label span{display:block;font-weight:500;color:var(--gray-400);font-size:10px;font-family:var(--mono);margin-top:1px}
-.apply-finding-input{width:100%;box-sizing:border-box;border:1px solid var(--gray-300);border-radius:var(--radius-sm);padding:7px 10px;font-size:12.5px;font-family:var(--font);line-height:1.5;resize:vertical;color:var(--gray-800)}
-.apply-finding-input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(29,158,117,.12)}
-.apply-brief{margin-top:14px;background:#F0FDF4;border:1px solid #86EFAC;border-radius:var(--radius);padding:12px 14px}
-.apply-brief-hdr{font-size:12.5px;font-weight:700;color:#065F46;margin-bottom:6px}
-.apply-brief-hdr span{font-weight:500;color:#15803D;font-size:11px}
-.apply-brief-guard{font-size:11px;color:#92400E;background:#FFFBEB;border:1px solid #FDE68A;border-radius:var(--radius-sm);padding:6px 10px;margin-bottom:8px;line-height:1.45}
-.apply-brief-input{width:100%;box-sizing:border-box;border:1px solid #86EFAC;border-radius:var(--radius-sm);padding:8px 11px;font-size:13px;font-family:var(--font);line-height:1.55;resize:vertical;color:var(--gray-800);background:var(--white)}
-.apply-brief-input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(29,158,117,.15)}
-.apply-brief-eg{margin-top:8px;font-size:11.5px}
-.apply-brief-eg summary{cursor:pointer;color:#047857;font-weight:600}
-.apply-brief-eg>div{margin-top:6px;padding:8px 11px;background:var(--white);border-left:3px solid var(--green);border-radius:0 var(--radius-sm) var(--radius-sm) 0;color:var(--gray-700);line-height:1.55;font-style:italic}
 
 .tool-setup-box{background:#F0FDF4;border:1px solid #86EFAC;border-radius:var(--radius);padding:10px 14px;margin-bottom:12px;font-size:12.5px;color:#065F46;line-height:1.55}
 .tool-setup-box strong{color:#064E3B}
@@ -1501,7 +1486,7 @@ textarea.proj-extra-input{resize:vertical;min-height:50px;line-height:1.5}
   <!-- PORTFOLIO PROJECTS (Batch 4) -->
   <div class="sec-wrap" id="sec-proj">
     <div class="sec-hdr" id="sec-hdr-proj" onclick="toggleSection('proj')">
-      <div class="sec-hdr-left"><span class="sec-hdr-icon">📦</span><span class="sec-hdr-title">Portfolio Projects</span><span class="sec-hdr-badge" id="sec-badge-proj">rubric-gated, not vibe-gated</span></div>
+      <div class="sec-hdr-left"><span class="sec-hdr-icon">📦</span><span class="sec-hdr-title">Portfolio Projects</span><span class="sec-intent act">Act</span><span class="sec-hdr-badge" id="sec-badge-proj">rubric-gated, not vibe-gated</span></div>
       <span class="sec-chev" id="sec-chev-proj">▶</span>
     </div>
     <div class="sec-body" id="sec-body-proj" style="display:none">
@@ -1512,7 +1497,7 @@ textarea.proj-extra-input{resize:vertical;min-height:50px;line-height:1.5}
   <!-- JOB POSTING ALIGNMENT MATRIX (Batch 5) -->
   <div class="sec-wrap" id="sec-jobs">
     <div class="sec-hdr" id="sec-hdr-jobs" onclick="toggleSection('jobs')">
-      <div class="sec-hdr-left"><span class="sec-hdr-icon">🎯</span><span class="sec-hdr-title">Job Posting Alignment</span><span class="sec-hdr-badge" id="sec-badge-jobs">requirements → proof → gap</span></div>
+      <div class="sec-hdr-left"><span class="sec-hdr-icon">🎯</span><span class="sec-hdr-title">Job Posting Alignment</span><span class="sec-intent act">Act</span><span class="sec-hdr-badge" id="sec-badge-jobs">requirements → proof → gap</span></div>
       <span class="sec-chev" id="sec-chev-jobs">▶</span>
     </div>
     <div class="sec-body" id="sec-body-jobs" style="display:none">
@@ -1528,7 +1513,7 @@ textarea.proj-extra-input{resize:vertical;min-height:50px;line-height:1.5}
   <!-- MOCK INTERVIEW HANDOFF (Batch 8) -->
   <div class="sec-wrap" id="sec-mock">
     <div class="sec-hdr" id="sec-hdr-mock" onclick="toggleSection('mock')">
-      <div class="sec-hdr-left"><span class="sec-hdr-icon">🎤</span><span class="sec-hdr-title">Mock Interview · Gemini Handoff</span><span class="sec-hdr-badge" id="sec-badge-mock">5 prompts · paste into Gemini Voice</span></div>
+      <div class="sec-hdr-left"><span class="sec-hdr-icon">🎤</span><span class="sec-hdr-title">Mock Interview · Gemini Handoff</span><span class="sec-intent act">Act</span><span class="sec-hdr-badge" id="sec-badge-mock">5 prompts · paste into Gemini Voice</span></div>
       <span class="sec-chev" id="sec-chev-mock">▶</span>
     </div>
     <div class="sec-body" id="sec-body-mock" style="display:none">
@@ -1539,7 +1524,7 @@ textarea.proj-extra-input{resize:vertical;min-height:50px;line-height:1.5}
   <!-- WEAK CONCEPT RADAR (Batch 9 — Suite cross-file integration) -->
   <div class="sec-wrap" id="sec-wcr">
     <div class="sec-hdr" id="sec-hdr-wcr" onclick="toggleSection('wcr')">
-      <div class="sec-hdr-left"><span class="sec-hdr-icon">🪫</span><span class="sec-hdr-title">Weak Concept Radar</span><span class="sec-hdr-badge" id="sec-badge-wcr">from BI Analyst Suite</span></div>
+      <div class="sec-hdr-left"><span class="sec-hdr-icon">🪫</span><span class="sec-hdr-title">Weak Concept Radar</span><span class="sec-intent act">Act</span><span class="sec-hdr-badge" id="sec-badge-wcr">from BI Analyst Suite</span></div>
       <span class="sec-chev" id="sec-chev-wcr">▶</span>
     </div>
     <div class="sec-body" id="sec-body-wcr" style="display:none">
@@ -1551,7 +1536,7 @@ textarea.proj-extra-input{resize:vertical;min-height:50px;line-height:1.5}
   <!-- HIREABILITY SCORE (Batch 3) -->
   <div class="sec-wrap" id="sec-hire">
     <div class="sec-hdr" id="sec-hdr-hire" onclick="toggleSection('hire')">
-      <div class="sec-hdr-left"><span class="sec-hdr-icon">🎯</span><span class="sec-hdr-title">Hireability Score</span><span class="sec-hdr-badge" id="sec-badge-hire">proof, not streak</span></div>
+      <div class="sec-hdr-left"><span class="sec-hdr-icon">🎯</span><span class="sec-hdr-title">Hireability Score</span><span class="sec-intent track">Track</span><span class="sec-hdr-badge" id="sec-badge-hire">proof, not streak</span></div>
       <span class="sec-chev" id="sec-chev-hire">▶</span>
     </div>
     <div class="sec-body" id="sec-body-hire" style="display:none">
@@ -1562,7 +1547,7 @@ textarea.proj-extra-input{resize:vertical;min-height:50px;line-height:1.5}
   <!-- FOCUS ANALYTICS -->
   <div class="sec-wrap" id="sec-focus">
     <div class="sec-hdr" id="sec-hdr-focus" onclick="toggleSection('focus')">
-      <div class="sec-hdr-left"><span class="sec-hdr-icon">🍅</span><span class="sec-hdr-title">Focus Analytics</span><span class="sec-hdr-badge" id="sec-badge-focus"></span></div>
+      <div class="sec-hdr-left"><span class="sec-hdr-icon">🍅</span><span class="sec-hdr-title">Focus Analytics</span><span class="sec-intent track">Track</span><span class="sec-hdr-badge" id="sec-badge-focus"></span></div>
       <span class="sec-chev" id="sec-chev-focus">▶</span>
     </div>
     <div class="sec-body" id="sec-body-focus" style="display:none">
@@ -1580,7 +1565,7 @@ textarea.proj-extra-input{resize:vertical;min-height:50px;line-height:1.5}
   <!-- EVIDENCE LOG (Batch 1) -->
   <div class="sec-wrap" id="sec-evidence">
     <div class="sec-hdr" id="sec-hdr-evidence" onclick="toggleSection('evidence')">
-      <div class="sec-hdr-left"><span class="sec-hdr-icon">📒</span><span class="sec-hdr-title">Evidence Log</span><span class="sec-hdr-badge" id="sec-badge-evidence">proof-based, not lesson-based</span></div>
+      <div class="sec-hdr-left"><span class="sec-hdr-icon">📒</span><span class="sec-hdr-title">Evidence Log</span><span class="sec-intent log">Log</span><span class="sec-hdr-badge" id="sec-badge-evidence">proof-based, not lesson-based</span></div>
       <span class="sec-chev" id="sec-chev-evidence">▶</span>
     </div>
     <div class="sec-body" id="sec-body-evidence" style="display:none">
@@ -2184,15 +2169,10 @@ textarea.proj-extra-input{resize:vertical;min-height:50px;line-height:1.5}
   <div class="pomo-body" id="pomo-body">
     <div class="pomo-cycle" id="pomo-cycle">Focus 1/4</div>
     <div class="pomo-timer" id="pomo-timer">25:00</div>
-    <div class="pomo-quick-select" id="pomo-quick-focus">
+    <div class="pomo-quick-select" id="pomo-quick-select">
       <button class="pomo-quick-btn" onclick="pomoQuickSet(25)">25m</button>
       <button class="pomo-quick-btn" onclick="pomoQuickSet(45)">45m</button>
       <button class="pomo-quick-btn" onclick="pomoQuickSet(60)">60m</button>
-    </div>
-    <div class="pomo-quick-select" id="pomo-quick-break" style="display:none">
-      <button class="pomo-quick-btn" onclick="pomoBreakSet(5)">5m</button>
-      <button class="pomo-quick-btn" onclick="pomoBreakSet(15)">15m</button>
-      <button class="pomo-quick-btn" onclick="pomoBreakSet(20)">20m</button>
     </div>
     <div class="pomo-context" id="pomo-context">—</div>
     <div class="pomo-elapsed-note" id="pomo-elapsed-note">Auto-saves when you hit End &amp; save</div>
@@ -2229,7 +2209,8 @@ textarea.proj-extra-input{resize:vertical;min-height:50px;line-height:1.5}
     <div class="pomo-modal-title">Pomodoro Settings</div>
     <div class="pomo-set-grid">
       <label>Focus (min)<input type="number" id="pomo-set-focus" min="5" max="90"></label>
-      <label>Break (min)<input type="number" id="pomo-set-break" min="1" max="60"></label>
+      <label>Short break (min)<input type="number" id="pomo-set-short" min="1" max="30"></label>
+      <label>Long break (min)<input type="number" id="pomo-set-long" min="5" max="60"></label>
       <label>Daily goal (pomos)<input type="number" id="pomo-set-goal" min="1" max="20"></label>
     </div>
     <label class="pomo-set-check"><input type="checkbox" id="pomo-set-sound"> Beep when timer ends</label>
@@ -2336,7 +2317,7 @@ const SUITE_URL = 'https://jeweljohngapuz-arch.github.io/data-analytics-bootcamp
 const LS_POMO = 'jewel_pomodoro_v1';
 const LS_POMO_SETTINGS = 'jewel_pomodoro_settings_v1';
 const LS_POMO_CYCLE = 'jewel_pomodoro_cycle_v1';
-const POMO_DEFAULTS = { focus: 25, short: 5, long: 15, break: 5, goal: 4, sound: true };
+const POMO_DEFAULTS = { focus: 25, short: 5, long: 15, goal: 4, sound: true };
 const POMO_PEAK_MIN_SESSIONS = 10; // gate peak-window label behind min sample size
 
 // ─────────────────────────────────────────────
@@ -6264,6 +6245,7 @@ function selectDay(n) {
     <!-- Header row -->
     <div class="detail-row1">
       <span class="detail-day-num">Day ${d.day}</span>
+      <span class="detail-date">${d.date}</span>
       ${statusPill}${starBadge}
     </div>
     <div class="badge-row">${phaseB}${skillBadges}${gameB}</div>
@@ -6376,25 +6358,6 @@ function selectDay(n) {
         </div>
       </div>
     </div>
-
-    ${dayIsAnalytical(d) ? `
-    <!-- FINDING REP (analytical days only) -->
-    <div class="step-row">
-      <div class="step-num-col">
-        <div class="step-num" style="background:var(--green)">📝</div>
-        <div class="step-line"></div>
-      </div>
-      <div class="step-body">
-        <div class="step-label">Write your finding · the analyst rep</div>
-        <div class="step-title">Turn today's output into one stakeholder finding</div>
-        <div class="apply-finding" style="margin-top:6px;border-top:none;padding-top:0">
-          <div class="apply-finding-label">📝 Your finding <span>[what happened] — [why it matters] — [recommended action]</span></div>
-          <textarea class="apply-finding-input" rows="2" placeholder="One line: what the data shows, why it matters, what to do." oninput="applyInsightSet(${n},'finding',this.value)">${pomoEscape(applyInsightVal(n,'finding'))}</textarea>
-        </div>
-        <div class="apply-brief-guard" style="margin-top:8px">⚠️ Claim only what your rows show. Label any assumption. Then hit 📋 Copy recap for Claude to get it audited — that review is where the skill sticks.</div>
-      </div>
-    </div>
-    ` : ''}
 
     <!-- STEP 4: COMMIT -->
     <div class="step-row">
@@ -6679,17 +6642,6 @@ function buildDayRecap(n, mode) {
   L.push('');
   L.push('WHAT I STRUGGLED WITH');
   L.push((g.struggle && g.struggle.trim()) ? g.struggle.trim() : '(nothing written)');
-  L.push('');
-  L.push('MY FINDING(S) \u2014 audit these against what my data actually shows');
-  const ins = (typeof applyInsights !== 'undefined' && applyInsights[n]) ? applyInsights[n] : {};
-  const findingKeys = Object.keys(ins).filter(function(k){ return k === 'finding' || /^f\d+$/.test(k); }).sort();
-  let anyFinding = false;
-  findingKeys.forEach(function(k){
-    const v = (ins[k] || '').trim();
-    if (v) { anyFinding = true; L.push('\u2022 ' + v); }
-  });
-  if (ins.brief && ins.brief.trim()) { anyFinding = true; L.push('Stakeholder brief: ' + ins.brief.trim()); }
-  if (!anyFinding) L.push('(no finding written \u2014 this is the analyst rep; flag that I skipped it)');
   L.push('');
   L.push('MY NOTES / INSIGHT (my own words)');
   if (dayNotes.length === 0) {
@@ -7231,15 +7183,15 @@ function savePomoSettings() { try { localStorage.setItem(LS_POMO_SETTINGS, JSON.
 function pomoQuickSet(mins) {
   pomoSettings.focus = mins;
   savePomoSettings();
-  // Re-render is the single source of truth for the display — never write the timer
-  // directly here, or a break standby would wrongly show the focus minutes.
-  renderPomoWidget();
-}
-
-function pomoBreakSet(mins) {
-  pomoSettings.break = mins;
-  savePomoSettings();
-  renderPomoWidget();
+  // Update timer display
+  const timer = document.getElementById('pomo-timer');
+  const mini = document.getElementById('pomo-mini-display');
+  if (timer) timer.textContent = pomoFormatMMSS(mins * 60);
+  if (mini) mini.textContent = pomoFormatMMSS(mins * 60);
+  // Highlight active button
+  document.querySelectorAll('.pomo-quick-btn').forEach(function(btn) {
+    btn.classList.toggle('active', parseInt(btn.textContent) === mins);
+  });
 }
 
 function pomoSaveCycle() {
@@ -7279,11 +7231,15 @@ function pomoFormatMMSS(totalSec) {
 }
 function pomoPlannedFor(type) {
   if (type === 'focus') return pomoSettings.focus;
-  return pomoSettings.break; // user-chosen break length (5/15/20 or custom)
+  if (type === 'long_break') return pomoSettings.long;
+  return pomoSettings.short;
 }
 function pomoNextType() {
-  // Break is always available after a focus — length is chosen, not gated by focus count.
-  return pomoLastCompletedType === 'focus' ? 'break' : 'focus';
+  if (pomoLastCompletedType === 'focus') {
+    // cycleIndex already advanced on completion; if it wrapped to 1, last focus was 4th → long break
+    return pomoCycleIndex === 1 ? 'long_break' : 'short_break';
+  }
+  return 'focus';
 }
 
 // Session filters
@@ -7575,35 +7531,28 @@ function renderPomoWidget() {
 
   if (pomoState === 'idle') {
     const next = pomoNextType();
-    const isBreak = next !== 'focus';
-    const nextLabel = isBreak ? 'Break' : 'Focus';
+    const nextLabel = next === 'focus' ? 'Focus' : (next === 'long_break' ? 'Long break' : 'Short break');
     const nextMin = pomoPlannedFor(next);
     if (typeLabel) typeLabel.textContent = nextLabel;
     if (timer) timer.textContent = pomoFormatMMSS(nextMin * 60);
     if (mini) mini.textContent = pomoFormatMMSS(nextMin * 60);
     if (cycle) {
-      cycle.textContent = isBreak
-        ? 'Break · pick a length'
-        : 'Focus ' + pomoCycleIndex + ' of 4';
+      cycle.textContent = next === 'focus'
+        ? 'Focus ' + pomoCycleIndex + ' of 4'
+        : (next === 'long_break' ? 'Long break after 4 focuses' : 'Short break');
     }
-    if (primaryBtn) primaryBtn.textContent = isBreak ? 'Start break' : 'Start focus';
-    if (skipBtn) skipBtn.style.display = isBreak ? '' : 'none';
+    if (primaryBtn) primaryBtn.textContent = next === 'focus' ? 'Start focus' : 'Start break';
+    if (skipBtn) skipBtn.style.display = next === 'focus' ? 'none' : '';
     if (endBtn) endBtn.style.display = 'none';
     if (discardBtn) discardBtn.style.display = 'none';
     if (elapsedNote) { elapsedNote.textContent = ''; elapsedNote.style.display = 'none'; }
-    // Show only the preset row that matches the next session type
-    const focusRow = document.getElementById('pomo-quick-focus');
-    const breakRow = document.getElementById('pomo-quick-break');
-    if (focusRow) focusRow.style.display = isBreak ? 'none' : 'flex';
-    if (breakRow) breakRow.style.display = isBreak ? 'flex' : 'none';
-    // Highlight the active preset in whichever row is showing
-    const activeMin = isBreak ? pomoSettings.break : pomoSettings.focus;
+    // Highlight active quick-select button
     document.querySelectorAll('.pomo-quick-btn').forEach(function(btn) {
-      btn.classList.toggle('active', parseInt(btn.textContent) === activeMin);
+      btn.classList.toggle('active', parseInt(btn.textContent) === pomoSettings.focus);
     });
   } else if (pomoState === 'running') {
     const t = pomoCurrent.type;
-    const lbl = t === 'focus' ? 'Focus' : 'Break';
+    const lbl = t === 'focus' ? 'Focus' : (t === 'long_break' ? 'Long break' : 'Short break');
     if (typeLabel) typeLabel.textContent = lbl;
     if (cycle) cycle.textContent = t === 'focus' ? 'Focus ' + pomoCycleIndex + ' of 4' : lbl;
     if (primaryBtn) primaryBtn.textContent = 'Pause';
@@ -7674,7 +7623,8 @@ function pomoSaveNote(skip) {
 // ─────────────────────────────────────────────
 function openPomoSettings() {
   document.getElementById('pomo-set-focus').value = pomoSettings.focus;
-  document.getElementById('pomo-set-break').value = pomoSettings.break;
+  document.getElementById('pomo-set-short').value = pomoSettings.short;
+  document.getElementById('pomo-set-long').value  = pomoSettings.long;
   document.getElementById('pomo-set-goal').value  = pomoSettings.goal;
   document.getElementById('pomo-set-sound').checked = !!pomoSettings.sound;
   document.getElementById('pomo-settings-modal').classList.add('open');
@@ -7685,7 +7635,8 @@ function closePomoSettings() {
 function savePomoSettingsAndClose() {
   pomoSettings = {
     focus: pomoClamp(document.getElementById('pomo-set-focus').value, 5, 90),
-    break: pomoClamp(document.getElementById('pomo-set-break').value, 1, 60),
+    short: pomoClamp(document.getElementById('pomo-set-short').value, 1, 30),
+    long:  pomoClamp(document.getElementById('pomo-set-long').value, 5, 60),
     goal:  pomoClamp(document.getElementById('pomo-set-goal').value, 1, 20),
     sound: !!document.getElementById('pomo-set-sound').checked
   };
@@ -7998,36 +7949,6 @@ function pomoRenderTime() {
 
   if (s.length === 0) html = '<div class="focus-empty">No completed focus sessions yet. Start your first one from the timer.</div>';
   return html;
-}
-
-// ─────────────────────────────────────────────
-// APPLY-IT INSIGHTS — per-ask findings + stakeholder brief
-// ─────────────────────────────────────────────
-const LS_APPLY_INSIGHTS = 'jewel_apply_insights_v1';
-let applyInsights = {};
-function loadApplyInsights() {
-  try {
-    const raw = localStorage.getItem(LS_APPLY_INSIGHTS);
-    if (raw) { const p = JSON.parse(raw); if (p && typeof p === 'object') applyInsights = p; }
-  } catch(e) {}
-}
-function saveApplyInsights() {
-  try { localStorage.setItem(LS_APPLY_INSIGHTS, JSON.stringify(applyInsights)); } catch(e) {}
-}
-function applyInsightVal(n, key) {
-  return (applyInsights[n] && applyInsights[n][key]) || '';
-}
-// Saves on every keystroke, so any re-render reloads the latest text (no data loss).
-function applyInsightSet(n, key, val) {
-  if (!applyInsights[n]) applyInsights[n] = {};
-  applyInsights[n][key] = val;
-  saveApplyInsights();
-}
-// A day earns a finding rep only if it produces analytical output (not Git/exam-only days).
-const ANALYTIC_SKILLS = ['SQL', 'Power BI', 'Python', 'DAX', 'Excel', 'Power Query'];
-function dayIsAnalytical(d) {
-  if (!d || !Array.isArray(d.skills)) return false;
-  return d.skills.some(function(sk){ return ANALYTIC_SKILLS.indexOf(sk) !== -1; });
 }
 
 // ─────────────────────────────────────────────
@@ -8553,23 +8474,8 @@ function renderPilotGuide(n, d, cols, isComplete) {
     html += '<div class="apply-solution">' + pomoEscape(ask.solution) + '</div>';
     html += '<div class="apply-stretch"><strong>Why this matters:</strong> ' + pomoEscape(ask.stretch) + '</div>';
     html += renderPreview(PILOT_PREVIEWS[previewKey]);
-    // Per-ask finding — the working layer: every query gets one written finding.
-    html += '<div class="apply-finding">';
-    html += '<div class="apply-finding-label">📝 Your finding <span>[what happened] — [why it matters] — [recommended action]</span></div>';
-    html += '<textarea class="apply-finding-input" rows="2" placeholder="One line: what the rows show, why it matters, what to do." oninput="applyInsightSet(' + n + ',\'f' + idx + '\',this.value)">' + pomoEscape(applyInsightVal(n, 'f' + idx)) + '</textarea>';
-    html += '</div>';
     html += '</div>';
   });
-
-  // Synthesis brief — the decision layer. Only when there are multiple asks to roll up.
-  if (askList.length > 1) {
-    html += '<div class="apply-brief">';
-    html += '<div class="apply-brief-hdr">🎯 Brief for the stakeholder <span>— roll your findings into one recommendation. This is the part that gets you hired.</span></div>';
-    html += '<div class="apply-brief-guard">⚠️ Claim only what your rows show. No "trend" from a handful of rows; no cause or risk the data can\'t prove. If it\'s an assumption, label it.</div>';
-    html += '<textarea class="apply-brief-input" rows="4" placeholder="Bottom line up front: the 1–3 things they should act on, each with a recommended action." oninput="applyInsightSet(' + n + ',\'brief\',this.value)">' + pomoEscape(applyInsightVal(n, 'brief')) + '</textarea>';
-    html += '<details class="apply-brief-eg"><summary>See a worked example</summary><div>Three of eight discontinued products still hold warehouse stock, tying up space and working capital; one active product (ID 31) shows zero on-hand. Recommend clearing the discontinued stock and confirming whether ID 31 has a restock on order before the next ordering cycle.</div></details>';
-    html += '</div>';
-  }
 
   html += '</div></div>';
 
@@ -8695,7 +8601,6 @@ function renderAll() {
 loadState();
 loadPomo();
 pomoLoadCycle();
-loadApplyInsights();
 loadNotes();
 loadEvidence();
 loadProjects();

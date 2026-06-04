@@ -70,12 +70,14 @@ FROM orders
 WHERE shipped_date  = NULL; -- NULL is not a value - its an absence of value.
 
 -- correct
-SELECT COUNT(*)
+SELECT COUNT(*) -- COUNT(*) is the aggregator
 FROM orders
-WHERE shipped_date  IS NULL;
+WHERE shipped_date  IS NULL; -- IS NULL is the filter
 -- null means unknown. you cant compare unknown to anything.
 -- sql doesn't return true or false, it returns unknown. 
 -- using IS NULL finds the rows with NULL. 
+
+
 
 -- #3 Does this return only active products?
 -- wrong 
@@ -128,6 +130,7 @@ SELECT
     product_id,
     product_name,
     unit_price,
+    units_on_order,
     units_in_stock,
     discontinued
 FROM products
