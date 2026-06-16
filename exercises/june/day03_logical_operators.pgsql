@@ -88,3 +88,55 @@ SELECT *
 FROM customers
 WHERE country IN ('Germany', 'France');
 -- IN must be wrapped in parenthesis
+
+-- STEP 4 - APPLY IT
+-- #1 Country watchlist. "Pull me all orders shipped to Canada, Brazil, or 
+-- Argentina in 1997. Just order ID, ship country, and order date."
+SELECT
+    order_id,
+    ship_country,
+    shipped_date
+FROM orders
+WHERE ship_country IN ('Canada', 'Brazil', 'Argentina')
+AND shipped_date BETWEEN '1997-01-01' AND '1997-12-31'
+ORDER BY ship_country ASC, shipped_date DESC;
+
+-- aggregated findings
+SELECT
+    ship_country,
+    COUNT(order_id) AS total_orders
+FROM orders
+WHERE ship_country IN ('Canada', 'Brazil', 'Argentina')
+AND shipped_date BETWEEN '1997-01-01' AND '1997-12-31'
+GROUP BY ship_country
+ORDER BY ship_country;
+
+-- #2  Alphabet distribution check. "Show me every customer whose 
+-- company name starts with a vowel (A, E, I, O, U). I am cross-referencing
+-- alphabet distribution for the audit."
+SELECT
+    company_name,
+    contact_name
+FROM customers
+WHERE company_name LIKE 'A%' 
+OR company_name LIKE 'E%'
+OR company_name LIKE 'I%'
+OR company_name LIKE 'O%'
+OR company_name LIKE 'U%';
+
+-- #3 Pricing tier validation. "Give me products priced between $15 and
+-- $40 with 'crab', 'shrimp', or 'salmon' in the name. Catalog team wants
+-- to validate seafood pricing tier."
+SELECT
+    product_id,
+    product_name,
+    unit_price
+FROM products
+WHERE unit_price BETWEEN 15 AND 40
+AND (
+    product_name ILIKE '%crab%'
+    OR product_name ILIKE '%shrimp%'
+    OR product_name ILIKE '%salmon%'
+    )
+ORDER BY unit_price DESC;
+
