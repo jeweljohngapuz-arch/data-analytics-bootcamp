@@ -46,6 +46,8 @@ LEFT JOIN - mainly shows what's missing. gaps/churn everything including zeros/N
 no filter on the left side. Every row from the FROM table comes through no matter what. 
 If there's a match on the right, you get real data. If there's no match, you get NULL.
 
+LEFT JOIN IS THE DEFAULT JOIN. SAFER THAN INNER JOIN
+
 FROM - use from  if the table has the foreigh keys that touch everything else.
 * start at the table that holds the IDs connecting everything. its the bridge.
 
@@ -54,6 +56,12 @@ FROM - use from  if the table has the foreigh keys that touch everything else.
 ** IMPORTANT **
 kitchen (building the data) - FROM > JOIN > WHERE > GROUP BY > HAVING
 dining room (presenting the data) - SELECT > ORDER BY > LIMIT
+
+**
+NO MIXING OF INNER AND LEFT JOIN. 
+USE LEFT ALL THE WAY OR USE INNER ALL THE WAY
+IF NEEDED IT SHOULD START WITH INNER. 
+**
 
 */
 
@@ -203,3 +211,4 @@ INNER JOIN order_details od
     ON p.product_id = od.product_id
 GROUP BY p.product_id, p.product_name
 ORDER BY order_count DESC;
+
