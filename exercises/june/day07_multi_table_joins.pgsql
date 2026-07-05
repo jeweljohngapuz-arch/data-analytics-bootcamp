@@ -249,3 +249,13 @@ LEFT JOIN order_details od
     ON od.order_id = o.order_id
 LEFT JOIN products p
     ON p.product_id = od.product_id;
+
+SELECT *
+FROM orders
+LIMIT 5;
+
+SELECT
+    o.ship_country,
+    ROUND(SUM(o.freight)::numeric, 2) AS total_freight
+FROM orders o
+GROUP BY o.ship_country; 
